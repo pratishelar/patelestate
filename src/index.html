@@ -2,12 +2,185 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>Frontend</title>
+  <title>Patel Estate</title>
   <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- FAVICON -->
+  <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="./assets/css/jquery-ui.css">
+  <!-- GOOGLE FONTS -->
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i%7CMontserrat:600,800" rel="stylesheet">
+  <!-- FONT AWESOME -->
+  <link rel="stylesheet" href="./assets/css/fontawesome-all.min.css">
+  <link rel="stylesheet" href="./assets/css/font-awesome.min.css">
+  <!-- LEAFLET MAP -->
+  <link rel="stylesheet" href="./assets/css/leaflet.css">
+  <link rel="stylesheet" href="./assets/css/leaflet-gesture-handling.min.css">
+  <link rel="stylesheet" href="./assets/css/leaflet.markercluster.css">
+  <link rel="stylesheet" href="./assets/css/leaflet.markercluster.default.css">
+  <!-- Slider Revolution CSS Files -->
+  <link rel="stylesheet" href="./assets/revolution/css/settings.css">
+  <link rel="stylesheet" href="./assets/revolution/css/layers.css">
+  <link rel="stylesheet" href="./assets/revolution/css/navigation.css">
+  <!-- ARCHIVES CSS -->
+  <link rel="stylesheet" href="./assets/css/animate.css">
+  <link rel="stylesheet" href="./assets/css/magnific-popup.css">
+  <link rel="stylesheet" href="./assets/css/lightcase.css">
+  <link rel="stylesheet" href="./assets/css/owl.carousel.min.css">
+  <link rel="stylesheet" href="./assets/css/bootstrap.css">
+  <link rel="stylesheet" href="./assets/css/menu.css">
+  <link rel="stylesheet" href="./assets/css/slick.css">
+  <link rel="stylesheet" href="./assets/css/styles.css">
+  <link rel="stylesheet" id="color" href="./assets/css/default.css">
+  <link rel="stylesheet" href="./assets/css/timedropper.css">
+  <link rel="stylesheet" href="./assets/css/datedropper.css">
+  <link rel="stylesheet" href="./assets/css/swiper.min.css">
+  
 </head>
 <body>
   <app-root></app-root>
+
+      <!-- ARCHIVES JS -->
+      <script src="./assets/js/jquery.min.js"></script>
+      <script src="./assets/js/jquery-ui.js"></script>
+      <script src="./assets/js/tether.min.js"></script>
+      <script src="./assets/js/moment.js"></script>
+      <script src="./assets/js/transition.min.js"></script>
+      <script src="./assets/js/bootstrap.min.js"></script>
+      <script src="./assets/js/mmenu.min.js"></script>
+      <script src="./assets/js/mmenu.js"></script>
+      <script src="./assets/js/slick.min.js"></script>
+      <script src="./assets/js/slick3.js"></script>
+      <script src="./assets/js/fitvids.js"></script>
+      <script src="./assets/js/jquery.waypoints.min.js"></script>
+      <script src="./assets/js/jquery.counterup.min.js"></script>
+      <script src="./assets/js/imagesloaded.pkgd.min.js"></script>
+      <script src="./assets/js/isotope.pkgd.min.js"></script>
+      <script src="./assets/js/smooth-scroll.min.js"></script>
+      <script src="./assets/js/lightcase.js"></script>
+      <script src="./assets/js/owl.carousel.js"></script>
+      <script src="./assets/js/jquery.magnific-popup.min.js"></script>
+      <script src="./assets/js/ajaxchimp.min.js"></script>
+      <script src="./assets/js/newsletter.js"></script>
+      <script src="./assets/js/jquery.form.js"></script>
+      <script src="./assets/js/jquery.validate.min.js"></script>
+      <script src="./assets/js/forms-2.js"></script>
+      <script src="./assets/js/leaflet.js"></script>
+      <script src="./assets/js/leaflet-gesture-handling.min.js"></script>
+      <script src="./assets/js/leaflet-providers.js"></script>
+      <script src="./assets/js/leaflet.markercluster.js"></script>
+      <script src="./assets/js/map4.js"></script>
+      <script src="./assets/js/color-switcher.js"></script>
+
+
+
+      <!-- Slider Revolution scripts -->
+      <script src="./assets/revolution/js/jquery.themepunch.tools.min.js"></script>
+      <script src="./assets/revolution/js/jquery.themepunch.revolution.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.actions.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.carousel.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.kenburn.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.layeranimation.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.migration.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.navigation.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.parallax.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.slideanims.min.js"></script>
+      <script src="./assets/revolution/js/extensions/revolution.extension.video.min.js"></script>
+      <script src="./assets/js/slick4.js"></script>
+      <script src="./assets/js/popup.js"></script>
+      <script src="./assets/js/timedropper.js"></script>
+      <script src="./assets/js/datedropper.js"></script>
+      <script src="./assets/js/map-single.js"></script>
+      <script src="./assets/js/swiper.min.js"></script>
+      <script src="./assets/js/inner.js"></script>
+
+      <!-- MAIN JS -->
+      <script src="./assets/js/script.js"></script>
+
+      <script>
+          var swiper = new Swiper('.swiper-container', {
+              slidesPerView: 3,
+              slidesPerGroup: 1,
+              loop: true,
+              loopFillGroupWithBlank: true,
+              pagination: {
+                  el: '.swiper-pagination',
+                  clickable: true,
+              },
+              navigation: {
+                  nextEl: '.swiper-button-next',
+                  prevEl: '.swiper-button-prev',
+              },
+              breakpoints: {
+                  640: {
+                      slidesPerView: 1,
+                      spaceBetween: 20,
+                  },
+                  768: {
+                      slidesPerView: 1,
+                      spaceBetween: 40,
+                  },
+                  1024: {
+                      slidesPerView: 5,
+                      spaceBetween: 50,
+                  },
+              }
+          });
+
+      </script>
+
+      <!-- Date Dropper Script-->
+      <script>
+          $('#reservation-date').dateDropper();
+
+      </script>
+      <!-- Time Dropper Script-->
+      <script>
+          this.$('#reservation-time').timeDropper({
+              setCurrentTime: false,
+              meridians: true,
+              primaryColor: "#e8212a",
+              borderColor: "#e8212a",
+              minutesInterval: '15'
+          });
+
+      </script>
+
+      <script>
+          $(document).ready(function() {
+              $('.popup-youtube, .popup-vimeo, .popup-gmaps').magnificPopup({
+                  disableOn: 700,
+                  type: 'iframe',
+                  mainClass: 'mfp-fade',
+                  removalDelay: 160,
+                  preloader: false,
+                  fixedContentPos: false
+              });
+          });
+
+      </script>
+
+      <script>
+          $('.slick-carousel').each(function() {
+              var slider = $(this);
+              $(this).slick({
+                  infinite: true,
+                  dots: false,
+                  arrows: false,
+                  centerMode: true,
+                  centerPadding: '0'
+              });
+
+              $(this).closest('.slick-slider-area').find('.slick-prev').on("click", function() {
+                  slider.slick('slickPrev');
+              });
+              $(this).closest('.slick-slider-area').find('.slick-next').on("click", function() {
+                  slider.slick('slickNext');
+              });
+          });
+
+      </script>
 </body>
 </html>
