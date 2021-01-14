@@ -17,6 +17,9 @@ import { BusyService } from './_services/busy.service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TimeagoModule } from 'ngx-timeago';
 import { SinglePropertyResolver } from './_resolvers/singleProperty.resolver';
+import { AgmCoreModule } from '@agm/core';
+import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
+import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 @NgModule({
   declarations: [					
@@ -30,10 +33,17 @@ import { SinglePropertyResolver } from './_resolvers/singleProperty.resolver';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule, 
     NgxSpinnerModule,
     BrowserAnimationsModule,
-    TimeagoModule.forRoot()
+    TimeagoModule.forRoot(),
+    AgmCoreModule.forRoot({
+      // please get your own API key here:
+      // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
+      apiKey: 'AIzaSyDX_rf6mAboOhmU-GpNk_MlG3Km2ORhkhE'
+    }),
+    AgmJsMarkerClustererModule,
+    AgmSnazzyInfoWindowModule
   ],
   providers: [
     PropertiesService, 
