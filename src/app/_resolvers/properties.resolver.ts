@@ -6,17 +6,29 @@ import { PropertiesService } from '../_services/properties.service';
 
 @Injectable()
 export class PropertiesResolver implements Resolve<any> {
-
-  constructor(private propertyservice: PropertiesService, private router: Router) {}
+  constructor(
+    private propertyservice: PropertiesService,
+    private router: Router
+  ) {}
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-    return this.propertyservice
-      .getProperties()
-      .pipe(
+    let propertyType = route.paramMap.get('propertyType');
+
+    if (propertyType == 'CommercialProperties') {
+      return this.propertyservice.getProperties().pipe(
         catchError((error) => {
           this.router.navigate(['/']);
           return of(null);
         })
       );
+    } else if (propertyType == 'ResidentialProperty') {
+      return this.propertyservice.getResidentialProperties().pipe(
+        catchError((error) => {
+          this.router.navigate(['/']);
+          return of(null);
+        })
+      );
+    }
+
   }
 }

@@ -1,5 +1,5 @@
 <section class="search-sec">
-    <div class="container">
+    <div class="container" style="max-width: 90%;">
         <form>
             <div class="row">
                 <div class="col-lg-12">
@@ -13,7 +13,7 @@
                                 <option>Example one</option>
                                 <option>Example one</option>
                                 <option>Example one</option>
-                            </select> 
+                            </select>
                         </div>
                         <div class="col-lg-2 col-md-3 col-sm-12 p-0">
                             <select class="form-control search-slt" id="exampleFormControlSelect1">
@@ -24,7 +24,7 @@
                                 <option>Example one</option>
                                 <option>Example one</option>
                                 <option>Example one</option>
-                            </select> 
+                            </select>
                         </div>
                         <div class="col-lg-2 col-md-3 col-sm-12 p-0">
                             <select class="form-control search-slt" id="exampleFormControlSelect1">
@@ -35,9 +35,9 @@
                                 <option>Example one</option>
                                 <option>Example one</option>
                                 <option>Example one</option>
-                            </select> 
+                            </select>
                         </div>
-                         <div class="col-lg-2 col-md-3 col-sm-12 p-0">
+                        <div class="col-lg-2 col-md-3 col-sm-12 p-0">
                             <select class="form-control search-slt" id="exampleFormControlSelect1">
                                 <option>Select Drop City</option>
                                 <option>Example one</option>
@@ -48,34 +48,33 @@
                                 <option>Example one</option>
                             </select>
                         </div>
-                          <div class="col-lg-2 col-md-3 col-sm-12 p-0">
-                            <select class="form-control search-slt" id="exampleFormControlSelect1">
-                                <option>Select Vehicle</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-1 col-md-3 col-sm-12 p-0">
+
+                        <div class="col-lg-2 col-md-3 col-sm-12 p-0">
                             <button type="button" class="btn btn-primary wrn-btn">Search</button>
-                           
                         </div>
-                        <div class="col-lg-1 col-md-3 col-sm-12 p-0">
-                            <button type="button" class="btn btn-primary wrn-btn">filter</button>
-                           
+
+                        <div class="col-lg-1 col-md-3 col-sm-12 p-0" style="padding-left: 50px !important;">
+                            <button type="button" class="btn btn-primary wrn-btn"
+                                (click)="openModal(template)">filter</button>
                         </div>
+                        <div class="col-lg-1 col-md-3 col-sm-12 p-0" style="padding-left: 10px !important;">
+                            <label class="switch" for="checkbox">
+                                <input type="checkbox" id="checkbox" checked (click)="toggleShowMap()" />
+                                <div class="slider round"></div>
+                            </label>
+                        </div>
+
                     </div>
                 </div>
             </div>
+
         </form>
+
     </div>
-</section> 
- 
- <!-- START SECTION SEARCH AREA -->
- <!-- <section class="main-search-field">
+</section>
+
+<!-- START SECTION SEARCH AREA -->
+<!-- <section class="main-search-field">
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-6 mb-4">
@@ -169,26 +168,27 @@
 
 
 <!-- STAR HEADER GOOGLE MAP -->
-<section class="header-map google-maps pull-top map-leaflet-wrapper" style="height: 500px;">
+<section *ngIf="isShown" class="header-map google-maps pull-top map-leaflet-wrapper" style="height: 700px;">
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="true" [zoomControl]="true"
-      [scrollwheel]="null">
-      <agm-marker-cluster
-        imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
-        <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng" 
-          [markerDraggable]="m.draggable" (markerClick)="clickedMarker(m.label, i)" [iconUrl]="icon" (mouseOver)="mouseOver(m, i)">
-  
-          <!-- <agm-snazzy-info-window [isOpen]="false">
-            <ng-template>
-              <strong>InfoWindow content</strong>
-            </ng-template>
-          </agm-snazzy-info-window> -->
-  
-          <agm-info-window>
+        [scrollwheel]="null">
+        <agm-marker-cluster
+            imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
+            <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"
+                [markerDraggable]="m.draggable" (markerClick)="clickedMarker(m.label, i)" [iconUrl]="icon"
+                (mouseOver)="mouseOver(m, i)">
+
+                <agm-snazzy-info-window [isOpen]="false">
+                    <ng-template>
+                        <strong>InfoWindow content</strong>
+                    </ng-template>
+                </agm-snazzy-info-window>
+
+                <!-- <agm-info-window>
             <strong>InfoWindow content</strong>
-          </agm-info-window>
-  
-        </agm-marker>
-      </agm-marker-cluster>
+          </agm-info-window> -->
+
+            </agm-marker>
+        </agm-marker-cluster>
     </agm-map>
     <!-- <div class="container" style="margin-right: 250px;">
       <div class="filter">
@@ -277,9 +277,9 @@
         </form>
       </div>
     </div> -->
-  </section>
-  <!-- END HEADER GOOGLE MAP -->
-  
+</section>
+<!-- END HEADER GOOGLE MAP -->
+
 <div class="inner-pages">
     <!-- START SECTION PROPERTIES LISTING -->
     <section class="properties-right featured portfolio blog">
@@ -299,12 +299,6 @@
                             </div>
                             <div class="col-lg-6 col-md-7 col-10 cod-pad">
                                 <div class="sorting-options">
-                                    <select class="sorting">
-                                        <option>Price: High to low</option>
-                                        <option>Price: Low to high</option>
-                                        <option>Sells: High to low</option>
-                                        <option>Sells: Low to high</option>
-                                    </select>
                                     <a href="properties-list-right-sidebar.html" class="change-view-btn lde"><i
                                             class="fa fa-th-list"></i></a>
                                     <a href="properties-grid-right-sidebar.html"
@@ -320,62 +314,71 @@
                             <div class="project-single">
                                 <div class="project-inner project-head">
                                     <div class="project-bottom">
-                                        <h4><a routerLink="/property/{{property.propertyUniqid}}">View
-                                                Property</a><span class="category">Real Estate</span></h4>
+                                        <h4><a *ngIf="property.askingPrice"
+                                                routerLink="/property/CommercialProperties/{{property.propertyUniqid}}">View
+                                                Property</a>
+                                            <a *ngIf="property.price"
+                                                routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}">View
+                                                Property</a>
+                                            <span class="category">Real Estate</span></h4>
                                     </div>
                                     <div class="homes">
                                         <!-- homes img -->
-                                        <a routerLink="/property/{{property.propertyUniqid}}"
+                                        <a routerLink="/property/CommercialProperties/{{property.propertyUniqid}}"
                                             class="homes-img">
                                             <div class="homes-tag button alt sale">{{property.transactionType}}</div>
                                             <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
-                                            <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}" alt="home-1"
-                                            onerror="this.src='../assets/images/feature-properties/fp-1.jpg';" style="height: 250px;"  class="img-responsive">
+                                            <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
+                                                alt="home-1"
+                                                onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
+                                                style="height: 250px;" class="img-responsive">
                                         </a>
                                     </div>
                                     <div class="button-effect">
-                                        <a routerLink="/property/{{property.propertyUniqid}}"
+                                        <a routerLink="/property/CommercialProperties/{{property.propertyUniqid}}"
                                             class="btn"><i class="fa fa-link"></i></a>
-                                        <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4"
-                                            class="btn popup-video popup-youtube"><i class="fas fa-video"></i></a>
-                                        <a routerLink="/property/{{property.propertyUniqid}}"
-                                            class="img-poppu btn"><i class="fa fa-photo"></i></a>
                                     </div>
                                 </div>
                                 <!-- homes content -->
                                 <div class="homes-content" style="min-height: 300px;">
                                     <!-- homes address -->
-                                    <h3><a routerLink="/property/{{property.propertyUniqid}}">{{property.propertyType}}</a></h3>
+                                    <h3><a>{{property.propertyType}}</a>
+                                    </h3>
                                     <p class="homes-address mb-3">
-                                        <a routerLink="/property/{{property.propertyUniqid}}">
-                                            <i class="fa fa-map-marker"></i><span>{{property.address}}, {{property.city}} , {{property.state}} , {{property.postalCode}}</span>
+                                        <a>
+                                            <i class="fa fa-map-marker"></i><span>{{property.address}},
+                                                {{property.city}}
+                                                <span *ngIf="property.state">,{{property.state}}</span>
+                                                ,{{property.postalCode}}</span>
                                         </a>
                                     </p>
                                     <!-- homes List -->
                                     <ul class="homes-list clearfix">
-                                        <li>
+                                        <li *ngIf="property.bedroomsTotal">
                                             <i class="fa fa-bed" aria-hidden="true"></i>
-                                            <span>6 Bedrooms</span>
+                                            <span>{{property.bedroomsTotal}} Bedrooms</span>
                                         </li>
-                                        <li>
+                                        <li *ngIf="property.bedroomsTotal">
                                             <i class="fa fa-bath" aria-hidden="true"></i>
-                                            <span>3 Bathrooms</span>
+                                            <span>{{property.bedroomsTotal}} Bathrooms</span>
                                         </li>
                                         <li>
                                             <i class="fa fa-object-group" aria-hidden="true"></i>
-                                            <span>720 sq ft</span>
+                                            <span>{{ property.totalFinishedArea != null ? property.totalFinishedArea : "NA sqft"}}</span>
                                         </li>
-                                        <li>
-                                            <i class="fas fa-warehouse" aria-hidden="true"></i>
-                                            <span>2 Garages</span>
-                                        </li>
+
                                     </ul>
                                     <!-- Price -->
                                     <div class="price-properties">
-                                        <h3 class="title mt-3">
-                                            <a routerLink="/property/{{property.propertyUniqid}}">$
+                                        <h3 *ngIf="property.askingPrice" class="title mt-3">
+                                            <a>$
                                                 {{property.askingPrice}}</a>
                                         </h3>
+                                        <h3 *ngIf="property.price" class="title mt-3">
+                                            <a>$
+                                                {{property.price}}</a>
+                                        </h3>
+
                                         <div class="compare">
                                             <a href="#" title="Compare">
                                                 <i class="fas fa-exchange-alt"></i>
@@ -392,8 +395,8 @@
                                         <a href="agent-details.html">
                                             <i class="fa fa-user"></i> Jhon Doe
                                         </a>
-                                        <span>
-                                            <i class="fa fa-calendar"></i> {{property.listingDate |  timeago}}
+                                        <span *ngIf="property.listingDate">
+                                            <i class="fa fa-calendar"></i> {{property.listingDate | timeago }}
                                         </span>
                                     </div>
                                 </div>
@@ -402,7 +405,7 @@
                     </div>
 
                 </div>
-               
+
             </div>
             <nav aria-label="..." class="mt-5">
                 <ul class="pagination">
@@ -424,9 +427,191 @@
         </div>
     </section>
     <!-- END SECTION PROPERTIES LISTING -->
-
-
-
-
-
 </div>
+
+<ng-template #template>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Filter Property</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="row" style="padding:10px;">
+                <div class="col-lg-12">
+                    <div class="row" style="padding: 15px;">
+                        <div class="col-lg-3 col-md-3 col-sm-12 ">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Drop City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row" style="padding: 15px;">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 ">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 ">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Drop City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row" style="padding: 15px;">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12 ">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Pickup City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+                        <div class="col-lg-3 col-md-3 col-sm-12">
+                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
+                            <select class="form-control label" id="exampleFormControlSelect1">
+                                <option>Select Drop City</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                                <option>Example one</option>
+                            </select>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+
+                        <div class="col-lg-12 col-md-3 col-sm-12">
+                            <button type="button" class="btn btn-primary wrn-btn">Search</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+</ng-template>

@@ -18,7 +18,16 @@
                           <div class="mt-0">
                             <a class="listing-address">
                               <i class="fa fa-map-marker pr-2 ti-location-pin mrg-r-5"></i>
-                              {{property.address}}, {{property.city}}, {{property.state}}, {{property.postalCode}}
+                              <span *ngIf="property.address"> {{property.address}}</span>
+                              <span *ngIf="property.addressLine1"> {{property.addressLine1}}</span>
+                              <span *ngIf="property.streetAddress"> {{property.streetAddress}}</span>
+
+                              <span *ngIf="property.city">, {{property.city}}</span>
+
+                              <span *ngIf="property.state"> , {{property.state}}</span>
+                              <span *ngIf="property.country"> , {{property.country}}</span>
+
+                              <span *ngIf="property.postalCode"> , {{property.postalCode}}</span>
                             </a>
                           </div>
                         </div>
@@ -28,10 +37,13 @@
                       <div class="single detail-wrapper">
                         <div class="detail-wrapper-body">
                           <div class="listing-title-bar">
-                            <h4>$ {{property.askingprice}}</h4>
+                            <h4 *ngIf="property.askingprice">$ {{property.askingprice}}</h4>
+                            <h4 *ngIf="property.price">$ {{property.price}}</h4>
+
                             <div class="mt-0">
                               <a class="listing-address">
-                                <p>{{property.landArea}}</p>
+                                <p *ngIf="property.landArea">{{property.landArea}}</p>
+                                <p *ngIf="property.sizeInterior">{{property.sizeInterior}}</p>
                               </a>
                             </div>
                           </div>
@@ -44,40 +56,18 @@
               <!-- main slider carousel items -->
               <div id="listingDetailsSlider" class="carousel listing-details-sliders slide mb-30">
                 <h5 class="mb-4">Gallery</h5>
-                <div class="carousel-inner">
-                  <div class="item carousel-item" *ngFor="let photo of property.commercialImages; let i = index"
-                    [attr.data-slide-number]="i" [class.active]="selectedIndex === i"
-                    (click)="setIndex(i)">
-                    <img src="{{photo.photoPath}}" class="img-fluid" alt="slider-listing"
-                      style="width: 1000px; height: 400px;">
-                  </div>
-
-
-                  <a class="carousel-control left" href="#listingDetailsSlider" data-slide="prev"><i
-                      class="fa fa-angle-left"></i></a>
-                  <a class="carousel-control right" href="#listingDetailsSlider" data-slide="next"><i
-                      class="fa fa-angle-right"></i></a>
-
-                </div>
-                <!-- main slider carousel nav controls -->
-                <div style="width: 100%; overflow-x: auto;">
-                  <ul class="carousel-indicators smail-listing list-inline nav nav-justified">
-                    <li class="list-inline-item" *ngFor="let photo of property.commercialImages; let i = index"
-                      [attr.data-index]="i" [class.active]="selectedIndexcarasoul === i" (click)="setIndexcarasoul(i)">
-                      <a id="carousel-selector-{{i}}"  [attr.data-slide-to]="i" class="selected" 
-                        data-target="#listingDetailsSlider">
-                        <img src="{{photo.photoPath}}" class="img-thumbnail" alt="listing-small"
-                          style="height: 100px; width: 200px;">
-                      </a>
-                    </li>
-                  </ul>
+                <div class="gallery-wrapper">
+                  <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
                 </div>
 
                 <!-- main slider carousel items -->
               </div>
               <div class="blog-info details mb-30">
-                <h5 class="mb-4">Description</h5>
-                <p class="mb-3">{{property.description}}</p>
+                <h5 class="mb-4" *ngIf="property.description">Description</h5>
+                <p class="mb-3" *ngIf="property.description">{{property.description}}</p>
+
+                <h5 class="mb-4" *ngIf="property.publicRemarks">Public Remark</h5>
+                <p class="mb-3" *ngIf="property.publicRemarks">{{property.publicRemarks}}</p>
 
               </div>
             </div>
@@ -88,35 +78,67 @@
             <ul class="homes-list clearfix">
               <li>
                 <span class="font-weight-bold mr-1">Property ID:</span>
-                <span class="det">{{property.ddfProID}}</span>
+                <span class="det">{{property.mlsId}}</span>
               </li>
               <li>
                 <span class="font-weight-bold mr-1">Property Type:</span>
                 <span class="det">{{property.propertyType}}</span>
               </li>
-              <li>
+              <li *ngIf="property.status">
                 <span class="font-weight-bold mr-1">Property status:</span>
                 <span class="det">{{property.status}}</span>
               </li>
-              <li>
+              <li *ngIf="property.askingprice">
                 <span class="font-weight-bold mr-1">Property Price:</span>
                 <span class="det">{{property.askingprice}}</span>
               </li>
-              <li>
-                <span class="font-weight-bold mr-1">Rooms:</span>
-                <span class="det">{{property.rooms}}</span>
+              <li *ngIf="property.price">
+                <span class="font-weight-bold mr-1">Property Price:</span>
+                <span class="det">{{property.price}}</span>
               </li>
-              <li>
+              <li *ngIf="property.bedroomsTotal">
+                <span class="font-weight-bold mr-1">Bed Rooms:</span>
+                <span class="det">{{property.bedroomsTotal}}</span>
+              </li>
+              <li *ngIf="property.bathroomTotal">
+                <span class="font-weight-bold mr-1">Bath Rooms:</span>
+                <span class="det">{{property.bathroomTotal}}</span>
+              </li>
+              <li *ngIf="property.parking">
+                <span class="font-weight-bold mr-1">Parking:</span>
+                <span class="det">{{property.parking}}</span>
+              </li>
+              <li *ngIf="property.basementType">
+                <span class="font-weight-bold mr-1">Basement Type:</span>
+                <span class="det">{{property.basementType}}</span>
+              </li>
+              <li *ngIf="property.fenceType">
+                <span class="font-weight-bold mr-1">Fence Type:</span>
+                <span class="det">{{property.fenceType}}</span>
+              </li>
+              <li *ngIf="property.storiesTotal">
+                <span class="font-weight-bold mr-1">Stories:</span>
+                <span class="det">{{property.storiesTotal}}</span>
+              </li>
+              <li *ngIf="property.listingDate">
                 <span class="font-weight-bold mr-1">Listing Date:</span>
                 <span class="det">{{property.listingDate | date}}</span>
               </li>
-              <li>
+              <li *ngIf="property.listingContractDate">
+                <span class="font-weight-bold mr-1">Listing Date:</span>
+                <span class="det">{{property.listingContractDate | date}}</span>
+              </li>
+              <li *ngIf="property.expirydate">
                 <span class="font-weight-bold mr-1">Expiry Date:</span>
                 <span class="det">{{property.expirydate | date}}</span>
               </li>
-              <li>
+              <li *ngIf="property.broker">
                 <span class="font-weight-bold mr-1">Broker:</span>
                 <span class="det">{{property.broker}}</span>
+              </li>
+              <li *ngIf="property.brokerage">
+                <span class="font-weight-bold mr-1">Broker:</span>
+                <span class="det">{{property.brokerage}}</span>
               </li>
 
             </ul>
@@ -124,48 +146,23 @@
             <h5 class="mt-5">Amenities</h5>
             <!-- cars List -->
             <ul class="homes-list clearfix">
-              <li>
+              <li *ngFor="let amenity of amenities">
                 <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Air Cond</span>
+                <span>{{amenity}}</span>
               </li>
-              <li>
+            </ul>
+
+            <!-- title -->
+            <h5 class="mt-5">Appliances</h5>
+            <!-- cars List -->
+            <ul class="homes-list clearfix">
+              <li *ngFor="let appliance of appliances">
                 <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Balcony</span>
-              </li>
-              <li>
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Internet</span>
-              </li>
-              <li>
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Dishwasher</span>
-              </li>
-              <li>
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Bedding</span>
-              </li>
-              <li>
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Cable TV</span>
-              </li>
-              <li>
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Parking</span>
-              </li>
-              <li>
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Pool</span>
-              </li>
-              <li>
-                <i class="fa fa-check-square" aria-hidden="true"></i>
-                <span>Fridge</span>
+                <span>{{appliance}}</span>
               </li>
             </ul>
           </div>
-          <div class="floor-plan property wprt-image-video w50 pro">
-            <h5>Floor Plans</h5>
-            <img alt="image" src="../assets/images/bg/floor-plan-1.png">
-          </div>
+
           <div class="floor-plan property wprt-image-video w50 pro">
             <h5>What's Nearby</h5>
             <div class="property-nearby">
@@ -305,232 +302,31 @@
           <div class="property-location map">
             <h5>Location</h5>
             <div class="divider-fade"></div>
-            <div id="map-contact" class="contact-map"></div>
+            <div class="contact-map">
+              <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="false"
+                [zoomControl]="false">
+                <agm-marker-cluster
+                  imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
+                  <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"
+                    [label]="m.label" [markerDraggable]="m.draggable">
+
+                    <agm-snazzy-info-window [isOpen]="true">
+                      <ng-template>
+                        <strong>InfoWindow content</strong>
+                      </ng-template>
+                    </agm-snazzy-info-window>
+
+                  </agm-marker>
+                </agm-marker-cluster>
+
+              </agm-map>
+            </div>
           </div>
-          <!-- Star Reviews -->
-          <section class="reviews comments">
-            <h3 class="mb-5">3 Reviews</h3>
-            <div class="row mb-5">
-              <ul class="col-12 commented pl-0">
-                <li class="comm-inf">
-                  <div class="col-md-2">
-                    <img src="../assets/images/testimonials/ts-5.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-md-10 comments-info">
-                    <div class="conra">
-                      <h5 class="mb-2">Mary Smith</h5>
-                      <div class="rating-box">
-                        <div class="detail-list-rating mr-0">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="mb-4">May 30 2020</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam, quam congue dictum luctus,
-                      lacus magna congue ante, in finibus dui sapien eu dolor. Integer tincidunt suscipit erat, nec
-                      laoreet ipsum vestibulum sed.</p>
-                    <div class="rest"><img src="../assets/images/single-property/s-1.jpg" class="img-fluid" alt="">
-                    </div>
-                  </div>
-                </li>
 
-              </ul>
-            </div>
-            <div class="row">
-              <ul class="col-12 commented pl-0">
-                <li class="comm-inf">
-                  <div class="col-md-2">
-                    <img src="../assets/images/testimonials/ts-4.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-md-10 comments-info">
-                    <div class="conra">
-                      <h5 class="mb-2">Abraham Tyron</h5>
-                      <div class="rating-box">
-                        <div class="detail-list-rating mr-0">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="mb-4">june 1 2020</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam, quam congue dictum luctus,
-                      lacus magna congue ante, in finibus dui sapien eu dolor. Integer tincidunt suscipit erat, nec
-                      laoreet ipsum vestibulum sed.</p>
-                  </div>
-                </li>
-
-              </ul>
-            </div>
-            <div class="row mt-5">
-              <ul class="col-12 commented mb-0 pl-0">
-                <li class="comm-inf">
-                  <div class="col-md-2">
-                    <img src="../assets/images/testimonials/ts-3.jpg" class="img-fluid" alt="">
-                  </div>
-                  <div class="col-md-10 comments-info">
-                    <div class="conra">
-                      <h5 class="mb-2">Lisa Williams</h5>
-                      <div class="rating-box">
-                        <div class="detail-list-rating mr-0">
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star"></i>
-                          <i class="fa fa-star-o"></i>
-                        </div>
-                      </div>
-                    </div>
-                    <p class="mb-4">jul 12 2020</p>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras aliquam, quam congue dictum luctus,
-                      lacus magna congue ante, in finibus dui sapien eu dolor. Integer tincidunt suscipit erat, nec
-                      laoreet ipsum vestibulum sed.</p>
-                    <div class="resti">
-                      <div class="rest"><img src="../assets/images/single-property/s-2.jpg" class="img-fluid" alt="">
-                      </div>
-                      <div class="rest"><img src="../assets/images/single-property/s-3.jpg" class="img-fluid" alt="">
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </div>
-          </section>
-          <!-- End Reviews -->
-          <!-- Star Add Review -->
-          <section class="single reviews leve-comments details">
-            <div id="add-review" class="add-review-box">
-              <!-- Add Review -->
-              <h3 class="listing-desc-headline margin-bottom-20 mb-4">Add Review</h3>
-              <span class="leave-rating-title">Your rating for this listing</span>
-              <!-- Rating / Upload Button -->
-              <div class="row mb-4">
-                <div class="col-md-6">
-                  <!-- Leave Rating -->
-                  <div class="clearfix"></div>
-                  <div class="leave-rating margin-bottom-30">
-                    <input type="radio" name="rating" id="rating-1" value="1" />
-                    <label for="rating-1" class="fa fa-star"></label>
-                    <input type="radio" name="rating" id="rating-2" value="2" />
-                    <label for="rating-2" class="fa fa-star"></label>
-                    <input type="radio" name="rating" id="rating-3" value="3" />
-                    <label for="rating-3" class="fa fa-star"></label>
-                    <input type="radio" name="rating" id="rating-4" value="4" />
-                    <label for="rating-4" class="fa fa-star"></label>
-                    <input type="radio" name="rating" id="rating-5" value="5" />
-                    <label for="rating-5" class="fa fa-star"></label>
-                  </div>
-                  <div class="clearfix"></div>
-                </div>
-                <div class="col-md-6">
-                  <!-- Uplaod Photos -->
-                  <div class="add-review-photos margin-bottom-30">
-                    <div class="photoUpload">
-                      <span><i class="sl sl-icon-arrow-up-circle"></i> Upload Photos</span>
-                      <input type="file" class="upload" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 data">
-                  <form action="#">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="text" name="name" class="form-control" placeholder="First Name" required>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="text" name="name" class="form-control" placeholder="Last Name" required>
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="email" name="email" class="form-control" placeholder="Email" required>
-                      </div>
-                    </div>
-                    <div class="col-md-12 form-group">
-                      <textarea class="form-control" id="exampleTextarea" rows="8" placeholder="Review"
-                        required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-lg mt-2">Submit Review</button>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </section>
-          <!-- End Add Review -->
         </div>
         <aside class="col-lg-4 col-md-12 car">
           <div class="single widget">
-            <!-- Start: Schedule a Tour -->
-            <div class="schedule widget-boxed mt-33">
-              <div class="widget-boxed-header">
-                <h4><i class="fa fa-calendar pr-3 padd-r-10"></i>Schedule a Tour</h4>
-              </div>
-              <div class="widget-boxed-body">
-                <div class="row">
-                  <div class="col-lg-6 col-md-12 book">
-                    <input type="text" id="reservation-date" data-lang="en" data-large-mode="true" data-min-year="2017"
-                      data-max-year="2020" data-disabled-days="08/17/2017,08/18/2017" data-id="datedropper-0"
-                      data-theme="my-style" class="form-control" readonly="">
-                  </div>
-                  <div class="col-lg-6 col-md-12 book2">
-                    <input type="text" id="reservation-time" class="form-control" readonly="">
-                  </div>
-                </div>
-                <div class="row mrg-top-15 mb-3">
-                  <div class="col-lg-6 col-md-12 mt-4">
-                    <label class="mb-4">Adult</label>
-                    <div class="input-group">
-                      <span class="input-group-btn">
-                        <button type="button" class="btn counter-btn theme-cl btn-number" disabled="disabled"
-                          data-type="minus" data-field="quant[1]">
-                          <i class="fa fa-minus"></i>
-                        </button>
-                      </span>
-                      <input type="text" name="quant[1]" class="border-0 text-center form-control input-number"
-                        data-min="0" data-max="10" value="0">
-                      <span class="input-group-btn">
-                        <button type="button" class="btn counter-btn theme-cl btn-number" data-type="plus"
-                          data-field="quant[1]">
-                          <i class="fa fa-plus"></i>
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                  <div class="col-lg-6 col-md-12 mt-4">
-                    <label class="mb-4">Children</label>
-                    <div class="input-group">
-                      <span class="input-group-btn">
-                        <button type="button" class="btn counter-btn theme-cl btn-number" disabled="disabled"
-                          data-type="minus" data-field="quant[2]">
-                          <i class="fa fa-minus"></i>
-                        </button>
-                      </span>
-                      <input type="text" name="quant[2]" class="border-0 text-center form-control input-number"
-                        data-min="0" data-max="10" value="0">
-                      <span class="input-group-btn">
-                        <button type="button" class="btn counter-btn theme-cl btn-number" data-type="plus"
-                          data-field="quant[2]">
-                          <i class="fa fa-plus"></i>
-                        </button>
-                      </span>
-                    </div>
-                  </div>
-                </div>
-                <a href="payment-method.html" class="btn reservation btn-radius theme-btn full-width mrg-top-10">Submit
-                  Request</a>
-              </div>
-            </div>
-            <!-- End: Schedule a Tour -->
+
             <!-- end author-verified-badge -->
             <div class="sidebar">
               <div class="widget-boxed mt-33 mt-5">
@@ -661,61 +457,74 @@
         <div class="container">
           <h5>Similar Properties</h5>
           <div class="row portfolio-items">
-            <div class="item col-lg-4 col-md-6 col-xs-12 landscapes">
-              <div class="project-single">
+            <div class="item col-lg-4 col-md-4 col-xs-12 landscapes sale"
+              *ngFor="let property of properties;  let i=index">
+              <div class="project-single" *ngIf="i<3">
                 <div class="project-inner project-head">
                   <div class="project-bottom">
-                    <h4><a href="single-property-1.html">View Property</a><span class="category">Real Estate</span></h4>
+                    <h4><a *ngIf="property.askingPrice"
+                        routerLink="/property/CommercialProperties/{{property.propertyUniqid}}">View
+                        Property</a>
+                      <a *ngIf="property.price"
+                        routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}">View
+                        Property</a>
+                      <span class="category">Real Estate</span></h4>
                   </div>
                   <div class="homes">
                     <!-- homes img -->
-                    <a href="single-property-1.html" class="homes-img">
-                      <div class="homes-tag button alt featured">Featured</div>
-                      <div class="homes-tag button alt sale">For Sale</div>
-                      <div class="homes-price">Family Home</div>
-                      <img src="../assets/images/feature-properties/fp-1.jpg" alt="home-1" class="img-responsive">
+                    <a routerLink="/property/CommercialProperties/{{property.propertyUniqid}}" class="homes-img">
+                      <div class="homes-tag button alt sale">{{property.transactionType}}</div>
+                      <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
+                      <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}" alt="home-1"
+                        onerror="this.src='../assets/images/feature-properties/fp-1.jpg';" style="height: 250px;"
+                        class="img-responsive">
                     </a>
                   </div>
                   <div class="button-effect">
-                    <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                    <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                        class="fas fa-video"></i></a>
-                    <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
+                    <a routerLink="/property/CommercialProperties/{{property.propertyUniqid}}" class="btn"><i
+                        class="fa fa-link"></i></a>
                   </div>
                 </div>
                 <!-- homes content -->
-                <div class="homes-content">
+                <div class="homes-content" style="min-height: 300px;">
                   <!-- homes address -->
-                  <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
+                  <h3><a>{{property.propertyType}}</a>
+                  </h3>
                   <p class="homes-address mb-3">
-                    <a href="single-property-1.html">
-                      <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
+                    <a>
+                      <i class="fa fa-map-marker"></i><span>{{property.address}},
+                        {{property.city}}
+                        <span *ngIf="property.state">,{{property.state}}</span>
+                        ,{{property.postalCode}}</span>
                     </a>
                   </p>
                   <!-- homes List -->
                   <ul class="homes-list clearfix">
-                    <li>
+                    <li *ngIf="property.bedroomsTotal">
                       <i class="fa fa-bed" aria-hidden="true"></i>
-                      <span>6 Bedrooms</span>
+                      <span>{{property.bedroomsTotal}} Bedrooms</span>
                     </li>
-                    <li>
+                    <li *ngIf="property.bedroomsTotal">
                       <i class="fa fa-bath" aria-hidden="true"></i>
-                      <span>3 Bathrooms</span>
+                      <span>{{property.bedroomsTotal}} Bathrooms</span>
                     </li>
                     <li>
                       <i class="fa fa-object-group" aria-hidden="true"></i>
-                      <span>720 sq ft</span>
+                      <span>{{ property.totalFinishedArea != null ? property.totalFinishedArea : "NA sqft"}}</span>
                     </li>
-                    <li>
-                      <i class="fas fa-warehouse" aria-hidden="true"></i>
-                      <span>2 Garages</span>
-                    </li>
+
                   </ul>
                   <!-- Price -->
                   <div class="price-properties">
-                    <h3 class="title mt-3">
-                      <a href="single-property-1.html">$ 230,000</a>
+                    <h3 *ngIf="property.askingPrice" class="title mt-3">
+                      <a>$
+                        {{property.askingPrice}}</a>
                     </h3>
+                    <h3 *ngIf="property.price" class="title mt-3">
+                      <a>$
+                        {{property.price}}</a>
+                    </h3>
+
                     <div class="compare">
                       <a href="#" title="Compare">
                         <i class="fas fa-exchange-alt"></i>
@@ -732,170 +541,14 @@
                     <a href="agent-details.html">
                       <i class="fa fa-user"></i> Jhon Doe
                     </a>
-                    <span>
-                      <i class="fa fa-calendar"></i> 2 months ago
+                    <span *ngIf="property.listingDate">
+                      <i class="fa fa-calendar"></i> {{property.listingDate | timeago }}
                     </span>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="item col-lg-4 col-md-6 col-xs-12 people">
-              <div class="project-single">
-                <div class="project-inner project-head">
-                  <div class="project-bottom">
-                    <h4><a href="single-property-1.html">View Property</a><span class="category">Real Estate</span></h4>
-                  </div>
-                  <div class="homes">
-                    <!-- homes img -->
-                    <a href="single-property-1.html" class="homes-img">
-                      <div class="homes-tag button alt featured">Featured</div>
-                      <div class="homes-tag button sale rent">For Rent</div>
-                      <div class="homes-price">Family Home</div>
-                      <img src="../assets/images/feature-properties/fp-2.jpg" alt="home-1" class="img-responsive">
-                    </a>
-                  </div>
-                  <div class="button-effect">
-                    <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                    <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                        class="fas fa-video"></i></a>
-                    <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                  </div>
-                </div>
-                <!-- homes content -->
-                <div class="homes-content">
-                  <!-- homes address -->
-                  <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-                  <p class="homes-address mb-3">
-                    <a href="single-property-1.html">
-                      <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                    </a>
-                  </p>
-                  <!-- homes List -->
-                  <ul class="homes-list clearfix">
-                    <li>
-                      <i class="fa fa-bed" aria-hidden="true"></i>
-                      <span>6 Bedrooms</span>
-                    </li>
-                    <li>
-                      <i class="fa fa-bath" aria-hidden="true"></i>
-                      <span>3 Bathrooms</span>
-                    </li>
-                    <li>
-                      <i class="fa fa-object-group" aria-hidden="true"></i>
-                      <span>720 sq ft</span>
-                    </li>
-                    <li>
-                      <i class="fas fa-warehouse" aria-hidden="true"></i>
-                      <span>2 Garages</span>
-                    </li>
-                  </ul>
-                  <!-- Price -->
-                  <div class="price-properties">
-                    <h3 class="title mt-3">
-                      <a href="single-property-1.html">$ 230,000</a>
-                    </h3>
-                    <div class="compare">
-                      <a href="#" title="Compare">
-                        <i class="fas fa-exchange-alt"></i>
-                      </a>
-                      <a href="#" title="Share">
-                        <i class="fas fa-share-alt"></i>
-                      </a>
-                      <a href="#" title="Favorites">
-                        <i class="fa fa-heart-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="footer">
-                    <a href="agent-details.html">
-                      <i class="fa fa-user"></i> Jhon Doe
-                    </a>
-                    <span>
-                      <i class="fa fa-calendar"></i> 2 months ago
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="item col-lg-4 col-md-6 col-xs-12 people landscapes no-pb pbp-3">
-              <div class="project-single no-mb mbp-3">
-                <div class="project-inner project-head">
-                  <div class="project-bottom">
-                    <h4><a href="properties-details.html">View Property</a><span class="category">Real Estate</span>
-                    </h4>
-                  </div>
-                  <div class="homes">
-                    <!-- homes img -->
-                    <a href="single-property-1.html" class="homes-img">
-                      <div class="homes-tag button alt featured">Featured</div>
-                      <div class="homes-tag button alt sale">For Sale</div>
-                      <div class="homes-price">Family Home</div>
-                      <img src="../assets/images/feature-properties/fp-3.jpg" alt="home-1" class="img-responsive">
-                    </a>
-                  </div>
-                  <div class="button-effect">
-                    <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                    <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                        class="fas fa-video"></i></a>
-                    <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-                  </div>
-                </div>
-                <!-- homes content -->
-                <div class="homes-content">
-                  <!-- homes address -->
-                  <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-                  <p class="homes-address mb-3">
-                    <a href="single-property-1.html">
-                      <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                    </a>
-                  </p>
-                  <!-- homes List -->
-                  <ul class="homes-list clearfix">
-                    <li>
-                      <i class="fa fa-bed" aria-hidden="true"></i>
-                      <span>6 Bedrooms</span>
-                    </li>
-                    <li>
-                      <i class="fa fa-bath" aria-hidden="true"></i>
-                      <span>3 Bathrooms</span>
-                    </li>
-                    <li>
-                      <i class="fa fa-object-group" aria-hidden="true"></i>
-                      <span>720 sq ft</span>
-                    </li>
-                    <li>
-                      <i class="fas fa-warehouse" aria-hidden="true"></i>
-                      <span>2 Garages</span>
-                    </li>
-                  </ul>
-                  <!-- Price -->
-                  <div class="price-properties">
-                    <h3 class="title mt-3">
-                      <a href="single-property-1.html">$ 230,000</a>
-                    </h3>
-                    <div class="compare">
-                      <a href="#" title="Compare">
-                        <i class="fas fa-exchange-alt"></i>
-                      </a>
-                      <a href="#" title="Share">
-                        <i class="fas fa-share-alt"></i>
-                      </a>
-                      <a href="#" title="Favorites">
-                        <i class="fa fa-heart-o"></i>
-                      </a>
-                    </div>
-                  </div>
-                  <div class="footer">
-                    <a href="agent-details.html">
-                      <i class="fa fa-user"></i> Jhon Doe
-                    </a>
-                    <span>
-                      <i class="fa fa-calendar"></i> 2 months ago
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+
           </div>
         </div>
       </section>

@@ -21,6 +21,9 @@ import { AgmCoreModule } from '@agm/core';
 import { AgmJsMarkerClustererModule } from '@agm/js-marker-clusterer';
 import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+
 @NgModule({
   declarations: [					
     AppComponent,
@@ -40,14 +43,16 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
     AgmCoreModule.forRoot({
       // please get your own API key here:
       // https://developers.google.com/maps/documentation/javascript/get-api-key?hl=en
-      apiKey: 'AIzaSyDX_rf6mAboOhmU-GpNk_MlG3Km2ORhkhE'
+      apiKey: 'AIzaSyAR535bjLnTAM3ol07v1Cd-MD5_Vpps2y0'
     }),
     AgmJsMarkerClustererModule,
-    AgmSnazzyInfoWindowModule
+    AgmSnazzyInfoWindowModule,
+    ModalModule.forRoot(),
+    NgxGalleryModule
   ],
   providers: [
     PropertiesService, 
-    PropertiesResolver, 
+    PropertiesResolver,
     BusyService,
     SinglePropertyResolver,
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },

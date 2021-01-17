@@ -1,14 +1,17 @@
 agm-map {
     width: 100%;
-    height: 555px;
+    height: 700px;
     position: absolute;
     z-index: 0;
   }
   
   /*search box css start here*/
 .search-sec{
-  background: linear-gradient(-47deg, #4528DC 0%, #8731E8 100%);
-  padding: 2rem;
+  /* background: linear-gradient(-47deg, #4528DC 0%, #8731E8 100%); */
+  background-color: #f3f3f3;
+  padding: 1rem;
+  padding-bottom: 4px;
+  padding-top: 20px;
 }
 .search-slt{
   display: block;
@@ -19,14 +22,77 @@ agm-map {
   background-color: #fff;
   background-image: none;
   border: 1px solid #ccc;
-  height: calc(3rem + 2px) !important;
+  height: calc(2rem + 2px) !important;
   border-radius:0;
 }
 .wrn-btn{
   width: 100%;
-  font-size: 16px;
+  font-size: 12px;
   font-weight: 400;
   text-transform: capitalize;
-   height: calc(3rem + 2px) !important;
+   height: calc(2rem + 2px) !important;
    border-radius:0;
 }
+
+
+.switch {
+  display: inline-block;
+  height: 32px;
+  position: relative;
+  width: 60px;
+}
+
+.switch input {
+  display:none;
+}
+
+.slider {
+  background-color: #ccc;
+  bottom: 0;
+  cursor: pointer;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+  transition: .4s;
+}
+
+.slider:before {
+  background-color: #fff;
+  bottom: 4px;
+  content: "";
+  height: 26px;
+  left: 4px;
+  position: absolute;
+  transition: .4s;
+  width: 26px;
+}
+
+input:checked + .slider {
+  background-color: #66bb6a;
+}
+
+input:checked + .slider:before {
+  transform: translateX(26px);
+}
+
+.slider.round {
+  border-radius: 0px;
+}
+
+.slider.round:before {
+  border-radius: 0%;
+}
+
+/* .search-slt{
+ 
+  height: calc(2rem + 0px) !important;
+  
+} */
+
+.label{
+  font-size: 10px;
+}
+
+
+

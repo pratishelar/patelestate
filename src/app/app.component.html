@@ -10,7 +10,7 @@
       ================================================== -->
   <header id="header-container">
     <!-- Topbar -->
-    <div class="header-top" style="background: linear-gradient(-47deg, #4528DC 0%, #8731E8 100%);">
+    <div class="header-top" style="background: linear-gradient(-47deg, #4528DC 0%, #8731E8 100%); padding: 4px;">
       <div class="container">
         <div class="top-info hidden-sm-down">
           <div class="call-header">
@@ -37,30 +37,21 @@
               <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
             </div>
           </div>
-          <div class="dropdown">
-            <button class="btn-dropdown dropdown-toggle" type="button" id="dropdownlang" data-toggle="dropdown"
-              aria-haspopup="true">
-              <img src="../assets/images/en.png" alt="lang" /> English
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownlang">
-              <li><img src="../assets/images/fr.png" alt="lang" />France</li>
-              <li><img src="../assets/images/de.png" alt="lang" /> German</li>
-              <li><img src="../assets/images/it.png" alt="lang" />Italy</li>
-            </ul>
-          </div>
+       
         </div>
       </div>
     </div>
     <div class="clearfix"></div>
     <!-- Topbar / End -->
+
     <!-- Header -->
     <div id="header">
       <div class="container">
         <!-- Left Side Content -->
         <div class="left-side">
           <!-- Logo -->
-          <div id="logo">
-            <a routerLink='/'><img src="../assets/images/logo.svg" alt=""></a>
+          <div id="logo" style="width: 40px; padding-top:12px;">
+            <a routerLink='/'><img src="../assets/images/logo.png" alt=""></a>
           </div>
           <!-- Mobile Navigation -->
           <div class="mmenu-trigger">
@@ -77,9 +68,9 @@
               </li>
               <li><a href="#">Properties</a>
                 <ul>
-                  <li><a routerLink='/properties' routerLinkActive="active">Featured</a>
+                  <li><a routerLink="/properties/ResidentialProperty">Residentail</a>
                   </li>
-                  <li><a routerLink='/properties' routerLinkActive="active">Newly Added</a>
+                  <li><a routerLink="/properties/CommercialProperties" >Commercial</a>
                   </li>
                 </ul>
               </li>
@@ -119,16 +110,14 @@
         <div class="right-side hidden-lg-down">
           <!-- Header Widget -->
           <div class="header-widget">
-            <a href="submit-property.html" class="button border">Submit Property</a>
+            <!-- <a href="submit-property.html" class="button border" style="border-radius: 30px; background-color: #ea3aff;">Submit Property</a> -->
           </div>
           <!-- Header Widget / End -->
         </div>
         <!-- Right Side Content / End -->
-
       </div>
     </div>
     <!-- Header / End -->
-
   </header>
   <div class="clearfix"></div>
   <!-- Header Container / End -->
