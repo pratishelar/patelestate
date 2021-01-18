@@ -16,10 +16,10 @@ export class SinglePropertyResolver implements Resolve<any> {
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
     let propertyType = route.paramMap.get('propertyType');
 
-    if (propertyType == 'CommercialProperties') {
-      return this.memberService.getProperty(route.paramMap.get('propertyId'));
+    if (propertyType == 'CommercialProperty') {
+      return this.memberService.getcommercialSingle(route.paramMap.get('propertyId'));
     } else if (propertyType == 'ResidentialProperty') {
-      return this.memberService.getPropertyResidential(
+      return this.memberService.getResidentialSingle(
         route.paramMap.get('propertyId')
       );
     }

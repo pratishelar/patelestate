@@ -23,6 +23,8 @@ import { AgmSnazzyInfoWindowModule } from '@agm/snazzy-info-window';
 
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [					
@@ -48,7 +50,9 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     AgmJsMarkerClustererModule,
     AgmSnazzyInfoWindowModule,
     ModalModule.forRoot(),
-    NgxGalleryModule
+    NgxGalleryModule,
+    PaginationModule.forRoot(),
+    FormsModule
   ],
   providers: [
     PropertiesService, 

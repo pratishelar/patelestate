@@ -10,11 +10,14 @@ import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
   templateUrl: './propertiesFullGrid.component.html',
   styleUrls: ['./propertiesFullGrid.component.css'],
 })
-export class PropertiesFullGridComponent implements OnInit  {
+export class PropertiesFullGridComponent implements OnInit {
   properties: any = [];
   modalRef: BsModalRef;
-  isShown: boolean = true;
+  isShown: boolean;
   markers: any[] = [];
+  currentPage = 4;
+  page: number;
+  public display: number = 1;
 
   constructor(
     private propertiesService: PropertiesService,
@@ -23,20 +26,26 @@ export class PropertiesFullGridComponent implements OnInit  {
   ) {}
 
   ngOnInit() {
-    
-    this.getproperties();
-    
-  }
-
-  // ngAfterViewInit() {
-  //   this.markers = [];
-  //   this.getproperties();
+    this.propertiesService.getResidentialProperties().subscribe(
+      (properties: any) => {
    
-  // }
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+
+    this.getproperties();
+  }
 
   toggleShowMap() {
     this.isShown = !this.isShown;
   }
+
+  changeDisplay(mode: number): void {
+    this.display = mode;
+  }
+
 
   getproperties() {
     this.route.data.subscribe((data) => {
@@ -51,11 +60,21 @@ export class PropertiesFullGridComponent implements OnInit  {
           draggable: false,
         };
         this.markers.push(obj);
+        console.log(this.markers);
       });
+
+      if( this.markers[0].lat == 0)
+      {
+        this.isShown = false;
+      }else
+      {
+        this.isShown = true;
+      }
     });
+  }
 
-
-
+  pageChanged(event: any): void {
+    this.page = event.page;
   }
 
   openModal(template: TemplateRef<any>) {
@@ -84,6 +103,25 @@ export class PropertiesFullGridComponent implements OnInit  {
   mouseOver(m: any, i: number) {
     // m.icon = '../assets/images/pin3.png';
   }
+
+  idle($event: any) {
+    console.log($event);
+  }
+
+
+  pagination(top,skip){
+    this.propertiesService.getCommercialProperties(top,skip).subscribe(
+      (properties: any) => {
+        this.properties = properties.body;
+        console.log(properties);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
+
+  
 }
 
 // just an interface for type safety.

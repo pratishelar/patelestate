@@ -10,11 +10,13 @@ export class PropertiesService {
 
   constructor(private http: HttpClient) {}
 
-  getProperties(): Observable<any> {
+  getCommercialProperties(top,skip): Observable<any> {
     let params = new HttpParams();
 
-    params = params.append('$top', '10');
+    params = params.append('$top', top);
     params = params.append('$orderby', 'listingDate DESC');
+    params = params.append('$skip', skip);
+
 
     return this.http.get<any[]>(this.baseUrl + 'CommercialProperties', {
       observe: 'response',
@@ -22,21 +24,30 @@ export class PropertiesService {
     });
   }
 
-  getProperty(propertyId): Observable<any> {
-    return this.http.get<any[]>(this.baseUrl + 'CommercialProperties/' + propertyId );
+  getcommercialSingle(propertyId): Observable<any> {
+    return this.http.get<any[]>(
+      this.baseUrl + 'CommercialProperties/' + propertyId
+    );
   }
-  getPropertyResidential(propertyId): Observable<any> {
-    return this.http.get<any[]>(this.baseUrl + 'ResidentialProperty/' + propertyId );
-  }
+
+  
 
   getResidentialProperties(): Observable<any> {
     let params = new HttpParams();
 
-    //params = params.append('$top', '10');
+    params = params.append('$top', '9');
 
     return this.http.get<any[]>(this.baseUrl + 'ResidentialProperty', {
       observe: 'response',
       params,
-    });  }
-}
+    });
+  }
 
+  getResidentialSingle(propertyId): Observable<any> {
+    return this.http.get<any[]>(
+      this.baseUrl + 'ResidentialProperty/' + propertyId
+    );
+  }
+
+  
+}

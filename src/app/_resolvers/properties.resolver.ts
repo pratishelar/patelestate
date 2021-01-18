@@ -15,7 +15,7 @@ export class PropertiesResolver implements Resolve<any> {
     let propertyType = route.paramMap.get('propertyType');
 
     if (propertyType == 'CommercialProperties') {
-      return this.propertyservice.getProperties().pipe(
+      return this.propertyservice.getCommercialProperties(10,0).pipe(
         catchError((error) => {
           this.router.navigate(['/']);
           return of(null);

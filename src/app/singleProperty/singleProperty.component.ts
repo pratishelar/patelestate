@@ -12,9 +12,9 @@ import { PropertiesService } from '../_services/properties.service';
 })
 export class SinglePropertyComponent implements OnInit {
   property: any;
-  amenities:any = [];
+  amenities: any = [];
   appliances: any = [];
-  properties: any =[];
+  properties: any = [];
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];
@@ -47,8 +47,10 @@ export class SinglePropertyComponent implements OnInit {
     },
   ];
 
-  constructor(private route: ActivatedRoute,     private propertiesService: PropertiesService,
-    ) {}
+  constructor(
+    private route: ActivatedRoute,
+    private propertiesService: PropertiesService
+  ) {}
 
   ngOnInit() {
     this.getSingleProperty();
@@ -94,8 +96,11 @@ export class SinglePropertyComponent implements OnInit {
       });
       this.galleryImages = this.property.residentialImages;
     }
+    this.getsimilarproperty(3, 0);
+  }
 
-        this.propertiesService.getProperties().subscribe(
+  getsimilarproperty(top, skip) {
+    this.propertiesService.getCommercialProperties(top, skip).subscribe(
       (properties: any) => {
         this.properties = properties.body;
         console.log(properties);
@@ -104,10 +109,7 @@ export class SinglePropertyComponent implements OnInit {
         console.log(error);
       }
     );
-
-   
   }
- 
 
   getSingleProperty() {
     this.route.data.subscribe((data) => {
