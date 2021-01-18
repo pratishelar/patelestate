@@ -34,13 +34,14 @@
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
-                    <a class="btn btn-yellow searchhide" >Search</a>
+                    <a class="btn btn-yellow searchhide">Search</a>
                 </div>
                 <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
                     <a class="btn btn-yellow" (click)="openModal(template)">Filter </a>
                 </div>
                 <div class="col-xl-1 col-lg-4 col-md-4 col-sm-6">
-                    <a class="btn btn-yellow" name="isShown" [ngClass]="(isShown==true)?'mapon':'mapoff'" (click)="toggleShowMap()">Map</a>
+                    <a class="btn btn-yellow" name="isShown" [ngClass]="(isShown==true)?'mapon':'mapoff'"
+                        (click)="toggleShowMap()">Map</a>
                 </div>
 
                 <!-- <div class="row">
@@ -218,18 +219,28 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-5 col-2">
                                 <h4>
-
                                     <span class="hidden-sm-down">Properties Listing</span>
                                 </h4>
                             </div>
                             <div class="col-lg-6 col-md-7 col-10 cod-pad">
                                 <div class="sorting-options">
-                                    <select class="sorting">
-                                        <option>Price: High to low</option>
-                                        <option>Price: Low to high</option>
-                                        <option>Sells: High to low</option>
-                                        <option>Sells: Low to high</option>
+                                    <select *ngIf="propertyType == 'Commercial'" class="sorting" (change)="Sort($event.target.value)">
+                                        <option value="">None</option>
+                                        <option value="askingPrice DESC">Price: High to low</option>
+                                        <option value="askingPrice ASC">Price: Low to high</option>
+                                        <option value="listingDate ASC">Listing: High to low</option>
+                                        <option value="listingDate DESC">Listing: Low to high</option>
                                     </select>
+
+                                    <select *ngIf="propertyType == 'Residential'" class="sorting" (change)="Sort($event.target.value)">
+                                        <option value="">None</option>
+                                        <option value="Price DESC">Price: High to low</option>
+                                        <option value="Price ASC">Price: Low to high</option>
+                                        <option value="listingContractDate ASC">Listing: High to low</option>
+                                        <option value="listingContractDate DESC">Listing: Low to high</option>
+                                    </select>
+
+                         
                                     <a type="radio" class="change-view-btn "
                                         [ngClass]="(display==1)?'active-view-btn':'lde'" value="1"
                                         (click)="changeDisplay(1)"><i class="fa fa-th-large"></i></a>
@@ -247,17 +258,17 @@
                             <div class="project-single">
                                 <div class="project-inner project-head">
                                     <div class="project-bottom">
-                                        <h4><a *ngIf="property.askingPrice"
+                                        <h4><a *ngIf="propertyType == 'Commercial'"
                                                 routerLink="/property/CommercialProperty/{{property.propertyUniqid}}">View
                                                 Property</a>
-                                            <a *ngIf="property.price"
+                                            <a *ngIf="propertyType == 'Residential'"
                                                 routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}">View
                                                 Property</a>
                                             <span class="category">Real Estate</span></h4>
                                     </div>
                                     <div class="homes">
                                         <!-- homes img -->
-                                        <a *ngIf="property.askingPrice"
+                                        <a *ngIf="propertyType == 'Commercial'"
                                             routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
                                             class="homes-img">
                                             <div class="homes-tag button alt sale">{{property.transactionType}}</div>
@@ -267,7 +278,7 @@
                                                 onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
                                                 style="height: 250px;" class="img-responsive">
                                         </a>
-                                        <a *ngIf="property.price"
+                                        <a *ngIf="propertyType == 'Residential'"
                                             routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
                                             class="homes-img">
                                             <div class="homes-tag button alt sale">{{property.transactionType}}</div>
@@ -279,10 +290,10 @@
                                         </a>
                                     </div>
                                     <div class="button-effect">
-                                        <a *ngIf="property.askingPrice"
+                                        <a *ngIf="propertyType == 'Commercial'"
                                             routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
                                             class="btn"><i class="fa fa-link"></i></a>
-                                        <a *ngIf="property.price"
+                                        <a *ngIf="propertyType == 'Residential'"
                                             routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
                                             class="btn"><i class="fa fa-link"></i></a>
                                     </div>
@@ -319,29 +330,28 @@
                                     </ul>
                                     <!-- Price -->
                                     <div class="price-properties">
-                                        <h3 *ngIf="property.askingPrice" class="title mt-3">
-                                            <a>$
-                                                {{property.askingPrice}}</a>
-                                        </h3>
-                                        <h3 *ngIf="property.price" class="title mt-3">
-                                            <a>$
-                                                {{property.price}}</a>
+                                        <h3 class="title mt-3">
+                                            <a *ngIf="propertyType == 'Commercial'"> $
+                                                {{property.askingPrice ? property.askingPrice : "NA"}}</a>
+                                            <a *ngIf="propertyType == 'Residential'">$
+                                                {{property.price ? property.price : "NA"}}</a>
                                         </h3>
 
+
                                         <div class="compare">
-                                            <a href="#" title="Compare">
+                                            <a  title="Compare">
                                                 <i class="fas fa-exchange-alt"></i>
                                             </a>
-                                            <a href="#" title="Share">
+                                            <a  title="Share">
                                                 <i class="fas fa-share-alt"></i>
                                             </a>
-                                            <a href="#" title="Favorites">
+                                            <a  title="Favorites">
                                                 <i class="fa fa-heart-o"></i>
                                             </a>
                                         </div>
                                     </div>
                                     <div class="footer">
-                                        <a href="agent-details.html">
+                                        <a >
                                             <i class="fa fa-user"></i> Jhon Doe
                                         </a>
                                         <span *ngIf="property.listingDate">
@@ -363,13 +373,13 @@
                                 <div class="project-single mb-0 bb-0">
                                     <div class="project-inner project-head">
                                         <div class="project-bottom">
-                                            <h4 *ngIf="property.askingPrice">
+                                            <h4 *ngIf="propertyType == 'Commercial'">
                                                 <a
                                                     routerLink="/property/CommercialProperty/{{property.propertyUniqid}}">View
                                                     Property</a>
                                                 <span class="category">Real Estate</span>
                                             </h4>
-                                            <h4 *ngIf="property.price">
+                                            <h4 *ngIf="propertyType == 'Residential'">
                                                 <a
                                                     routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}">View
                                                     Property</a>
@@ -378,7 +388,7 @@
                                         </div>
                                         <div class="homes">
                                             <!-- homes img -->
-                                            <a *ngIf="property.askingPrice"
+                                            <a *ngIf="propertyType == 'Commercial'"
                                                 routerLink="/property/CommercialProperties/{{property.propertyUniqid}}"
                                                 class="homes-img">
                                                 <div class="homes-tag button alt sale">{{property.transactionType}}
@@ -389,7 +399,7 @@
                                                     onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
                                                     alt="home-1" class="img-responsive">
                                             </a>
-                                            <a *ngIf="property.price"
+                                            <a *ngIf="propertyType == 'Residential'"
                                                 routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
                                                 class="homes-img">
                                                 <div class="homes-tag button alt sale">{{property.transactionType}}
@@ -402,11 +412,11 @@
                                             </a>
                                         </div>
                                         <div class="button-effect">
-                                            <a *ngIf="property.askingPrice"
+                                            <a *ngIf="propertyType == 'Commercial'"
                                                 routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
                                                 class="btn"><i class="fa fa-link"></i></a>
 
-                                            <a *ngIf="property.price"
+                                            <a *ngIf="propertyType == 'Residential'"
                                                 routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
                                                 class="btn"><i class="fa fa-link"></i></a>
 
@@ -462,19 +472,19 @@
                                             {{property.price}}</a>
                                     </h3>
                                     <div class="compare">
-                                        <a href="#" title="Compare">
+                                        <a  title="Compare">
                                             <i class="fas fa-exchange-alt"></i>
                                         </a>
-                                        <a href="#" title="Share">
+                                        <a  title="Share">
                                             <i class="fas fa-share-alt"></i>
                                         </a>
-                                        <a href="#" title="Favorites">
+                                        <a  title="Favorites">
                                             <i class="fa fa-heart-o"></i>
                                         </a>
                                     </div>
                                 </div>
                                 <div class="footer">
-                                    <a href="agent-details.html">
+                                    <a >
                                         <i class="fa fa-user"></i> Jhon Doe
                                     </a>
                                     <span *ngIf="property.listingDate">

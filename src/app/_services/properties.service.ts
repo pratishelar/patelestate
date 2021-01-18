@@ -10,12 +10,13 @@ export class PropertiesService {
 
   constructor(private http: HttpClient) {}
 
-  getCommercialProperties(top,skip): Observable<any> {
+  getCommercialProperties(top?,skip?,sort?): Observable<any> {
     let params = new HttpParams();
 
     params = params.append('$top', top);
-    params = params.append('$orderby', 'listingDate DESC');
     params = params.append('$skip', skip);
+    if(sort)
+    params = params.append('$orderby', sort);
 
 
     return this.http.get<any[]>(this.baseUrl + 'CommercialProperties', {
@@ -32,10 +33,13 @@ export class PropertiesService {
 
   
 
-  getResidentialProperties(): Observable<any> {
+  getResidentialProperties(top?,skip?,sort?): Observable<any> {
     let params = new HttpParams();
 
-    params = params.append('$top', '9');
+    params = params.append('$top', top);
+    params = params.append('$skip', skip);
+    if(sort)
+    params = params.append('$orderby', sort);
 
     return this.http.get<any[]>(this.baseUrl + 'ResidentialProperty', {
       observe: 'response',

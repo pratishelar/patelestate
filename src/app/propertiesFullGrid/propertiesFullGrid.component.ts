@@ -18,6 +18,17 @@ export class PropertiesFullGridComponent implements OnInit {
   currentPage = 4;
   page: number;
   public display: number = 1;
+  // google maps zoom level
+  zoom: number = 4;
+  icon = {
+    url: '../assets/images/pin.png',
+    scaledSize: { height: 40, width: 30 },
+  };
+  propertyType: any;
+
+  // initial center position for the map
+  lat: number = 59.37570263036942;
+  lng: number = -110.38690422746896;
 
   constructor(
     private propertiesService: PropertiesService,
@@ -26,16 +37,7 @@ export class PropertiesFullGridComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.propertiesService.getResidentialProperties().subscribe(
-      (properties: any) => {
-   
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
-
-    this.getproperties();
+    this.getpropertiesFromroute();
   }
 
   toggleShowMap() {
@@ -46,8 +48,7 @@ export class PropertiesFullGridComponent implements OnInit {
     this.display = mode;
   }
 
-
-  getproperties() {
+  getpropertiesFromroute() {
     this.route.data.subscribe((data) => {
       console.log(data);
       this.properties = data['properties'].body;
@@ -63,12 +64,12 @@ export class PropertiesFullGridComponent implements OnInit {
         console.log(this.markers);
       });
 
-      if( this.markers[0].lat == 0)
-      {
+      if (this.markers[0].lat == 0) {
         this.isShown = false;
-      }else
-      {
+        this.propertyType = 'Commercial';
+      } else {
         this.isShown = true;
+        this.propertyType = 'Residential';
       }
     });
   }
@@ -85,17 +86,6 @@ export class PropertiesFullGridComponent implements OnInit {
     });
   }
 
-  // google maps zoom level
-  zoom: number = 4;
-  icon = {
-    url: '../assets/images/pin.png',
-    scaledSize: { height: 40, width: 30 },
-  };
-
-  // initial center position for the map
-  lat: number = 59.37570263036942;
-  lng: number = -110.38690422746896;
-
   clickedMarker(label: string, index: number) {
     console.log(`clicked the marker: ${label || index}`);
   }
@@ -108,20 +98,32 @@ export class PropertiesFullGridComponent implements OnInit {
     console.log($event);
   }
 
+  Sort(SortType) {
+    if (this.propertyType == 'Commercial') {
+      this.propertiesService.getCommercialProperties(10, 0, SortType).subscribe(
+        (properties: any) => {
+          this.properties = properties.body;
+          console.log(properties);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
+    else if (this.propertyType == 'Residential'){
+      this.propertiesService.getResidentialProperties(10, 0, SortType).subscribe(
+        (properties: any) => {
+          this.properties = properties.body;
+          console.log(properties);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
 
-  pagination(top,skip){
-    this.propertiesService.getCommercialProperties(top,skip).subscribe(
-      (properties: any) => {
-        this.properties = properties.body;
-        console.log(properties);
-      },
-      (error) => {
-        console.log(error);
-      }
-    );
+    }
   }
 
-  
 }
 
 // just an interface for type safety.
