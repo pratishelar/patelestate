@@ -1,5 +1,3 @@
-
-
 <!-- Wrapper -->
 <div id="wrapper">
   <ngx-spinner>
@@ -10,7 +8,7 @@
       ================================================== -->
   <header id="header-container">
     <!-- Topbar -->
-    <div class="header-top" style="background: linear-gradient(-47deg, #4528DC 0%, #8731E8 100%); padding: 4px;">
+    <div class="header-top" style="background: linear-gradient(-47deg, #fad20b 0%, #eac543 100%); padding: 4px;">
       <div class="container">
         <div class="top-info hidden-sm-down">
           <div class="call-header">
@@ -37,7 +35,7 @@
               <a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
             </div>
           </div>
-       
+
         </div>
       </div>
     </div>
@@ -49,10 +47,7 @@
       <div class="container">
         <!-- Left Side Content -->
         <div class="left-side">
-          <!-- Logo -->
-          <div id="logo" style="width: 40px; padding-top:12px;">
-            <a routerLink='/'><img src="../assets/images/logo.png" alt=""></a>
-          </div>
+
           <!-- Mobile Navigation -->
           <div class="mmenu-trigger">
             <button class="hamburger hamburger--collapse" type="button">
@@ -64,57 +59,34 @@
           <!-- Main Navigation -->
           <nav id="navigation" class="style-1">
             <ul id="responsive">
-              <li><a class="" routerLink='/' routerLinkActive="active">Home</a>
+              <!-- <li><a class="" routerLink='/' routerLinkActive="active">Home</a>
+              </li> -->
+              <li><a routerLink="/properties/CommercialProperties" routerLinkActive="active">Commercial</a>
               </li>
-              <li><a>Properties</a>
-                <ul>
-                  <li><a routerLink="/properties/ResidentialProperty" routerLinkActive="active">Residentail</a>
-                  </li>
-                  <li><a routerLink="/properties/CommercialProperties" routerLinkActive="active">Commercial</a>
-                  </li>
-                </ul>
+              <li><a routerLink="/properties/ResidentialProperties" routerLinkActive="active">Residentail</a>
               </li>
-              <li><a href="#">Agents</a>
-                <ul>
-                  <li><a href="agents-listing-grid.html">Agents Grid</a>
-                  </li>
-                  <li><a href="agents-listing-row.html">Agents List</a>
-                  </li>
-                  <li><a href="agent-details.html">Agents Details</a>
-                  </li>
-                </ul>
+              
+
+              <div id="logo" style="margin: -5px 250px 0 250px">
+                <a routerLink='/'><img src="../assets/images/logo.png" alt=""></a>
+              </div>
+
+              <li style="float: right;"><a >Blog</a>
               </li>
 
-              <li><a href="#">Blog</a>
-                <ul>
-                  <li><a href="#">Recent Blog</a>
-
-                  </li>
-                  <li><a href="#">Property Blog</a>
-
-                  </li>
-
-                </ul>
+              <li style="float: right;"><a>Contact</a>
               </li>
-
-              <li><a href="contact-us.html">Contact</a>
-              </li>
+              
             </ul>
           </nav>
+
           <div class="clearfix"></div>
           <!-- Main Navigation / End -->
         </div>
         <!-- Left Side Content / End -->
 
-        <!-- Right Side Content / End -->
-        <div class="right-side hidden-lg-down">
-          <!-- Header Widget -->
-          <div class="header-widget">
-            <!-- <a href="submit-property.html" class="button border" style="border-radius: 30px; background-color: #ea3aff;">Submit Property</a> -->
-          </div>
-          <!-- Header Widget / End -->
-        </div>
-        <!-- Right Side Content / End -->
+
+
       </div>
     </div>
     <!-- Header / End -->

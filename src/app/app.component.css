@@ -5,3 +5,12 @@
 .header-top p i {
     font-size: 11px;
 }
+
+.left-side {
+    width: 100%;
+}
+
+.right-side {
+    width: 0%;
+}
+

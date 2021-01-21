@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PropertiesService } from '../_services/properties.service';
 
 
 @Component({
@@ -7,9 +8,31 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./home.component.css'],
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  properties: any = [];
+  display = "residential";
 
-  ngOnInit() {}
+  constructor(private propertiesService: PropertiesService,) {}
+
+  ngOnInit() {
+    this.getResidentialProperty();
+
+  }
+
+  togglePropertyType(mode) {
+    this.display = mode;  
+  }
+
+  getResidentialProperty(){
+    this.propertiesService.getCommercialProperties(10, 0,).subscribe(
+      (properties: any) => {
+        this.properties = properties.body;
+        console.log(properties);
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
+  }
 
 }
 

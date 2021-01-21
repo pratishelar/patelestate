@@ -21,7 +21,7 @@ export class PropertiesResolver implements Resolve<any> {
           return of(null);
         })
       );
-    } else if (propertyType == 'ResidentialProperty') {
+    } else if (propertyType == 'ResidentialProperties') {
       return this.propertyservice.getResidentialProperties(10,0).pipe(
         catchError((error) => {
           this.router.navigate(['/']);

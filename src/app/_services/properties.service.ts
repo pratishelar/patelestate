@@ -53,5 +53,16 @@ export class PropertiesService {
     );
   }
 
+  getResidentialMap(top?): Observable<any> {
+    let params = new HttpParams();
+
+    params = params.append('$top', top);
+  
+    return this.http.get<any[]>(this.baseUrl + 'ResidentialProperty/map', {
+      observe: 'response',
+      params,
+    });
+  }
+
   
 }

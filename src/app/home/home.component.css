@@ -1,3 +1,24 @@
 .homepage-3 .rld-banner-tab .nav-item a.active, .homepage-3 .rld-banner-tab .nav-item a:hover, .homepage-3 .rld-banner-tab .nav-item a.active:before {
     background: #ea3aff;
 }
+
+.homepage-3 .portfolio .homes-tag.sale {
+    background-color: rgb(193, 36, 36) !important;
+        width: 40% !important;
+}
+.bgcolor{
+    background-color: white !important;
+}
+
+.homepage-3 .btn, .homepage-3 .btn:active, .homepage-3 .btn.sApp-btn:before, .homepage-3 .bg-overlay::after, .homepage-3 .benifits-item:after {
+    background: linear-gradient(-47deg, #fad210 0%, #fad210 100%);}
+
+.homepage-3 .popular-searchs li a {
+    
+    background: rgb(90 81 15 / 69%);
+
+}
+
+.homepage-3 .rld-banner-tab .nav-item a.active, .homepage-3 .rld-banner-tab .nav-item a:hover, .homepage-3 .rld-banner-tab .nav-item a.active:before {
+    background: #000000;
+}

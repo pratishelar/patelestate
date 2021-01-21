@@ -143,9 +143,9 @@
 
             </ul>
             <!-- title -->
-            <h5 class="mt-5">Amenities</h5>
+            <h5 *ngIf="property.amenities" class="mt-5">Amenities</h5>
             <!-- cars List -->
-            <ul class="homes-list clearfix">
+            <ul *ngIf="property.amenities" class="homes-list clearfix">
               <li *ngFor="let amenity of amenities">
                 <i class="fa fa-check-square" aria-hidden="true"></i>
                 <span>{{amenity}}</span>
@@ -153,9 +153,9 @@
             </ul>
 
             <!-- title -->
-            <h5 class="mt-5">Appliances</h5>
+            <h5 *ngIf="property.appliances" class="mt-5">Appliances</h5>
             <!-- cars List -->
-            <ul class="homes-list clearfix">
+            <ul *ngIf="property.appliances" class="homes-list clearfix">
               <li *ngFor="let appliance of appliances">
                 <i class="fa fa-check-square" aria-hidden="true"></i>
                 <span>{{appliance}}</span>

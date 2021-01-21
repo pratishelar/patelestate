@@ -20,32 +20,13 @@ export class SinglePropertyComponent implements OnInit {
   galleryImages: NgxGalleryImage[];
 
   // google maps zoom level
-  zoom: number = 8;
+  zoom: number = 2;
 
   // initial center position for the map
-  lat: number = 51.673858;
-  lng: number = 7.815982;
+  lat: number = 59.37570263036942;
+  lng: number = -110.38690422746896;
 
-  markers: marker[] = [
-    {
-      lat: 51.673858,
-      lng: 7.815982,
-      label: 'A',
-      draggable: true,
-    },
-    {
-      lat: 51.373858,
-      lng: 7.215982,
-      label: 'B',
-      draggable: false,
-    },
-    {
-      lat: 51.723858,
-      lng: 7.895982,
-      label: 'C',
-      draggable: true,
-    },
-  ];
+  markers: marker[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -116,7 +97,14 @@ export class SinglePropertyComponent implements OnInit {
       this.property = data.property;
       this.amenities = this.property.amenities.split(',');
       this.appliances = this.property.appliances.split(',');
-      console.log(this.property);
+      this.markers = [
+        {
+          lat: this.property.latitude,
+          lng: this.property.longitude,
+          label: '1',
+          draggable: false,
+        },
+      ];
     });
   }
 }

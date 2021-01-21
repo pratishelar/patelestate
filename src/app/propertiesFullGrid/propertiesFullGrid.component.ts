@@ -19,16 +19,17 @@ export class PropertiesFullGridComponent implements OnInit {
   page: number;
   public display: number = 1;
   // google maps zoom level
-  zoom: number = 4;
+  zoom: number = 7;
   icon = {
     url: '../assets/images/pin.png',
     scaledSize: { height: 40, width: 30 },
   };
   propertyType: any;
+  singleProperty: any;
 
   // initial center position for the map
-  lat: number = 59.37570263036942;
-  lng: number = -110.38690422746896;
+  lat: number = 53.637115;
+  lng: number = -113.50774;
 
   constructor(
     private propertiesService: PropertiesService,
@@ -38,6 +39,33 @@ export class PropertiesFullGridComponent implements OnInit {
 
   ngOnInit() {
     this.getpropertiesFromroute();
+    this.getMapPins();
+  }
+
+  getMapPins() {
+    this.propertiesService.getResidentialMap().subscribe(
+      (property: any) => {
+        //this.MapPins = property;
+        this.markers = [];
+        property.body.forEach((element, index) => {
+          const obj = {
+            lat: element.latitude,
+            lng: element.longitude,
+            label: index,
+            draggable: false,
+            propertyUniqid: element.propertyUniqid,
+            address: element.address,
+            city: element.city,
+            photoLink: element.photoLink,
+            price: element.price,
+          };
+          this.markers.push(obj);
+        });
+      },
+      (error) => {
+        console.log(error);
+      }
+    );
   }
 
   toggleShowMap() {
@@ -50,21 +78,9 @@ export class PropertiesFullGridComponent implements OnInit {
 
   getpropertiesFromroute() {
     this.route.data.subscribe((data) => {
-      console.log(data);
       this.properties = data['properties'].body;
-      this.markers = [];
-      this.properties.forEach((element, index) => {
-        const obj = {
-          lat: element.latitude,
-          lng: element.longitude,
-          label: index,
-          draggable: false,
-        };
-        this.markers.push(obj);
-        console.log(this.markers);
-      });
 
-      if (this.markers[0].lat == 0) {
+      if (this.properties[0].lat == 0) {
         this.isShown = false;
         this.propertyType = 'Commercial';
       } else {
@@ -86,12 +102,10 @@ export class PropertiesFullGridComponent implements OnInit {
     });
   }
 
-  clickedMarker(label: string, index: number) {
-    console.log(`clicked the marker: ${label || index}`);
-  }
 
-  mouseOver(m: any, i: number) {
+  mouseOver(i: number) {
     // m.icon = '../assets/images/pin3.png';
+    this.markers[i].display = true;
   }
 
   idle($event: any) {
@@ -109,21 +123,20 @@ export class PropertiesFullGridComponent implements OnInit {
           console.log(error);
         }
       );
-    }
-    else if (this.propertyType == 'Residential'){
-      this.propertiesService.getResidentialProperties(10, 0, SortType).subscribe(
-        (properties: any) => {
-          this.properties = properties.body;
-          console.log(properties);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
-
+    } else if (this.propertyType == 'Residential') {
+      this.propertiesService
+        .getResidentialProperties(10, 0, SortType)
+        .subscribe(
+          (properties: any) => {
+            this.properties = properties.body;
+            console.log(properties);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     }
   }
-
 }
 
 // just an interface for type safety.

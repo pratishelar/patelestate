@@ -6,18 +6,18 @@
         <div class="row">
           <div class="col-12">
             <div class="banner-inner">
-              <h1 class="title text-center">Find Your Dream Property</h1>
-              <h5 class="sub-title text-center">Patel Estate Have Over Million Properties For You</h5>
+              <h1 class="title text-center" style="color: black;">Find Your Dream Property</h1>
+              <h5 class="sub-title text-center" style="color: black;">Patel Estate Have Over Million Properties For You</h5>
             </div>
           </div>
           <div class="col-12">
             <div class="banner-search-wrap">
               <ul class="nav nav-tabs rld-banner-tab" style="border-bottom:none;">
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" href="#tabs_1">Residential</a>
+                  <a class="nav-link active" data-toggle="tab" (click)="togglePropertyType('residential')" href="#tabs_1">Residential</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" href="#tabs_2">Commercial</a>
+                  <a class="nav-link" data-toggle="tab" (click)="togglePropertyType('commercial')" href="#tabs_2">Commercial</a>
                 </li>
               </ul>
               <div class="tab-content">
@@ -60,7 +60,7 @@
                         </div>
                       </div>
                       <div class="col-xl-2 col-lg-4 col-md-4">
-                        <a class="btn btn-yellow" href="#">SEARCH NOW</a>
+                        <a class="btn btn-yellow" style="color: black;" href="#">SEARCH NOW</a>
                       </div>
                     </div>
                   </div>
@@ -111,7 +111,7 @@
                 </div>
               </div>
             </div>
-            <ul class="popular-searchs">
+            <ul class="popular-searchs" *ngIf="display == 'residential'">
               <li>
                 <a href="#">
                   <span class="box">
@@ -153,6 +153,49 @@
                 </a>
               </li>
             </ul>
+
+            <ul class="popular-searchs" *ngIf="display == 'commercial'">
+              <li>
+                <a href="#">
+                  <span class="box">
+                    <img src="../assets/images/icons/icon-7.svg" width="45" height="45" alt="">
+                    <span>Land</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="box">
+                    <img src="../assets/images/icons/icon-8.svg" width="45" height="45" alt="">
+                    <span>Retail</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="box">
+                    <img src="../assets/images/icons/icon-9.svg" width="45" height="45" alt="">
+                    <span>Office</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="box">
+                    <img src="../assets/images/icons/icon-10.svg" width="45" height="45" alt="">
+                    <span>Agriculture</span>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="#">
+                  <span class="box">
+                    <img src="../assets/images/icons/icon-11.svg" width="45" height="45" alt="">
+                    <span>Industrial</span>
+                  </span>
+                </a>
+              </li>
+            </ul>
           </div>
         </div>
       </div>
@@ -169,544 +212,107 @@
           <h2 style="padding: 0px 0 0 20px;">Properties</h2>
         </div>
       </div>
-      <div class="row portfolio-items">
-        <div class="item col-lg-4 col-md-6 col-xs-12 landscapes sale">
-          <div class="project-single">
+
+      <div class="row">
+        <div class="item col-lg-4 col-md-4 col-xs-12 landscapes sale" *ngFor="let property of properties;  let i=index">
+          <div class="project-single" *ngIf="i<6">
             <div class="project-inner project-head">
               <div class="project-bottom">
-                <h4><a [routerLink]="['/single']" routerLinkActive="router-link-active">View Property</a><span
-                    class="category">Real Estate</span></h4>
+                <h4><a routerLink="/property/CommercialProperty/{{property.propertyUniqid}}">View
+                    Property</a>
+
+                  <span class="category">Real Estate</span></h4>
               </div>
               <div class="homes">
                 <!-- homes img -->
-                <a [routerLink]="['/single']" routerLinkActive="router-link-active" class="homes-img">
-                  <div class="homes-tag button alt featured">Featured</div>
-                  <div class="homes-tag button alt sale">For Sale</div>
-                  <div class="homes-price">Family Home</div>
-                  <img src="../assets/images/feature-properties/fp-1.jpg" alt="home-1" class="img-responsive">
+                <a routerLink="/property/CommercialProperty/{{property.propertyUniqid}}" class="homes-img">
+                  <div class="homes-tag button alt sale">{{property.transactionType}}</div>
+                  <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
+                  <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}" alt="home-1"
+                    onerror="this.src='../assets/images/feature-properties/fp-1.jpg';" style="height: 250px;"
+                    class="img-responsive">
                 </a>
+
               </div>
               <div class="button-effect">
-                <a [routerLink]="['/single']" routerLinkActive="router-link-active" class="btn"><i
+                <a routerLink="/property/CommercialProperty/{{property.propertyUniqid}}" class="btn"><i
                     class="fa fa-link"></i></a>
-                <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                    class="fas fa-video"></i></a>
-                <a [routerLink]="['/single']" routerLinkActive="router-link-active" class="img-poppu btn"><i
-                    class="fa fa-photo"></i></a>
+
               </div>
             </div>
             <!-- homes content -->
-            <div class="homes-content">
+            <div class="homes-content" style="min-height: 300px;">
               <!-- homes address -->
-              <h3><a [routerLink]="['/single']" routerLinkActive="router-link-active">Real House Luxury Villa</a></h3>
+              <h3><a>{{property.propertyType}}</a>
+              </h3>
               <p class="homes-address mb-3">
-                <a [routerLink]="['/single']" routerLinkActive="router-link-active">
-                  <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
+                <a>
+                  <i class="fa fa-map-marker"></i>
+                  <span>{{property.address}},
+                    {{property.city}}
+                    <span *ngIf="property.state">,{{property.state}}</span>
+                    ,{{property.postalCode}}</span>
                 </a>
               </p>
               <!-- homes List -->
               <ul class="homes-list clearfix">
-                <li>
+                <li *ngIf="property.bedroomsTotal">
                   <i class="fa fa-bed" aria-hidden="true"></i>
-                  <span>6 Bedrooms</span>
+                  <span>{{property.bedroomsTotal}} Bedrooms</span>
                 </li>
-                <li>
+                <li *ngIf="property.bedroomsTotal">
                   <i class="fa fa-bath" aria-hidden="true"></i>
-                  <span>3 Bathrooms</span>
+                  <span>{{property.bedroomsTotal}} Bathrooms</span>
                 </li>
                 <li>
                   <i class="fa fa-object-group" aria-hidden="true"></i>
-                  <span>720 sq ft</span>
+                  <span>{{ property.totalFinishedArea != null ? property.totalFinishedArea : "NA sqft"}}</span>
                 </li>
-                <li>
-                  <i class="fas fa-warehouse" aria-hidden="true"></i>
-                  <span>2 Garages</span>
-                </li>
+
               </ul>
               <!-- Price -->
               <div class="price-properties">
                 <h3 class="title mt-3">
-                  <a [routerLink]="['/single']" routerLinkActive="router-link-active">$ 230,000</a>
+                  <a> $
+                    {{property.price ? property.price : "NA"}}</a>
                 </h3>
+
                 <div class="compare">
-                  <a href="#" title="Compare">
+                  <a title="Compare">
                     <i class="fas fa-exchange-alt"></i>
                   </a>
-                  <a href="#" title="Share">
+                  <a title="Share">
                     <i class="fas fa-share-alt"></i>
                   </a>
-                  <a href="#" title="Favorites">
+                  <a title="Favorites">
                     <i class="fa fa-heart-o"></i>
                   </a>
                 </div>
               </div>
               <div class="footer">
-                <a href="agent-details.html">
+                <a>
                   <i class="fa fa-user"></i> Jhon Doe
                 </a>
-                <span>
-                  <i class="fa fa-calendar"></i> 2 months ago
+                <span *ngIf="property.listingDate">
+                  <i class="fa fa-calendar"></i> {{property.listingDate | timeago }}
                 </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item col-lg-4 col-md-6 col-xs-12 people rent">
-          <div class="project-single">
-            <div class="project-inner project-head">
-              <div class="project-bottom">
-                <h4><a [routerLink]="['/single']" routerLinkActive="router-link-active">View Property</a><span
-                    class="category">Real Estate</span></h4>
-              </div>
-              <div class="homes">
-                <!-- homes img -->
-                <a href="single-property-1.html" class="homes-img">
-                  <div class="homes-tag button alt featured">Featured</div>
-                  <div class="homes-tag button sale rent">For Rent</div>
-                  <div class="homes-price">Family Home</div>
-                  <img src="../assets/images/feature-properties/fp-2.jpg" alt="home-1" class="img-responsive">
-                </a>
-              </div>
-              <div class="button-effect">
-                <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                    class="fas fa-video"></i></a>
-                <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-              </div>
-            </div>
-            <!-- homes content -->
-            <div class="homes-content">
-              <!-- homes address -->
-              <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-              <p class="homes-address mb-3">
-                <a href="single-property-1.html">
-                  <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                </a>
-              </p>
-              <!-- homes List -->
-              <ul class="homes-list clearfix">
-                <li>
-                  <i class="fa fa-bed" aria-hidden="true"></i>
-                  <span>6 Bedrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-bath" aria-hidden="true"></i>
-                  <span>3 Bathrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-object-group" aria-hidden="true"></i>
-                  <span>720 sq ft</span>
-                </li>
-                <li>
-                  <i class="fas fa-warehouse" aria-hidden="true"></i>
-                  <span>2 Garages</span>
-                </li>
-              </ul>
-              <!-- Price -->
-              <div class="price-properties">
-                <h3 class="title mt-3">
-                  <a href="single-property-1.html">$ 230,000</a>
-                </h3>
-                <div class="compare">
-                  <a href="#" title="Compare">
-                    <i class="fas fa-exchange-alt"></i>
-                  </a>
-                  <a href="#" title="Share">
-                    <i class="fas fa-share-alt"></i>
-                  </a>
-                  <a href="#" title="Favorites">
-                    <i class="fa fa-heart-o"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="footer">
-                <a href="agent-details.html">
-                  <i class="fa fa-user"></i> Jhon Doe
-                </a>
-                <span>
-                  <i class="fa fa-calendar"></i> 2 months ago
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item col-lg-4 col-md-6 col-xs-12 people landscapes sale">
-          <div class="project-single">
-            <div class="project-inner project-head">
-              <div class="project-bottom">
-                <h4><a href="properties-details.html">View Property</a><span class="category">Real Estate</span></h4>
-              </div>
-              <div class="homes">
-                <!-- homes img -->
-                <a href="single-property-1.html" class="homes-img">
-                  <div class="homes-tag button alt featured">Featured</div>
-                  <div class="homes-tag button alt sale">For Sale</div>
-                  <div class="homes-price">Family Home</div>
-                  <img src="../assets/images/feature-properties/fp-3.jpg" alt="home-1" class="img-responsive">
-                </a>
-              </div>
-              <div class="button-effect">
-                <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                    class="fas fa-video"></i></a>
-                <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-              </div>
-            </div>
-            <!-- homes content -->
-            <div class="homes-content">
-              <!-- homes address -->
-              <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-              <p class="homes-address mb-3">
-                <a href="single-property-1.html">
-                  <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                </a>
-              </p>
-              <!-- homes List -->
-              <ul class="homes-list clearfix">
-                <li>
-                  <i class="fa fa-bed" aria-hidden="true"></i>
-                  <span>6 Bedrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-bath" aria-hidden="true"></i>
-                  <span>3 Bathrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-object-group" aria-hidden="true"></i>
-                  <span>720 sq ft</span>
-                </li>
-                <li>
-                  <i class="fas fa-warehouse" aria-hidden="true"></i>
-                  <span>2 Garages</span>
-                </li>
-              </ul>
-              <!-- Price -->
-              <div class="price-properties">
-                <h3 class="title mt-3">
-                  <a href="single-property-1.html">$ 230,000</a>
-                </h3>
-                <div class="compare">
-                  <a href="#" title="Compare">
-                    <i class="fas fa-exchange-alt"></i>
-                  </a>
-                  <a href="#" title="Share">
-                    <i class="fas fa-share-alt"></i>
-                  </a>
-                  <a href="#" title="Favorites">
-                    <i class="fa fa-heart-o"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="footer">
-                <a href="agent-details.html">
-                  <i class="fa fa-user"></i> Jhon Doe
-                </a>
-                <span>
-                  <i class="fa fa-calendar"></i> 2 months ago
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item col-lg-4 col-md-6 col-xs-12 people landscapes rent no-pb">
-          <div class="project-single no-mb">
-            <div class="project-inner project-head">
-              <div class="project-bottom">
-                <h4><a href="single-property-1.html">View Property</a><span class="category">Real Estate</span></h4>
-              </div>
-              <div class="homes">
-                <!-- homes img -->
-                <a href="single-property-1.html" class="homes-img">
-                  <div class="homes-tag button alt featured">Featured</div>
-                  <div class="homes-tag button sale rent">For Rent</div>
-                  <div class="homes-price">Family Home</div>
-                  <img src="../assets/images/feature-properties/fp-4.jpg" alt="home-1" class="img-responsive">
-                </a>
-              </div>
-              <div class="button-effect">
-                <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                    class="fas fa-video"></i></a>
-                <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-              </div>
-            </div>
-            <!-- homes content -->
-            <div class="homes-content">
-              <!-- homes address -->
-              <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-              <p class="homes-address mb-3">
-                <a href="properties-details.html">
-                  <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                </a>
-              </p>
-              <!-- homes List -->
-              <ul class="homes-list clearfix">
-                <li>
-                  <i class="fa fa-bed" aria-hidden="true"></i>
-                  <span>6 Bedrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-bath" aria-hidden="true"></i>
-                  <span>3 Bathrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-object-group" aria-hidden="true"></i>
-                  <span>720 sq ft</span>
-                </li>
-                <li>
-                  <i class="fas fa-warehouse" aria-hidden="true"></i>
-                  <span>2 Garages</span>
-                </li>
-              </ul>
-              <!-- Price -->
-              <div class="price-properties">
-                <h3 class="title mt-3">
-                  <a href="single-property-1.html">$ 230,000</a>
-                </h3>
-                <div class="compare">
-                  <a href="#" title="Compare">
-                    <i class="fas fa-exchange-alt"></i>
-                  </a>
-                  <a href="#" title="Share">
-                    <i class="fas fa-share-alt"></i>
-                  </a>
-                  <a href="#" title="Favorites">
-                    <i class="fa fa-heart-o"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="footer">
-                <a href="agent-details.html">
-                  <i class="fa fa-user"></i> Jhon Doe
-                </a>
-                <span>
-                  <i class="fa fa-calendar"></i> 2 months ago
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item col-lg-4 col-md-6 col-xs-12 people sale no-pb">
-          <div class="project-single no-mb">
-            <div class="project-inner project-head">
-              <div class="project-bottom">
-                <h4><a href="single-property-1.html">View Property</a><span class="category">Real Estate</span></h4>
-              </div>
-              <div class="homes">
-                <!-- homes img -->
-                <a href="single-property-1.html" class="homes-img">
-                  <div class="homes-tag button alt featured">Featured</div>
-                  <div class="homes-tag button alt sale">For Sale</div>
-                  <div class="homes-price">Family Home</div>
-                  <img src="../assets/images/feature-properties/fp-7.jpg" alt="home-1" class="img-responsive">
-                </a>
-              </div>
-              <div class="button-effect">
-                <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                    class="fas fa-video"></i></a>
-                <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-              </div>
-            </div>
-            <!-- homes content -->
-            <div class="homes-content">
-              <!-- homes address -->
-              <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-              <p class="homes-address mb-3">
-                <a href="single-property-1.html">
-                  <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                </a>
-              </p>
-              <!-- homes List -->
-              <ul class="homes-list clearfix">
-                <li>
-                  <i class="fa fa-bed" aria-hidden="true"></i>
-                  <span>6 Bedrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-bath" aria-hidden="true"></i>
-                  <span>3 Bathrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-object-group" aria-hidden="true"></i>
-                  <span>720 sq ft</span>
-                </li>
-                <li>
-                  <i class="fas fa-warehouse" aria-hidden="true"></i>
-                  <span>2 Garages</span>
-                </li>
-              </ul>
-              <!-- Price -->
-              <div class="price-properties">
-                <h3 class="title mt-3">
-                  <a href="properties-details.html">$ 230,000</a>
-                </h3>
-                <div class="compare">
-                  <a href="#" title="Compare">
-                    <i class="fas fa-exchange-alt"></i>
-                  </a>
-                  <a href="#" title="Share">
-                    <i class="fas fa-share-alt"></i>
-                  </a>
-                  <a href="#" title="Favorites">
-                    <i class="fa fa-heart-o"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="footer">
-                <a href="agent-details.html">
-                  <i class="fa fa-user"></i> Jhon Doe
-                </a>
-                <span>
-                  <i class="fa fa-calendar"></i> 2 months ago
-                </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="item col-lg-4 col-md-6 it2 col-xs-12 web rent no-pb">
-          <div class="project-single no-mb last">
-            <div class="project-inner project-head">
-              <div class="project-bottom">
-                <h4><a href="single-property-1.html">View Property</a><span class="category">Real Estate</span></h4>
-              </div>
-              <div class="homes">
-                <!-- homes img -->
-                <a href="single-property-1.html" class="homes-img">
-                  <div class="homes-tag button alt featured">Featured</div>
-                  <div class="homes-tag button sale rent">For Rent</div>
-                  <div class="homes-price">Family Home</div>
-                  <img src="../assets/images/feature-properties/fp-6.jpg" alt="home-1" class="img-responsive">
-                </a>
-              </div>
-              <div class="button-effect">
-                <a href="single-property-1.html" class="btn"><i class="fa fa-link"></i></a>
-                <a href="https://www.youtube.com/watch?v=2xHQqYRcrx4" class="btn popup-video popup-youtube"><i
-                    class="fas fa-video"></i></a>
-                <a href="single-property-2.html" class="img-poppu btn"><i class="fa fa-photo"></i></a>
-              </div>
-            </div>
-            <!-- homes content -->
-            <div class="homes-content">
-              <!-- homes address -->
-              <h3><a href="single-property-1.html">Real House Luxury Villa</a></h3>
-              <p class="homes-address mb-3">
-                <a href="single-property-1.html">
-                  <i class="fa fa-map-marker"></i><span>Est St, 77 - Central Park South, NYC</span>
-                </a>
-              </p>
-              <!-- homes List -->
-              <ul class="homes-list clearfix">
-                <li>
-                  <i class="fa fa-bed" aria-hidden="true"></i>
-                  <span>6 Bedrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-bath" aria-hidden="true"></i>
-                  <span>3 Bathrooms</span>
-                </li>
-                <li>
-                  <i class="fa fa-object-group" aria-hidden="true"></i>
-                  <span>720 sq ft</span>
-                </li>
-                <li>
-                  <i class="fas fa-warehouse" aria-hidden="true"></i>
-                  <span>2 Garages</span>
-                </li>
-              </ul>
-              <!-- Price -->
-              <div class="price-properties">
-                <h3 class="title mt-3">
-                  <a href="single-property-1.html">$ 230,000</a>
-                </h3>
-                <div class="compare">
-                  <a href="#" title="Compare">
-                    <i class="fas fa-exchange-alt"></i>
-                  </a>
-                  <a href="#" title="Share">
-                    <i class="fas fa-share-alt"></i>
-                  </a>
-                  <a href="#" title="Favorites">
-                    <i class="fa fa-heart-o"></i>
-                  </a>
-                </div>
-              </div>
-              <div class="footer">
-                <a href="agent-details.html">
-                  <i class="fa fa-user"></i> Jhon Doe
-                </a>
-                <span>
-                  <i class="fa fa-calendar"></i> 2 months ago
+                <span *ngIf="property.listingContractDate">
+                  <i class="fa fa-calendar"></i> {{property.listingContractDate | timeago }}
                 </span>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <div class="bg-all">
-        <a href="properties-full-grid.html" class="btn btn-outline-light">View All</a>
-      </div>
+    </div>
+    <div class="bg-all">
+      <a routerLink="/properties/CommercialProperties" routerLinkActive="active" class="btn btn-outline-light">View
+        All</a>
     </div>
   </section>
   <!-- END SECTION FEATURED PROPERTIES -->
 
-  <!-- START SECTION SERVICES -->
-  <section class="services-home">
-    <div class="container">
-      <div class="section-title">
-        <h3>Property</h3>
-        <h2>Services</h2>
-      </div>
-      <div class="row">
-        <div class="col-lg-4 col-md-12 m-top-0 m-bottom-40">
-          <div class="service bg-light-2 border-1 border-light box-shadow-1 box-shadow-2-hover">
-            <div class="media">
-              <i
-                class="fa fa-home bg-base text-white rounded-100 box-shadow-1 p-top-5 p-bottom-5 p-right-5 p-left-5"></i>
-            </div>
-            <div class="agent-section p-top-35 p-bottom-30 p-right-25 p-left-25">
-              <h4 class="m-bottom-15 text-bold-700">Houses</h4>
-              <p>Nonec pede justo fringilla vel aliquet nec vulputate eget arcu in enim justo rhoncus ut imperdiet
-                venenatis vitae justo.</p>
-              <a class="text-base text-base-dark-hover text-size-13" href="properties-full-list.html">Read More <i
-                  class="fa fa-long-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-12 m-top-40 m-bottom-40">
-          <div class="service bg-light-2 border-1 border-light box-shadow-1 box-shadow-2-hover">
-            <div class="media">
-              <i
-                class="fas fa-building bg-base text-white rounded-100 box-shadow-1 p-top-5 p-bottom-5 p-right-5 p-left-5"></i>
-            </div>
-            <div class="agent-section p-top-35 p-bottom-30 p-right-25 p-left-25">
-              <h4 class="m-bottom-15 text-bold-700">Apartments</h4>
-              <p>Nonec pede justo fringilla vel aliquet nec vulputate eget arcu in enim justo rhoncus ut imperdiet
-                venenatis vitae justo.</p>
-              <a class="text-base text-base-dark-hover text-size-13" href="properties-full-list.html">Read More <i
-                  class="fa fa-long-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-        <div class="col-lg-4 col-md-12 m-top-40 m-bottom-40 commercial">
-          <div class="service bg-light-2 border-1 border-light box-shadow-1 box-shadow-2-hover">
-            <div class="media">
-              <i
-                class="fas fa-warehouse bg-base text-white rounded-100 box-shadow-1 p-top-5 p-bottom-5 p-right-5 p-left-5"></i>
-            </div>
-            <div class="agent-section p-top-35 p-bottom-30 p-right-25 p-left-25">
-              <h4 class="m-bottom-15 text-bold-700">Commercial</h4>
-              <p>Nonec pede justo fringilla vel aliquet nec vulputate eget arcu in enim justo rhoncus ut imperdiet
-                venenatis vitae justo.</p>
-              <a class="text-base text-base-dark-hover text-size-13" href="properties-full-list.html">Read More <i
-                  class="fa fa-long-arrow-right"></i></a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- END SECTION SERVICES -->
+
 
   <!-- START SECTION POPULAR PLACES -->
   <section class="popular-places">
@@ -727,27 +333,27 @@
               <span class="featured">Featured</span>
             </div>
             <div class="img-box-content visible">
-              <h4>New York City </h4>
+              <h4>Toronto </h4>
               <span>203 Properties</span>
             </div>
           </a>
         </div>
-        <div class="col-lg-8 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <!-- Image Box -->
           <a href="properties-map.html" class="img-box hover-effect">
             <img src="../assets/images/popular-places/13.jpg" class="img-responsive" alt="">
             <div class="img-box-content visible">
-              <h4>Los Angeles</h4>
+              <h4>Edmonton</h4>
               <span>307 Properties</span>
             </div>
           </a>
         </div>
-        <div class="col-lg-8 col-md-6">
+        <div class="col-lg-4 col-md-6">
           <!-- Image Box -->
           <a href="properties-map.html" class="img-box hover-effect no-mb">
             <img src="../assets/images/popular-places/14.jpg" class="img-responsive" alt="">
             <div class="img-box-content visible">
-              <h4>San Francisco </h4>
+              <h4>Calgary </h4>
               <span>409 Properties</span>
             </div>
           </a>
@@ -761,7 +367,35 @@
               <span class="featured">Featured</span>
             </div>
             <div class="img-box-content visible">
-              <h4>Miami</h4>
+              <h4>Ottawa</h4>
+              <span>507 Properties</span>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <!-- Image Box -->
+          <a href="properties-map.html" class="img-box hover-effect no-mb x3">
+            <img src="../assets/images/popular-places/16.jpg" class="img-responsive" alt="">
+            <!-- Badge -->
+            <div class="listing-badges">
+              <span class="featured">Featured</span>
+            </div>
+            <div class="img-box-content visible">
+              <h4>Montreal</h4>
+              <span>507 Properties</span>
+            </div>
+          </a>
+        </div>
+        <div class="col-lg-4 col-md-6">
+          <!-- Image Box -->
+          <a href="properties-map.html" class="img-box hover-effect no-mb x3">
+            <img src="../assets/images/popular-places/17.jpg" class="img-responsive" alt="">
+            <!-- Badge -->
+            <div class="listing-badges">
+              <span class="featured">Featured</span>
+            </div>
+            <div class="img-box-content visible">
+              <h4>Vancouver</h4>
               <span>507 Properties</span>
             </div>
           </a>
@@ -771,120 +405,7 @@
   </section>
   <!-- END SECTION POPULAR PLACES -->
 
-  <!-- START SECTION BLOG -->
-  <section class="blog-section bg-white">
-    <div class="container">
-      <div class="section-title">
-        <h3>Latest</h3>
-        <h2>News</h2>
-      </div>
-      <div class="news-wrap">
-        <div class="row">
-          <div class="col-xl-6 col-md-12 col-xs-12">
-            <div class="news-item news-item-sm">
-              <a href="blog-details.html" class="news-img-link">
-                <div class="news-item-img">
-                  <img class="resp-img" src="../assets/images/blog/b-1.jpg" alt="blog image">
-                </div>
-              </a>
-              <div class="news-item-text">
-                <a href="blog-details.html">
-                  <h3>The Real Estate News</h3>
-                </a>
-                <span class="date">Jun 23, 2020 &nbsp;/&nbsp; By Admin</span>
-                <div class="news-item-descr">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                </div>
-                <div class="news-item-bottom">
-                  <a href="blog-details.html" class="news-link">Read more...</a>
-                  <ul class="action-list">
-                    <li class="action-item"><i class="fa fa-heart"></i> <span>306</span></li>
-                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="news-item news-item-sm mb">
-              <a href="blog-details.html" class="news-img-link">
-                <div class="news-item-img">
-                  <img class="resp-img" src="../assets/images/blog/b-2.jpg" alt="blog image">
-                </div>
-              </a>
-              <div class="news-item-text">
-                <a href="blog-details.html">
-                  <h3>The Real Estate News</h3>
-                </a>
-                <span class="date">Jun 23, 2020 &nbsp;/&nbsp; By Admin</span>
-                <div class="news-item-descr">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                </div>
-                <div class="news-item-bottom">
-                  <a href="blog-details.html" class="news-link">Read more...</a>
-                  <ul class="action-list">
-                    <li class="action-item"><i class="fa fa-heart"></i> <span>306</span></li>
-                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-xl-6 col-md-12 col-xs-12">
-            <div class="news-item news-item-sm">
-              <a href="blog-details.html" class="news-img-link">
-                <div class="news-item-img">
-                  <img class="resp-img" src="../assets/images/blog/b-3.jpg" alt="blog image">
-                </div>
-              </a>
-              <div class="news-item-text">
-                <a href="blog-details.html">
-                  <h3>The Real Estate News</h3>
-                </a>
-                <span class="date">Jun 23, 2020 &nbsp;/&nbsp; By Admin</span>
-                <div class="news-item-descr">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                </div>
-                <div class="news-item-bottom">
-                  <a href="blog-details.html" class="news-link">Read more...</a>
-                  <ul class="action-list">
-                    <li class="action-item"><i class="fa fa-heart"></i> <span>306</span></li>
-                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div class="news-item news-item-sm">
-              <a href="blog-details.html" class="news-img-link">
-                <div class="news-item-img">
-                  <img class="resp-img" src="../assets/images/blog/b-4.jpg" alt="blog image">
-                </div>
-              </a>
-              <div class="news-item-text">
-                <a href="blog-details.html">
-                  <h3>The Real Estate News</h3>
-                </a>
-                <span class="date">Jun 23, 2020 &nbsp;/&nbsp; By Admin</span>
-                <div class="news-item-descr">
-                  <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
-                </div>
-                <div class="news-item-bottom">
-                  <a href="blog-details.html" class="news-link">Read more...</a>
-                  <ul class="action-list">
-                    <li class="action-item"><i class="fa fa-heart"></i> <span>306</span></li>
-                    <li class="action-item"><i class="fa fa-comment"></i> <span>34</span></li>
-                    <li class="action-item"><i class="fa fa-share-alt"></i> <span>122</span></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-  <!-- END SECTION BLOG -->
+
 
   <!-- START SECTION TESTIMONIALS -->
   <section class="testimonials bg-gray">
@@ -895,71 +416,83 @@
       </div>
       <section>
         <div class="row">
-            <div class="col-md-4">
-                <div class="bg-light position-relative px-3 mt-5 text-center py-5">
-                    <div class="my-2">
-                       
-                    </div>
-                    <div class="px-3 text-center pb-3">
-                        <p class="font-weight-light my-3 text-secondary">Lorem ipsum dolor sit consectetur adipisicing elit. Alias amet
-                            deleniti et fugit iusto nesciunt.</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white mt-4"
-                         style="background-color: #9b5de5;width: 60px;height: 60px;">
-                        <img class="rounded-circle" src="https://instagram.fkbl4-1.fna.fbcdn.net/v/t51.2885-19/s320x320/116426683_628329168090429_611594986853654870_n.jpg?_nc_ht=instagram.fkbl4-1.fna.fbcdn.net&_nc_ohc=fJcu5CkREJoAX-CUArx&oh=e493efb6219297e9187168037fd761ac&oe=5F85A723" alt="" height="55px" width="55px">
-                    </div>
-                    <div class="text-center">
-                        <h5 class="font-weight-bold mt-4 mb-0" style="color: #9b5de5">Ramin JD</h5>
-                        <small class="font-weight-bold" >Manager</small>
-                    </div>
-                </div>
+          <div class="col-md-4">
+            <div class="bg-light position-relative px-3 mt-5 text-center py-5 bgcolor">
+              <div class="my-2">
+
+              </div>
+              <div class="px-3 text-center pb-3">
+                <p class="font-weight-light my-3 text-secondary">Lorem ipsum dolor sit consectetur adipisicing elit.
+                  Alias amet
+                  deleniti et fugit iusto nesciunt.</p>
+              </div>
             </div>
-            <div class="col-md-4">
-                <div style="background-color: #9b5de5" class="position-relative px-3 mt-5 text-center py-5">
-                    <div class="my-2">
-                   
-                    </div>
-                    <div class="px-3 text-center pb-3">
-                        <p class="font-weight-light my-3 text-white">Lorem ipsum dolor sit consectetur adipisicing elit. Alias amet
-                            deleniti et fugit iusto nesciunt.</p>
-                    </div>
-                </div>
-                <div>
-                    <div  class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white mt-4"
-                         style="width: 60px;height: 60px;background-color: #9b5de5">
-                        <img class="rounded-circle" src="https://instagram.fkbl4-1.fna.fbcdn.net/v/t51.2885-19/s320x320/118888997_328883638545046_6454707536801067921_n.jpg?_nc_ht=instagram.fkbl4-1.fna.fbcdn.net&_nc_ohc=wjH4I0_5rR0AX8fOMWh&oh=cd5528f64dcd8142b882217554681dc8&oe=5F85B2ED" alt="" height="55px" width="55px">
-                    </div>
-                    <div class="text-center">
-                        <h5 class="font-weight-bold mt-4 mb-0 " style="color: #9b5de5">Semin Jee</h5>
-                        <small class="font-weight-bold"style="line-height: 1">CEO</small>
-                    </div>
-                </div>
+            <div>
+              <div
+                class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white mt-4"
+                style="width: 60px;height: 60px;">
+                <img class="rounded-circle"
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+                alt="" height="55px" width="55px">
+              </div>
+              <div class="text-center">
+                <h5 class="font-weight-bold mt-4 mb-0" style="color: #9b5de5">Ramin JD</h5>
+                <small class="font-weight-bold">Manager</small>
+              </div>
             </div>
-            <div class="col-md-4">
-                <div class="bg-light position-relative px-3 mt-5 text-center py-5">
-                    <div class="my-2">
-                       
-                    </div>
-                    <div class="px-3 text-center pb-3">
-                        <p class="font-weight-light my-3 text-secondary">Lorem ipsum dolor sit consectetur adipisicing elit. Alias amet
-                            deleniti et fugit iusto nesciunt.</p>
-                    </div>
-                </div>
-                <div>
-                    <div class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white mt-4"
-                         style="width: 60px;height: 60px; background-color: #9b5de5">
-                        <img class="rounded-circle" src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80" alt="" height="55px" width="55px">
-                    </div>
-                    <div class="text-center">
-                        <h5 class="font-weight-bold mt-4 mb-0 " style="color: #9b5de5">Hadi Najafi</h5>
-                        <small class="font-weight-bold" style="line-height: 1">Developer</small>
-                    </div>
-                </div>
+          </div>
+          <div class="col-md-4">
+            <div style="background-color: #9b5de5" class="position-relative px-3 mt-5 text-center py-5">
+              <div class="my-2">
+
+              </div>
+              <div class="px-3 text-center pb-3">
+                <p class="font-weight-light my-3 text-white">Lorem ipsum dolor sit consectetur adipisicing elit. Alias
+                  amet
+                  deleniti et fugit iusto nesciunt.</p>
+              </div>
             </div>
+            <div>
+              <div
+                class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white mt-4"
+                style="width: 60px;height: 60px;">
+                <img class="rounded-circle"
+                src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+                alt="" height="55px" width="55px">
+              </div>
+              <div class="text-center">
+                <h5 class="font-weight-bold mt-4 mb-0 " style="color: #9b5de5">Semin Jee</h5>
+                <small class="font-weight-bold" style="line-height: 1">CEO</small>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="bg-light position-relative px-3 mt-5 text-center py-5 bgcolor">
+              <div class="my-2">
+
+              </div>
+              <div class="px-3 text-center pb-3">
+                <p class="font-weight-light my-3 text-secondary">Lorem ipsum dolor sit consectetur adipisicing elit.
+                  Alias amet
+                  deleniti et fugit iusto nesciunt.</p>
+              </div>
+            </div>
+            <div>
+              <div
+                class="font-weight-bold circle text-white rounded-circle d-flex align-items-center justify-content-center mx-auto position-relative border border-white mt-4"
+                style="width: 60px;height: 60px;">
+                <img class="rounded-circle"
+                  src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=800&q=80"
+                  alt="" height="55px" width="55px">
+              </div>
+              <div class="text-center">
+                <h5 class="font-weight-bold mt-4 mb-0 " style="color: #9b5de5">Hadi Najafi</h5>
+                <small class="font-weight-bold" style="line-height: 1">Developer</small>
+              </div>
+            </div>
+          </div>
         </div>
-    </section>
+      </section>
     </div>
   </section>
   <!-- END SECTION TESTIMONIALS -->
