@@ -14,4 +14,35 @@
     height: 300px;
   }
   
+  video {
+    /* override other styles to make responsive */
+    width: 100%    !important;
+    height: auto   !important;
+  }
+
+  .sidebar-widget .author-box img {
+    float: left;
+    width: 60px;
+    height: 60px;
+    border: 0px solid #f9f9f9;
+    margin-right: 15px;
+    border-radius: 10%;
+    background-color: #f9f9f9;
+}
+
+.widget-boxed-body {
+  padding: 0.5rem 0 0;
+}
+
+.agent-contact-form-sidebar {
+  width: 100%;
+  padding-top: 0px; 
+  border-top: 0px solid #eeeeee;
+}
+
+.single.detail-wrapper {
+  margin-left: 11rem;
+}
+  
+  
   

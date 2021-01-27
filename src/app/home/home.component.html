@@ -14,53 +14,62 @@
             <div class="banner-search-wrap">
               <ul class="nav nav-tabs rld-banner-tab" style="border-bottom:none;">
                 <li class="nav-item">
-                  <a class="nav-link active" data-toggle="tab" (click)="togglePropertyType('residential')" href="#tabs_1">Residential</a>
+                  <a class="nav-link active" data-toggle="tab" (click)="togglePropertyType('commercial')" href="#tabs_1">Commercial</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" data-toggle="tab" (click)="togglePropertyType('commercial')" href="#tabs_2">Commercial</a>
+                  <a class="nav-link" data-toggle="tab" (click)="togglePropertyType('residential')" href="#tabs_2">Residential</a>
                 </li>
               </ul>
               <div class="tab-content">
                 <div class="tab-pane fade show active" id="tabs_1">
                   <div class="rld-main-search">
                     <div class="row" style="font-size: 10px;">
-                      <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="rld-single-input left-icon">
-                          <input type="text" placeholder="Entry Landmark Location">
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <div class="rld-single-input left-icon searchhide">
+                            <input name="propertysearchinput" value="" [(ngModel)]="propertysearchinput" type="text" placeholder="Entry Landmark Location">
                         </div>
-                      </div>
-                      <div class="col-xl-2 col-lg-6 col-md-6">
+                    </div>
+    
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                         <div class="rld-single-select">
-                          <select class="select single-select">
-                            <option value="1">Property Type</option>
-                            <option value="2">Family House</option>
-                            <option value="3">Apartment</option>
-                            <option value="3">Condo</option>
-                          </select>
+                            <select class="select single-select" name="propertyTypedropdown" [(ngModel)]="propertyTypeinput">
+                                <option value=""  >Property Type</option>
+                                <option value="Land">Land</option>
+                                <option value="Office">Office</option>
+                                <option value="Retail">Retail</option>
+                                <option value="Industrial">Industrial</option>
+                                <option value="Other">Other</option>
+                            </select>
                         </div>
-                      </div>
-                      <div class="col-xl-2 col-lg-4 col-md-4">
+                    </div>
+    
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                         <div class="rld-single-select">
-                          <select class="select single-select">
-                            <option value="1">Any Bedrooms</option>
-                            <option value="2">Room 1</option>
-                            <option value="3">Room 2</option>
-                            <option value="3">Room 3</option>
-                          </select>
+                            <select class="select single-select"  name="minPriceInput" [(ngModel)]="minPriceInput">
+                                <option value="">Min Price</option>
+                                <option value=250000>25,000</option>
+                                <option value=500000>50,000</option>
+                                <option value=750000>75,000</option>
+                                <option value=1000000>100,000</option>
+                                <option value=1250000>125,000</option>
+                            </select>
                         </div>
-                      </div>
-                      <div class="col-xl-2 col-lg-4 col-md-4">
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                         <div class="rld-single-select">
-                          <select class="select single-select">
-                            <option value="1">Any Price</option>
-                            <option value="2">Price 1</option>
-                            <option value="3">Price 2</option>
-                            <option value="3">Price 3</option>
-                          </select>
+                            <select class="select single-select"  name="maxPriceInput" [(ngModel)]="maxPriceInput">
+                                <option value="" >Max Price</option>
+                                <option value=0>0</option>
+                                <option value=250000>25,0000</option>
+                                <option value=500000>50,0000</option>
+                                <option value=750000>75,0000</option>
+                                <option value=1000000>100,0000</option>
+                                <option value=1250000>125,0000</option>
+                            </select>
                         </div>
-                      </div>
+                    </div>
                       <div class="col-xl-2 col-lg-4 col-md-4">
-                        <a class="btn btn-yellow" style="color: black;" href="#">SEARCH NOW</a>
+                        <a class="btn btn-yellow" (click)="commercial()">Search</a>
                       </div>
                     </div>
                   </div>
@@ -68,43 +77,49 @@
                 <div class="tab-pane fade" id="tabs_2">
                   <div class="rld-main-search">
                     <div class="row">
-                      <div class="col-xl-4 col-lg-6 col-md-6">
-                        <div class="rld-single-input left-icon">
-                          <input type="text" placeholder="Entry Landmark Location">
+                      <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                        <div class="rld-single-input left-icon searchhide">
+                            <input name="propertysearchinput" value="" [(ngModel)]="propertysearchinput" type="text" placeholder="Entry Landmark Location">
                         </div>
-                      </div>
-                      <div class="col-xl-2 col-lg-6 col-md-6">
+                    </div>
+    
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                         <div class="rld-single-select">
-                          <select class="select single-select">
-                            <option value="1">All Properties</option>
-                            <option value="2">Properties 1</option>
-                            <option value="3">Properties 2</option>
-                            <option value="3">Properties 3</option>
-                          </select>
+                            <select class="select single-select" name="propertyTypedropdown" [(ngModel)]="propertyTypeinput">
+                              <option value=""  >Property Type</option> 
+                              <option  value="Single Family">Single Family</option>
+                                <option  value="Multi-family">Multi-family</option>
+                            </select>
                         </div>
-                      </div>
-                      <div class="col-xl-2 col-lg-4 col-md-4">
+                    </div>
+    
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                         <div class="rld-single-select">
-                          <select class="select single-select">
-                            <option value="1">Room</option>
-                            <option value="2">Room 1</option>
-                            <option value="3">Room 2</option>
-                            <option value="3">Room 3</option>
-                          </select>
+                            <select class="select single-select"  name="minPriceInput" [(ngModel)]="minPriceInput">
+                                <option value="">Min Price</option>
+                                <option value=250000>25,000</option>
+                                <option value=500000>50,000</option>
+                                <option value=750000>75,000</option>
+                                <option value=1000000>100,000</option>
+                                <option value=1250000>125,000</option>
+                            </select>
                         </div>
-                      </div>
-                      <div class="col-xl-2 col-lg-4 col-md-4">
+                    </div>
+                    <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                         <div class="rld-single-select">
-                          <select class="select single-select">
-                            <option value="1">Any Price</option>
-                            <option value="2">Price 1</option>
-                            <option value="3">Price 2</option>
-                            <option value="3">Price 3</option>
-                          </select>
+                            <select class="select single-select"  name="maxPriceInput" [(ngModel)]="maxPriceInput">
+                                <option value="" >Max Price</option>
+                                <option value=0>0</option>
+                                <option value=250000>25,0000</option>
+                                <option value=500000>50,0000</option>
+                                <option value=750000>75,0000</option>
+                                <option value=1000000>100,0000</option>
+                                <option value=1250000>125,0000</option>
+                            </select>
                         </div>
-                      </div>
+                    </div>
                       <div class="col-xl-2 col-lg-4 col-md-4">
-                        <a class="btn btn-yellow" href="#">SEARCH NOW</a>
+                        <a class="btn btn-yellow" (click)="residential()">Search</a>
                       </div>
                     </div>
                   </div>
@@ -113,23 +128,23 @@
             </div>
             <ul class="popular-searchs" *ngIf="display == 'residential'">
               <li>
-                <a href="#">
+                <a (click)="residential('Single Family')">
                   <span class="box">
                     <img src="../assets/images/icons/icon-7.svg" width="45" height="45" alt="">
-                    <span>Family House</span>
+                    <span>Single Family</span>
                   </span>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a (click)="residential('Multi-family')">
                   <span class="box">
                     <img src="../assets/images/icons/icon-8.svg" width="45" height="45" alt="">
-                    <span>Apartment</span>
+                    <span>Multi Family</span>
                   </span>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a >
                   <span class="box">
                     <img src="../assets/images/icons/icon-9.svg" width="45" height="45" alt="">
                     <span>Luxury House</span>
@@ -137,7 +152,7 @@
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a >
                   <span class="box">
                     <img src="../assets/images/icons/icon-10.svg" width="45" height="45" alt="">
                     <span>Villa House</span>
@@ -145,7 +160,7 @@
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a >
                   <span class="box">
                     <img src="../assets/images/icons/icon-11.svg" width="45" height="45" alt="">
                     <span>Town House</span>
@@ -156,7 +171,7 @@
 
             <ul class="popular-searchs" *ngIf="display == 'commercial'">
               <li>
-                <a href="#">
+                <a  (click)="commercial('Land')" >
                   <span class="box">
                     <img src="../assets/images/icons/icon-7.svg" width="45" height="45" alt="">
                     <span>Land</span>
@@ -164,7 +179,7 @@
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a (click)="commercial('Retail')">
                   <span class="box">
                     <img src="../assets/images/icons/icon-8.svg" width="45" height="45" alt="">
                     <span>Retail</span>
@@ -172,26 +187,27 @@
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a (click)="commercial('Office')">
                   <span class="box">
                     <img src="../assets/images/icons/icon-9.svg" width="45" height="45" alt="">
                     <span>Office</span>
                   </span>
                 </a>
               </li>
+            
               <li>
-                <a href="#">
+                <a (click)="commercial('Industrial')">
                   <span class="box">
-                    <img src="../assets/images/icons/icon-10.svg" width="45" height="45" alt="">
-                    <span>Agriculture</span>
+                    <img src="../assets/images/icons/icon-11.svg" width="45" height="45" alt="">
+                    <span>Industrial</span>
                   </span>
                 </a>
               </li>
               <li>
-                <a href="#">
+                <a (click)="commercial('Other')">
                   <span class="box">
-                    <img src="../assets/images/icons/icon-11.svg" width="45" height="45" alt="">
-                    <span>Industrial</span>
+                    <img src="../assets/images/icons/icon-10.svg" width="45" height="45" alt="">
+                    <span>other</span>
                   </span>
                 </a>
               </li>
@@ -208,7 +224,7 @@
     <div class="container">
       <div class="row">
         <div class="section-title col-md-5">
-          <h3 style="padding: 5px 0 0 20px;">Featured</h3>
+          <h3 style="padding: 5px 0 0 20px;">Exclusive</h3>
           <h2 style="padding: 0px 0 0 20px;">Properties</h2>
         </div>
       </div>
@@ -227,7 +243,7 @@
                 <!-- homes img -->
                 <a routerLink="/property/CommercialProperty/{{property.propertyUniqid}}" class="homes-img">
                   <div class="homes-tag button alt sale">{{property.transactionType}}</div>
-                  <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
+                  <div *ngIf="property.exclusive" class="homes-price button ">Exclusive</div>
                   <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}" alt="home-1"
                     onerror="this.src='../assets/images/feature-properties/fp-1.jpg';" style="height: 250px;"
                     class="img-responsive">
@@ -241,14 +257,14 @@
               </div>
             </div>
             <!-- homes content -->
-            <div class="homes-content" style="min-height: 300px;">
+            <div class="homes-content">
               <!-- homes address -->
               <h3><a>{{property.propertyType}}</a>
               </h3>
               <p class="homes-address mb-3">
                 <a>
                   <i class="fa fa-map-marker"></i>
-                  <span>{{property.address}},
+                  <span>
                     {{property.city}}
                     <span *ngIf="property.state">,{{property.state}}</span>
                     ,{{property.postalCode}}</span>
@@ -274,13 +290,10 @@
               <div class="price-properties">
                 <h3 class="title mt-3">
                   <a> $
-                    {{property.price ? property.price : "NA"}}</a>
+                    {{property.askingPrice ? property.askingPrice : "NA"}}</a>
                 </h3>
 
                 <div class="compare">
-                  <a title="Compare">
-                    <i class="fas fa-exchange-alt"></i>
-                  </a>
                   <a title="Share">
                     <i class="fas fa-share-alt"></i>
                   </a>
@@ -290,8 +303,8 @@
                 </div>
               </div>
               <div class="footer">
-                <a>
-                  <i class="fa fa-user"></i> Jhon Doe
+                <a style="margin-top: 15px;">
+                  Id: {{property.mlsId}}
                 </a>
                 <span *ngIf="property.listingDate">
                   <i class="fa fa-calendar"></i> {{property.listingDate | timeago }}
@@ -318,7 +331,7 @@
   <section class="popular-places">
     <div class="container">
       <div class="section-title">
-        <h3>Most Popular</h3>
+        <h3>Popular Commercial</h3>
         <h2>Places</h2>
       </div>
       <div class="row">
@@ -326,7 +339,7 @@
         </div>
         <div class="col-lg-4 col-md-6">
           <!-- Image Box -->
-          <a href="properties-map.html" class="img-box hover-effect">
+          <a (click)="Popularcommercial('Toronto')" class="img-box hover-effect">
             <img src="../assets/images/popular-places/12.jpg" class="img-responsive" alt="">
             <!-- Badge -->
             <div class="listing-badges">
@@ -334,33 +347,33 @@
             </div>
             <div class="img-box-content visible">
               <h4>Toronto </h4>
-              <span>203 Properties</span>
+              <!-- <span>203 Properties</span> -->
             </div>
           </a>
         </div>
         <div class="col-lg-4 col-md-6">
           <!-- Image Box -->
-          <a href="properties-map.html" class="img-box hover-effect">
+          <a (click)="Popularcommercial('Edmonton')" class="img-box hover-effect">
             <img src="../assets/images/popular-places/13.jpg" class="img-responsive" alt="">
             <div class="img-box-content visible">
               <h4>Edmonton</h4>
-              <span>307 Properties</span>
+              <!-- <span>307 Properties</span> -->
             </div>
           </a>
         </div>
         <div class="col-lg-4 col-md-6">
           <!-- Image Box -->
-          <a href="properties-map.html" class="img-box hover-effect no-mb">
+          <a (click)="Popularcommercial('Calgary')" class="img-box hover-effect no-mb">
             <img src="../assets/images/popular-places/14.jpg" class="img-responsive" alt="">
             <div class="img-box-content visible">
               <h4>Calgary </h4>
-              <span>409 Properties</span>
+              <!-- <span>409 Properties</span> -->
             </div>
           </a>
         </div>
         <div class="col-lg-4 col-md-6">
           <!-- Image Box -->
-          <a href="properties-map.html" class="img-box hover-effect no-mb x3">
+          <a (click)="Popularcommercial('Ottawa')" class="img-box hover-effect no-mb x3">
             <img src="../assets/images/popular-places/15.jpg" class="img-responsive" alt="">
             <!-- Badge -->
             <div class="listing-badges">
@@ -368,13 +381,13 @@
             </div>
             <div class="img-box-content visible">
               <h4>Ottawa</h4>
-              <span>507 Properties</span>
+              <!-- <span>507 Properties</span> -->
             </div>
           </a>
         </div>
         <div class="col-lg-4 col-md-6">
           <!-- Image Box -->
-          <a href="properties-map.html" class="img-box hover-effect no-mb x3">
+          <a (click)="Popularcommercial('Montreal')" class="img-box hover-effect no-mb x3">
             <img src="../assets/images/popular-places/16.jpg" class="img-responsive" alt="">
             <!-- Badge -->
             <div class="listing-badges">
@@ -382,13 +395,13 @@
             </div>
             <div class="img-box-content visible">
               <h4>Montreal</h4>
-              <span>507 Properties</span>
+              <!-- <span>507 Properties</span> -->
             </div>
           </a>
         </div>
         <div class="col-lg-4 col-md-6">
           <!-- Image Box -->
-          <a href="properties-map.html" class="img-box hover-effect no-mb x3">
+          <a (click)="Popularcommercial('Vancouver')" class="img-box hover-effect no-mb x3">
             <img src="../assets/images/popular-places/17.jpg" class="img-responsive" alt="">
             <!-- Badge -->
             <div class="listing-badges">
@@ -396,7 +409,7 @@
             </div>
             <div class="img-box-content visible">
               <h4>Vancouver</h4>
-              <span>507 Properties</span>
+              <!-- <span>507 Properties</span> -->
             </div>
           </a>
         </div>
@@ -436,18 +449,18 @@
                 alt="" height="55px" width="55px">
               </div>
               <div class="text-center">
-                <h5 class="font-weight-bold mt-4 mb-0" style="color: #9b5de5">Ramin JD</h5>
+                <h5 class="font-weight-bold mt-4 mb-0" style="color: black">Ramin JD</h5>
                 <small class="font-weight-bold">Manager</small>
               </div>
             </div>
           </div>
           <div class="col-md-4">
-            <div style="background-color: #9b5de5" class="position-relative px-3 mt-5 text-center py-5">
+            <div style="background-color: #f8d237;" class="position-relative px-3 mt-5 text-center py-5">
               <div class="my-2">
 
               </div>
               <div class="px-3 text-center pb-3">
-                <p class="font-weight-light my-3 text-white">Lorem ipsum dolor sit consectetur adipisicing elit. Alias
+                <p class="font-weight-light my-3 text-white" style="color:black!important">Lorem ipsum dolor sit consectetur adipisicing elit. Alias
                   amet
                   deleniti et fugit iusto nesciunt.</p>
               </div>
@@ -461,7 +474,7 @@
                 alt="" height="55px" width="55px">
               </div>
               <div class="text-center">
-                <h5 class="font-weight-bold mt-4 mb-0 " style="color: #9b5de5">Semin Jee</h5>
+                <h5 class="font-weight-bold mt-4 mb-0 " style="color:black">Semin Jee</h5>
                 <small class="font-weight-bold" style="line-height: 1">CEO</small>
               </div>
             </div>
@@ -486,7 +499,7 @@
                   alt="" height="55px" width="55px">
               </div>
               <div class="text-center">
-                <h5 class="font-weight-bold mt-4 mb-0 " style="color: #9b5de5">Hadi Najafi</h5>
+                <h5 class="font-weight-bold mt-4 mb-0 " style="color: black">Hadi Najafi</h5>
                 <small class="font-weight-bold" style="line-height: 1">Developer</small>
               </div>
             </div>

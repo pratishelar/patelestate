@@ -14,3 +14,7 @@
     width: 0%;
 }
 
+#navigation ul a:hover {
+    color: white;
+    background-color: black;
+}

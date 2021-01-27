@@ -1,104 +1,57 @@
 <section class="search-sec">
-    <div class="container rld-main-search" style="max-width: 90% !important;">
+    <div class="container rld-main-search" style="max-width: 70% !important;">
         <form>
             <div class="row">
                 <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                     <div class="rld-single-input left-icon searchhide">
-                        <input type="text" placeholder="Entry Landmark Location">
+                        <input name="propertysearchinput" value="" [(ngModel)]="propertysearchinput" type="text" placeholder="Entry Landmark Location">
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                     <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Property Type</option>
-                            <option value=25,000>25,000</option>
-                            <option value=50,000>50,000</option>
-                            <option value=75,000>75,000</option>
-                            <option value=100,000>100,000</option>
-                            <option value=125,000>125,000</option>
+                        <select class="select single-select" name="propertyTypedropdown" [(ngModel)]="propertyTypeinput">
+                            <option value=""  >Property Type</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Land">Land</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Office">Office</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Retail">Retail</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Industrial">Industrial</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Other">Other</option>
+
+                            <option *ngIf="propertyType == 'Residential'" value="Single Family">Single Family</option>
+                            <option *ngIf="propertyType == 'Residential'" value="Multi-family">Multi-family</option>
                         </select>
                     </div>
                 </div>
 
                 <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                     <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Min Price</option>
-                            <option value=25,000>25,000</option>
-                            <option value=50,000>50,000</option>
-                            <option value=75,000>75,000</option>
-                            <option value=100,000>100,000</option>
-                            <option value=125,000>125,000</option>
+                        <select class="select single-select"  name="minPriceInput" [(ngModel)]="minPriceInput">
+                            <option value="">Min Price</option>
+                            <option value=250000>25,000</option>
+                            <option value=500000>50,000</option>
+                            <option value=750000>75,000</option>
+                            <option value=1000000>100,000</option>
+                            <option value=1250000>125,000</option>
                         </select>
                     </div>
                 </div>
                 <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
                     <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Max Price</option>
+                        <select class="select single-select"  name="maxPriceInput" [(ngModel)]="maxPriceInput">
+                            <option value="" >Max Price</option>
                             <option value=0>0</option>
-                            <option value=25,000>25,000</option>
-                            <option value=50,000>50,000</option>
-                            <option value=75,000>75,000</option>
-                            <option value=100,000>100,000</option>
-                            <option value=125,000>125,000</option>
+                            <option value=250000>25,0000</option>
+                            <option value=500000>50,0000</option>
+                            <option value=750000>75,0000</option>
+                            <option value=1000000>100,0000</option>
+                            <option value=1250000>125,0000</option>
                         </select>
                     </div>
                 </div>
-                <!-- <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Residential'">
-                    <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Beds</option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
-                            <option value=6>6</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Residential'">
-                    <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Baths</option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
-                            <option value=6>6</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Commercial'">
-                    <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Building Size</option>
-                            <option value=1>0 - 5,000 sqft</option>
-                            <option value=2>5,001 - 10,000 sqft</option>
-                            <option value=3>10,001 - 15,000 sqft</option>
-                            <option value=4>15,001 - 20,000 sqft</option>
-                            <option value=5>20,001 - 25,000 sqft</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Commercial'">
-                    <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Land Size</option>
-                            <option value=1>1+ acer</option>
-                            <option value=2>2+ acer</option>
-                            <option value=3>3+ acer</option>
-                            <option value=4>4+ acer</option>
-                            <option value=5>5+ acer</option>
-                            <option value=6>6+ acer</option>
-                        </select>
-                    </div>
-                </div> -->
+               
                 <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
-                    <a class="btn btn-yellow searchhide">Search</a>
+                    <a class="btn btn-yellow searchhide" (click)="search()" >Search</a>
                 </div>
                 <div class="col-xl-1 col-lg-4 col-md-4 col-sm-6">
                     <a class="btn btn-yellow" (click)="openModal(template)">Filter </a>
@@ -114,7 +67,6 @@
 
     </div>
 </section>
-
 <!-- STAR HEADER GOOGLE MAP -->
 <section *ngIf="isShown" class="header-map google-maps pull-top map-leaflet-wrapper" style=" height: 750px;">
     <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="true" [zoomControl]="true"
@@ -265,27 +217,27 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-5 col-2">
                                 <h4>
-                                    <span class="hidden-sm-down">Properties Listing</span>
+                                    <span class="hidden-sm-down">{{propertyType}} Listing</span>
                                 </h4>
                             </div>
                             <div class="col-lg-6 col-md-7 col-10 cod-pad">
                                 <div class="sorting-options">
-                                    <select *ngIf="propertyType == 'Commercial'" class="sorting"
-                                        (change)="Sort($event.target.value)">
+                                    <select *ngIf="propertyType == 'Commercial'" class="sorting" name="sortType" [(ngModel)]="sortType"
+                                        (change)="Sort()">
                                         <option value="">None</option>
                                         <option value="askingPrice DESC">Price: High to low</option>
                                         <option value="askingPrice ASC">Price: Low to high</option>
-                                        <option value="listingDate ASC">Listing: High to low</option>
-                                        <option value="listingDate DESC">Listing: Low to high</option>
+                                        <option value="listingDate ASC">Listing: Old to New</option>
+                                        <option value="listingDate DESC">Listing: New to Old </option>
                                     </select>
 
-                                    <select *ngIf="propertyType == 'Residential'" class="sorting"
-                                        (change)="Sort($event.target.value)">
+                                    <select *ngIf="propertyType == 'Residential'" class="sorting" name="sortType" [(ngModel)]="sortType"
+                                        (change)="Sort()">
                                         <option value="">None</option>
                                         <option value="Price DESC">Price: High to low</option>
                                         <option value="Price ASC">Price: Low to high</option>
-                                        <option value="listingContractDate ASC">Listing: High to low</option>
-                                        <option value="listingContractDate DESC">Listing: Low to high</option>
+                                        <option value="listingContractDate ASC">Listing: Old to New</option>
+                                        <option value="listingContractDate DESC">Listing: New to Old</option>
                                     </select>
 
 
@@ -302,7 +254,7 @@
                     <!-- Block heading end -->
                     <div class="row" *ngIf="display === 1">
                         <div class="item col-lg-4 col-md-4 col-xs-12 landscapes sale"
-                            *ngFor="let property of properties">
+                            *ngFor="let property of properties | paginate: config">
                             <div class="project-single">
                                 <div class="project-inner project-head">
                                     <div class="project-bottom">
@@ -319,7 +271,7 @@
                                         <a *ngIf="propertyType == 'Commercial'"
                                             routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
                                             class="homes-img">
-                                            <div class="homes-tag button alt sale">{{property.transactionType}}</div>
+                                            <div class="homes-tag button alt sale">{{property.transactionType | slice:4:16}}</div>
                                             <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
                                             <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
                                                 alt="home-1"
@@ -347,17 +299,18 @@
                                     </div>
                                 </div>
                                 <!-- homes content -->
-                                <div class="homes-content" style="min-height: 300px;">
+                                <div class="homes-content" style="min-height: 100%; max-height: 100%;">
                                     <!-- homes address -->
                                     <h3><a>{{property.propertyType}}</a>
                                     </h3>
-                                    <p class="homes-address mb-3">
+                                    <p class="homes-address mb-3" style="min-height: 54px; ">
                                         <a>
                                             <i class="fa fa-map-marker"></i>
                                             <span>{{property.address}},
-                                                {{property.city}}
-                                                <span *ngIf="property.state">,{{property.state}}</span>
-                                                ,{{property.postalCode}}</span>
+                                                  {{property.city}}
+                                             <span *ngIf="property.state">,{{property.state}}</span>
+                                             ,{{property.postalCode}}
+                                             </span>
                                         </a>
                                     </p>
                                     <!-- homes List -->
@@ -366,9 +319,9 @@
                                             <i class="fa fa-bed" aria-hidden="true"></i>
                                             <span>{{property.bedroomsTotal}} Bedrooms</span>
                                         </li>
-                                        <li *ngIf="property.bedroomsTotal">
+                                        <li *ngIf="property.bathroomTotal">
                                             <i class="fa fa-bath" aria-hidden="true"></i>
-                                            <span>{{property.bedroomsTotal}} Bathrooms</span>
+                                            <span>{{property.bathroomTotal}} Bathrooms</span>
                                         </li>
                                         <li>
                                             <i class="fa fa-object-group" aria-hidden="true"></i>
@@ -379,17 +332,22 @@
                                     <!-- Price -->
                                     <div class="price-properties">
                                         <h3 class="title mt-3">
-                                            <a *ngIf="propertyType == 'Commercial'"> $
+                                            <a *ngIf="propertyType == 'Commercial' && property.askingPrice"> $
                                                 {{property.askingPrice ? property.askingPrice : "NA"}}</a>
+
+                                                <a *ngIf="propertyType == 'Commercial' && property.baseRent && property.baseRent != 'N/A' "> $
+                                                    {{property.baseRent ? property.baseRent : "NA"}}</a>  
+
                                             <a *ngIf="propertyType == 'Residential'">$
                                                 {{property.price ? property.price : "NA"}}</a>
+                                                
+
+                                                
                                         </h3>
 
 
                                         <div class="compare">
-                                            <a title="Compare">
-                                                <i class="fas fa-exchange-alt"></i>
-                                            </a>
+                                           
                                             <a title="Share">
                                                 <i class="fas fa-share-alt"></i>
                                             </a>
@@ -400,7 +358,7 @@
                                     </div>
                                     <div class="footer">
                                         <a>
-                                            <i class="fa fa-user"></i> Jhon Doe
+                                            ID: {{property.mlsId}}
                                         </a>
                                         <span *ngIf="property.listingDate">
                                             <i class="fa fa-calendar"></i> {{property.listingDate | timeago }}
@@ -479,15 +437,14 @@
                                 <p class="homes-address mb-3">
                                     <a>
                                         <i class="fa fa-map-marker"></i>
-                                        <span>{{property.address}},
+                                        <span>
                                             {{property.city}}
                                             <span *ngIf="property.state">,{{property.state}}</span>
-                                            ,{{property.postalCode}}</span>
+                                         </span>
                                     </a>
                                 </p>
                                 <!-- homes List -->
                                 <ul class="homes-list clearfix">
-
                                     <li>
                                         <i class="fa fa-bed" aria-hidden="true"></i>
                                         <span *ngIf="property.bedroomsTotal">{{property.bedroomsTotal}} Bedrooms</span>
@@ -503,9 +460,6 @@
                                         <span *ngIf="property.totalFinishedArea">{{property.totalFinishedArea}} </span>
                                         <span *ngIf="!property.totalFinishedArea">N/A</span>
                                     </li>
-
-
-
                                 </ul>
                                 <!-- Price -->
                                 <div class="price-properties">
@@ -520,9 +474,7 @@
                                             {{property.price}}</a>
                                     </h3>
                                     <div class="compare">
-                                        <a title="Compare">
-                                            <i class="fas fa-exchange-alt"></i>
-                                        </a>
+                                       
                                         <a title="Share">
                                             <i class="fas fa-share-alt"></i>
                                         </a>
@@ -533,7 +485,7 @@
                                 </div>
                                 <div class="footer">
                                     <a>
-                                        <i class="fa fa-user"></i> Jhon Doe
+                                        ID: {{property.mlsId}}
                                     </a>
                                     <span *ngIf="property.listingDate">
                                         <i class="fa fa-calendar"></i> {{property.listingDate | timeago }}
@@ -546,31 +498,10 @@
                         </div>
 
                     </div>
-
                 </div>
-
             </div>
-            <!-- <nav aria-label="..." class="mt-5">
-                <ul class="pagination">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item active">
-                        <a class="page-link" href="#">1 <span class="sr-only">(current)</span></a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">5</a></li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav> -->
-
-            <div class="col-xs-12 col-12">
-                <pagination [totalItems]="66" [(ngModel)]="currentPage" (pageChanged)="pageChanged($event)">
-                </pagination>
+            <div class="has-text-centered" style="text-align: center;">
+                <pagination-controls  id="server" [autoHide]="true" (pageChange)="onPageChange($event)"></pagination-controls>
             </div>
         </div>
     </section>
@@ -586,177 +517,112 @@
     </div>
     <div class="modal-body">
         <form>
-            <div class="row" style="padding:10px;">
-                <div class="col-lg-12">
-                    <div class="row" style="padding: 15px;">
-                        <div class="col-lg-3 col-md-3 col-sm-12 ">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Drop City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-
-
+            <div class="row">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <div class="rld-single-input left-icon searchhide">
+                        <input name="propertysearchinput" value="" [(ngModel)]="propertysearchinput" type="text" placeholder="Entry Landmark Location">
                     </div>
-
-                    <div class="row" style="padding: 15px;">
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 ">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 ">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Drop City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-
-
-                    </div>
-
-                    <div class="row" style="padding: 15px;">
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12 ">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Pickup City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <label for="exampleFormControlSelect1" class="label">Property Type</label>
-                            <select class="form-control label" id="exampleFormControlSelect1">
-                                <option>Select Drop City</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                                <option>Example one</option>
-                            </select>
-                        </div>
-
-
-                    </div>
-
-                    <div class="row">
-
-
-                        <div class="col-lg-12 col-md-3 col-sm-12">
-                            <button type="button" class="btn btn-primary wrn-btn">Search</button>
-                        </div>
-
-                    </div>
-
                 </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <div class="rld-single-select">
+                        <select class="select single-select" name="propertyTypedropdown" [(ngModel)]="propertyTypeinput">
+                            <option value=""  >Property Type</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Land">Land</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Office">Office</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Retail">Retail</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Industrial">Industrial</option>
+                            <option *ngIf="propertyType == 'Commercial'" value="Other">Other</option>
+
+                            <option *ngIf="propertyType == 'Residential'" value="Single Family">Single Family</option>
+                            <option *ngIf="propertyType == 'Residential'" value="Multi-family">Multi-family</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <div class="rld-single-select">
+                        <select class="select single-select"  name="minPriceInput" [(ngModel)]="minPriceInput">
+                            <option value="">Min Price</option>
+                            <option value=250000>25,000</option>
+                            <option value=500000>50,000</option>
+                            <option value=750000>75,000</option>
+                            <option value=1000000>100,000</option>
+                            <option value=1250000>125,000</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <div class="rld-single-select">
+                        <select class="select single-select"  name="maxPriceInput" [(ngModel)]="maxPriceInput">
+                            <option value="" >Max Price</option>
+                            <option value=0>0</option>
+                            <option value=250000>25,0000</option>
+                            <option value=500000>50,0000</option>
+                            <option value=750000>75,0000</option>
+                            <option value=1000000>100,0000</option>
+                            <option value=1250000>125,0000</option>
+                        </select>
+                    </div>
+                </div>
+                <!-- <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Residential'">
+                    <div class="rld-single-select">
+                        <select class="select single-select">
+                            <option value="" disabled selected>Beds</option>
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=6>6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Residential'">
+                    <div class="rld-single-select">
+                        <select class="select single-select">
+                            <option value="" disabled selected>Baths</option>
+                            <option value=1>1</option>
+                            <option value=2>2</option>
+                            <option value=3>3</option>
+                            <option value=4>4</option>
+                            <option value=5>5</option>
+                            <option value=6>6</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Commercial'">
+                    <div class="rld-single-select">
+                        <select class="select single-select">
+                            <option value="" disabled selected>Building Size</option>
+                            <option value=1>0 - 5,000 sqft</option>
+                            <option value=2>5,001 - 10,000 sqft</option>
+                            <option value=3>10,001 - 15,000 sqft</option>
+                            <option value=4>15,001 - 20,000 sqft</option>
+                            <option value=5>20,001 - 25,000 sqft</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Commercial'">
+                    <div class="rld-single-select">
+                        <select class="select single-select">
+                            <option value="" disabled selected>Land Size</option>
+                            <option value=1>1+ acer</option>
+                            <option value=2>2+ acer</option>
+                            <option value=3>3+ acer</option>
+                            <option value=4>4+ acer</option>
+                            <option value=5>5+ acer</option>
+                            <option value=6>6+ acer</option>
+                        </select>
+                    </div>
+                </div> -->
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <a class="btn btn-yellow " (click)="search()"  (click)="modalRef.hide()" >Search</a>
+                </div>
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                    <a class="btn btn-yellow " >Reset</a>
+                </div>
+
             </div>
 
 

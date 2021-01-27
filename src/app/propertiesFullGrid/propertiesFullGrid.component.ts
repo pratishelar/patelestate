@@ -1,21 +1,30 @@
-import { Component, OnInit, TemplateRef, AfterViewInit } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  TemplateRef,
+  AfterViewInit,
+  OnDestroy,
+} from '@angular/core';
 import { PropertiesService } from '../_services/properties.service';
 import { ActivatedRoute } from '@angular/router';
 import { TimeagoIntl } from 'ngx-timeago';
 import { MouseEvent } from '@agm/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-propertiesFullGrid',
   templateUrl: './propertiesFullGrid.component.html',
   styleUrls: ['./propertiesFullGrid.component.css'],
 })
-export class PropertiesFullGridComponent implements OnInit {
+export class PropertiesFullGridComponent implements OnInit, OnDestroy {
   properties: any = [];
   modalRef: BsModalRef;
   isShown: boolean;
   markers: any[] = [];
-  currentPage = 4;
+  currentPage = 1;
+  skip = 0;
+
   page: number;
   public display: number = 1;
   // google maps zoom level
@@ -27,9 +36,28 @@ export class PropertiesFullGridComponent implements OnInit {
   propertyType: any;
   singleProperty: any;
 
+  //sort
+  sortType = '';
+
+  // search
+  propertysearchinput = '';
+  propertyTypeinput = '';
+  minPriceInput = '';
+  maxPriceInput = '';
+
   // initial center position for the map
   lat: number = 53.637115;
   lng: number = -113.50774;
+
+  message: any;
+  subscription: Subscription;
+
+  config = {
+    currentPage: 1,
+    itemsPerPage: 9,
+    totalItems: 1000,
+    id: 'server',
+  };
 
   constructor(
     private propertiesService: PropertiesService,
@@ -39,8 +67,21 @@ export class PropertiesFullGridComponent implements OnInit {
 
   ngOnInit() {
     this.getpropertiesFromroute();
-    this.getMapPins();
+
+    this.message = this.propertiesService.getOption();
+    console.log(this.message);
+
+    if (Object.keys(this.message).length != 0) {
+      this.propertysearchinput = this.message.propertysearchinput;
+      this.propertyTypeinput = this.message.propertyTypeinput;
+      this.minPriceInput = this.message.minPriceInput;
+      this.maxPriceInput = this.message.maxPriceInput;
+      this.search();
+      this.propertiesService.clearOption();
+    }
   }
+
+  ngOnDestroy() {}
 
   getMapPins() {
     this.propertiesService.getResidentialMap().subscribe(
@@ -78,20 +119,19 @@ export class PropertiesFullGridComponent implements OnInit {
 
   getpropertiesFromroute() {
     this.route.data.subscribe((data) => {
+      // this.properties = [];
       this.properties = data['properties'].body;
-
-      if (this.properties[0].lat == 0) {
+      // this.markers = [];
+      console.log(this.properties);
+      if (this.properties[0].latitude == 0) {
         this.isShown = false;
         this.propertyType = 'Commercial';
-      } else {
-        this.isShown = true;
+      } else if (this.properties[0].latitude != 0) {
+        this.getMapPins();
+        this.isShown = false;
         this.propertyType = 'Residential';
       }
     });
-  }
-
-  pageChanged(event: any): void {
-    this.page = event.page;
   }
 
   openModal(template: TemplateRef<any>) {
@@ -102,30 +142,67 @@ export class PropertiesFullGridComponent implements OnInit {
     });
   }
 
-
   mouseOver(i: number) {
     // m.icon = '../assets/images/pin3.png';
     this.markers[i].display = true;
   }
 
   idle($event: any) {
-    console.log($event);
+    //console.log($event);
   }
 
-  Sort(SortType) {
+  Sort() {
+    this.skip = 0;
+    this.sortSearchPagination();
+    window.scrollTo(0, 0);
+  }
+
+  search() {
+    this.skip = 0;
+    this.sortSearchPagination();
+    window.scrollTo(0, 0);
+  }
+
+  onPageChange(number: number) {
+    //console.log(`pageChange(${number})`);
+    this.skip = (number-1) * this.config.itemsPerPage;
+    this.config.currentPage = number;
+    this.sortSearchPagination();
+    window.scrollTo(0, 0);
+  }
+
+  sortSearchPagination() {
     if (this.propertyType == 'Commercial') {
-      this.propertiesService.getCommercialProperties(10, 0, SortType).subscribe(
-        (properties: any) => {
-          this.properties = properties.body;
-          console.log(properties);
-        },
-        (error) => {
-          console.log(error);
-        }
-      );
+      this.propertiesService
+        .getCommercialProperties(
+          this.config.itemsPerPage,
+          this.skip,
+          this.sortType,
+          this.propertysearchinput,
+          this.propertyTypeinput,
+          this.minPriceInput,
+          this.maxPriceInput
+        )
+        .subscribe(
+          (properties: any) => {
+            this.properties = properties.body;
+            console.log(properties);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
     } else if (this.propertyType == 'Residential') {
       this.propertiesService
-        .getResidentialProperties(10, 0, SortType)
+        .getResidentialProperties(
+          this.config.itemsPerPage,
+          this.skip,
+          this.sortType,
+          this.propertysearchinput,
+          this.propertyTypeinput,
+          this.minPriceInput,
+          this.maxPriceInput
+        )
         .subscribe(
           (properties: any) => {
             this.properties = properties.body;

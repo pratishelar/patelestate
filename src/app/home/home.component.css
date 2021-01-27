@@ -4,7 +4,7 @@
 
 .homepage-3 .portfolio .homes-tag.sale {
     background-color: rgb(193, 36, 36) !important;
-        width: 40% !important;
+    /* width: 40% !important; */
 }
 .bgcolor{
     background-color: white !important;
@@ -21,4 +21,112 @@
 
 .homepage-3 .rld-banner-tab .nav-item a.active, .homepage-3 .rld-banner-tab .nav-item a:hover, .homepage-3 .rld-banner-tab .nav-item a.active:before {
     background: #000000;
+}
+
+
+.rld-single-input.left-icon:before {
+    content: '\f041';
+    font-size: 16px;
+    font-family: fontawesome;
+    color: #687389;
+    position: absolute;
+    top: 5px;
+    background-size: auto;
+    height: 17px;
+    width: 12px;
+    left: 19px;
+    background-repeat: no-repeat;
+  }
+  
+  .rld-single-input input {
+    height: 35px;
+    line-height: 40px;
+    width: 100%;
+    padding: 0 5px;
+    /* border: 1px solid #D4D4D4; */
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    border-radius: 50px;
+    font-size: 11px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    border: 2px solid #ffd208;
+    color: rgb(111 109 109);
+  }
+  
+  .rld-single-select .single-select {
+    height: 35px;
+    line-height: 40px;
+    width: 100%;
+    padding: 0 0px 0 5px;
+    -webkit-transition: all 0.4s ease;
+    transition: all 0.4s ease;
+    position: relative;
+    border-radius: 50px;
+    font-size: 11px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    border: 2px solid #ffd208;
+    color: rgb(111 109 109);
+  }
+  
+  .rld-single-input.left-icon input {
+    padding-left: 40px;
+  }
+  
+  .btn.btn-yellow {
+    height: 35px;
+    line-height: 31px;
+    padding: 0px 0px;
+    width: 100%;
+    /* background: linear-gradient(-47deg, #4528dc 0%, #8731e8 100%); */
+    margin-bottom: 5px;
+    box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
+    color:black;
+    font-weight: 300;
+    /* border: 2px solid #ffd208; */
+    border-radius: 50px;
+    font-size: 11px;
+    background-color: #ffffff;
+    border: 2px solid #ffd208;
+  }
+  
+  .btn.btn-yellow:hover {
+    background-color: #ffd208;
+    
+  }
+
+  .homepage-3 .portfolio .homes-price  {
+    font-size: 13px !important;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 2px;
+    color: #fff;
+    border: none;
+    background-color: #274abb!important;
+    display: inline-block;
+    z-index: 99;
+}
+.homepage-3 .popular-searchs li a:hover{
+    cursor: pointer;
+} 
+
+.homepage-3 .popular-places .img-box:hover{
+    cursor: pointer;
+}
+
+section.popular-places {
+    padding: 6rem 0;
+    background: #f7f7f7;
+}
+
+.homepage-3 .portfolio .footer span {
+    margin-top: 0px;
+}
+
+.section-title:before {
+
+    background-color: #f8d237;
+}
+
+.section-title h2 {
+    color: #000000;
 }
