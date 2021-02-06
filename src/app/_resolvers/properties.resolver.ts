@@ -15,14 +15,14 @@ export class PropertiesResolver implements Resolve<any> {
     let propertyType = route.paramMap.get('propertyType');
 
     if (propertyType == 'CommercialProperties') {
-      return this.propertyservice.getCommercialProperties(9,0).pipe(
+      return this.propertyservice.getCommercialProperties(12,0).pipe(
         catchError((error) => {
           this.router.navigate(['/']);
           return of(null);
         })
       );
     } else if (propertyType == 'ResidentialProperties') {
-      return this.propertyservice.getResidentialProperties(9,0).pipe(
+      return this.propertyservice.getResidentialProperties(12,0).pipe(
         catchError((error) => {
           this.router.navigate(['/']);
           return of(null);

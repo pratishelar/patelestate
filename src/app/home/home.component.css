@@ -19,6 +19,8 @@
 
 }
 
+
+
 .homepage-3 .rld-banner-tab .nav-item a.active, .homepage-3 .rld-banner-tab .nav-item a:hover, .homepage-3 .rld-banner-tab .nav-item a.active:before {
     background: #000000;
 }
@@ -129,4 +131,17 @@ section.popular-places {
 
 .section-title h2 {
     color: #000000;
+}
+
+.img {
+    width: 550px;
+    height: 230px;
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+  .portfolio .project-head:before {
+    position: relative !important;
+ 
 }

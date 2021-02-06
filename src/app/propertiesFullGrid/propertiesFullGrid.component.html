@@ -1,512 +1,1248 @@
-<section class="search-sec">
-    <div class="container rld-main-search" style="max-width: 70% !important;">
-        <form>
-            <div class="row">
-                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
-                    <div class="rld-single-input left-icon searchhide">
-                        <input name="propertysearchinput" value="" [(ngModel)]="propertysearchinput" type="text" placeholder="Entry Landmark Location">
+<!-- START SECTION PROPERTIES LISTING -->
+<section class="properties-right featured portfolio blog" style="position:fixed; width: 100%; top: 60px;">
+    <section class="search-sec" style="border-bottom: 1px solid #e8e8e8;">
+        <div class="container rld-main-search" style="max-width: 90% !important;">
+
+            <div class="row align-items-center justify-content-center">
+                <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12">
+                    <div class="input-group" style="margin-top: -2px;">
+                        <input class="form-control py-2 border-right-0 border searchinput" name="propertysearchinput"
+                            value="" [(ngModel)]="propertysearchinput" style="border-radius: 50px 0px 0px 50px;"
+                            placeholder="Entry Landmark Location" type="search" id="example-search-input">
+                        <span class="input-group-append">
+                            <button class="btn btn-outline-secondary border-left-0 border searchbtn"
+                                style="border-radius: 0px 50px 50px 0px;" type="button" (click)="onSearchChange()">
+                                <i class="fa fa-search"></i>
+                            </button>
+                        </span>
                     </div>
                 </div>
 
-                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
                     <div class="rld-single-select">
-                        <select class="select single-select" name="propertyTypedropdown" [(ngModel)]="propertyTypeinput">
-                            <option value=""  >Property Type</option>
-                            <option *ngIf="propertyType == 'Commercial'" value="Land">Land</option>
-                            <option *ngIf="propertyType == 'Commercial'" value="Office">Office</option>
-                            <option *ngIf="propertyType == 'Commercial'" value="Retail">Retail</option>
-                            <option *ngIf="propertyType == 'Commercial'" value="Industrial">Industrial</option>
-                            <option *ngIf="propertyType == 'Commercial'" value="Other">Other</option>
+                        <popover-content #propertytype placement="bottom" [closeOnClickOutside]="true">
+                            <div *ngIf="propertyType == 'Commercial'">
+                                <p style="color: black; margin-left:-10px"> <strong>Commercial</strong></p>
+                                <div class="row">
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_01" name="propertyTypeinput" [value]="''"
+                                            [(ngModel)]="propertyTypeinput" (ngModelChange)="propertyTypeclick('')">
+                                        <label class="lable" for="control_01">
 
-                            <option *ngIf="propertyType == 'Residential'" value="Single Family">Single Family</option>
-                            <option *ngIf="propertyType == 'Residential'" value="Multi-family">Multi-family</option>
-                        </select>
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">All</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_02" name="propertyTypeinput" [value]="'Land'"
+                                            [(ngModel)]="propertyTypeinput" (ngModelChange)="propertyTypeclick('Land')">
+                                        <label class="lable" for="control_02">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Land</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_03" name="propertyTypeinput" [value]="'Office'"
+                                            [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Office')">
+                                        <label class="lable" for="control_03">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Office</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_04" name="propertyTypeinput"
+                                            [value]="'Industrial'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Industrial')">
+                                        <label class="lable" for="control_04">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Industrial</p>
+                                        </label>
+                                    </div>
+
+
+                                </div>
+
+                                <p style="color: black; margin-left:-10px"> <strong>Business</strong></p>
+                                <div class="row">
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_05" name="propertyTypeinput"
+                                            [value]="'Autobody Workshop'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Autobody Workshop')">
+                                        <label class="lable" for="control_05">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Autobody</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_06" name="propertyTypeinput"
+                                            [value]="'Bottle Depot'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Bottle Depot')">
+                                        <label class="lable" for="control_06">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Bottle Depot</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_07" name="propertyTypeinput"
+                                            [value]="'Camp Ground'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Camp Ground')">
+                                        <label class="lable" for="control_07">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Camp Ground</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_08" name="propertyTypeinput"
+                                            [value]="'Car Wash'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Car Wash')">
+                                        <label class="lable" for="control_08">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Car Wash</p>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_09" name="propertyTypeinput"
+                                            [value]="'Convenience Store'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Convenience Store')">
+                                        <label class="lable" for="control_09">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Store</p>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_10" name="propertyTypeinput"
+                                            [value]="'Day Care'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Day Care')">
+                                        <label class="lable" for="control_10">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Day Care</p>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_11" name="propertyTypeinput"
+                                            [value]="'Gas Station'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Gas Station')">
+                                        <label class="lable" for="control_11">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Gas Station</p>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_12" name="propertyTypeinput"
+                                            [value]="'Liquor Store'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Liquor Store')">
+                                        <label class="lable" for="control_12">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Liquor Store</p>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_13" name="propertyTypeinput"
+                                            [value]="'Personal Services'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Personal Services')">
+                                        <label class="lable" for="control_13">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Services</p>
+                                        </label>
+                                    </div>
+
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_14" name="propertyTypeinput" [value]="'Pub/Bar'"
+                                            [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Pub/Bar')">
+                                        <label class="lable" for="control_14">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Pub/Bar</p>
+                                        </label>
+                                    </div>
+
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_15" name="propertyTypeinput"
+                                            [value]="'Recreation'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Recreation')">
+                                        <label class="lable" for="control_15">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Recreation</p>
+                                        </label>
+                                    </div>
+
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_16" name="propertyTypeinput"
+                                            [value]="'Restaurant'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Restaurant')">
+                                        <label class="lable" for="control_16">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Restaurant</p>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_17" name="propertyTypeinput"
+                                            [value]="'Retail and Wholesale'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Retail and Wholesale')">
+                                        <label class="lable" for="control_17">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Wholesale</p>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_18" name="propertyTypeinput" [value]="'Rv Park'"
+                                            [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Rv Park')">
+                                        <label class="lable" for="control_18">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Rv Park</p>
+                                        </label>
+                                    </div>
+
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_19" name="propertyTypeinput" [value]="'Other'"
+                                            [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Other')">
+                                        <label class="lable" for="control_19">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Other</p>
+                                        </label>
+                                    </div>
+
+
+
+                                </div>
+                            </div>
+
+                            <div *ngIf="propertyType == 'Residential'">
+                                <p style="color: black; margin-left:-10px"> <strong>Residential</strong></p>
+                                <div class="row">
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_20" name="propertyTypeinput" [value]="''"
+                                            [(ngModel)]="propertyTypeinput" (ngModelChange)="propertyTypeclick('')">
+                                        <label class="lable" for="control_20">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">All</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_21" name="propertyTypeinput"
+                                            [value]="'Single Family'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Single Family')">
+                                        <label class="lable" for="control_21">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Single Family</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_22" name="propertyTypeinput"
+                                            [value]="'Multi-family'" [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Multi-family')">
+                                        <label class="lable" for="control_22">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Multi-family</p>
+                                        </label>
+                                    </div>
+                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                        <input type="radio" id="control_23" name="propertyTypeinput" [value]="'Condo'"
+                                            [(ngModel)]="propertyTypeinput"
+                                            (ngModelChange)="propertyTypeclick('Multi-family')">
+                                        <label class="lable" for="control_23">
+
+                                            <img class="propimg" src="../assets/images/icons/i-5.svg" width="25"
+                                                height="25" alt="">
+
+                                            <p class="proptitle">Condo</p>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            <!-- <button type="button" class="btn btn-dark">Done</button> -->
+                        </popover-content>
+
+                        <button type="button" [popover]="propertytype" class="btn btn-yellow btnfilter"
+                            popoverSize="medium-small" [popoverOnHover]="false"
+                            [ngClass]="{borderbtn: propertyTypeinput}">
+                            {{propertyTypeinput ? propertyTypeinput : "All Property" }}
+                        </button>
+
                     </div>
                 </div>
 
-                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
                     <div class="rld-single-select">
-                        <select class="select single-select"  name="minPriceInput" [(ngModel)]="minPriceInput">
-                            <option value="">Min Price</option>
-                            <option value=250000>25,000</option>
-                            <option value=500000>50,000</option>
-                            <option value=750000>75,000</option>
-                            <option value=1000000>100,000</option>
-                            <option value=1250000>125,000</option>
-                        </select>
+
+                        <popover-content #Forsale [closeOnClickOutside]="true">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div>
+                                        <label class="radio">
+                                            <input type="radio" name="forSale" [value]="''" [(ngModel)]="forSale"
+                                                (ngModelChange)="forsaleclick('')">
+                                            <span>Any</span>
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="forSale" [value]="'For sale'"
+                                                [(ngModel)]="forSale" (ngModelChange)="forsaleclick('For sale')">
+                                            <span>For Sale</span>
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="forSale" [value]="'For lease'"
+                                                [(ngModel)]="forSale" (ngModelChange)="forsaleclick('For lease')">
+                                            <span>For Lease</span>
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="forSale" [value]="'For Sale & Lease'"
+                                                [(ngModel)]="forSale"
+                                                (ngModelChange)="forsaleclick('For Sale & Lease')">
+                                            <span>For Sale & Lease</span>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <!-- <div class="col-lg-12">
+                                        <a class="proptype forsalebtn" (click)="forsaleclick('')">
+                                            <span class="box">
+                                                <span class="proptitle forsalelable">All</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <a class="proptype forsalebtn" (click)="forsaleclick('For sale')">
+                                            <span class="box">
+                                                <span class="proptitle forsalelable">For Sale</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <a class="proptype forsalebtn" (click)="forsaleclick('For lease')">
+                                            <span class="box">
+                                                <span class="proptitle forsalelable">For Lease</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <a class="proptype forsalebtn" (click)="forsaleclick('For Sale & Lease')">
+                                            <span class="box">
+                                                <span class="proptitle forsalelable">For Sale & Lease</span>
+                                            </span>
+                                        </a>
+                                    </div> -->
+                            </div>
+                        </popover-content>
+
+                        <button type="button" [popover]="Forsale" class="btn btn-yellow btnfilter" popoverSize="small"
+                            [popoverOnHover]="false" [ngClass]="{borderbtn: forSale}"> {{forSale ? forSale : "Sale" }}
+                        </button>
+
                     </div>
                 </div>
-                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
+
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
                     <div class="rld-single-select">
-                        <select class="select single-select"  name="maxPriceInput" [(ngModel)]="maxPriceInput">
-                            <option value="" >Max Price</option>
-                            <option value=0>0</option>
-                            <option value=250000>25,0000</option>
-                            <option value=500000>50,0000</option>
-                            <option value=750000>75,0000</option>
-                            <option value=1000000>100,0000</option>
-                            <option value=1250000>125,0000</option>
-                        </select>
+                        <popover-content #Exclusive [closeOnClickOutside]="true">
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <div>
+                                        <label class="radio">
+                                            <input type="radio" name="exclusive" [value]="''" [(ngModel)]="exclusive"
+                                                (ngModelChange)="exclusiveclick('')">
+                                            <span>Any</span>
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="exclusive" [value]="'true'"
+                                                [(ngModel)]="exclusive" (ngModelChange)="exclusiveclick('true')">
+                                            <span>Exclusive</span>
+                                        </label>
+                                        <label class="radio">
+                                            <input type="radio" name="exclusive" [value]="'false'"
+                                                [(ngModel)]="exclusive" (ngModelChange)="exclusiveclick('false')">
+                                            <span>Non Exclusive</span>
+                                        </label>
+                                    </div>
+
+                                </div>
+
+                                <!-- <div class="col-lg-12">
+
+                                        <a class="proptype forsalebtn" (click)="exclusiveclick('')">
+                                            <span class="box">
+                                                <span class="proptitle forsalelable">Any</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <a class="proptype forsalebtn" (click)="exclusiveclick('true')">
+                                            <span class="box">
+                                                <span class="proptitle forsalelable">Exclusive</span>
+                                            </span>
+                                        </a>
+                                    </div>
+                                    <div class="col-lg-12">
+                                        <a class="proptype forsalebtn" (click)="exclusiveclick('false')">
+                                            <span class="box">
+                                                <span class="proptitle forsalelable">Non Exclusive</span>
+                                            </span>
+                                        </a>
+                                    </div> -->
+                            </div>
+                        </popover-content>
+
+                        <button type="button" [popover]="Exclusive" class="btn btn-yellow btnfilter" popoverSize="small"
+                            [popoverOnHover]="false">
+                            <!-- {{exclusive ? "Exclusive" : "Non Exclusive" }}  --> Exclusive
+                        </button>
+
                     </div>
                 </div>
-               
-                <div class="col-xl-2 col-lg-4 col-md-4 col-sm-12">
-                    <a class="btn btn-yellow searchhide" (click)="search()" >Search</a>
+
+
+
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Residential'">
+                    <div class="rld-single-select">
+
+                        <popover-content #bedbath placement="bottom" [closeOnClickOutside]="true">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <p style="color: black;"> <strong>BedRooms</strong></p>
+                                    <div class="form-inline">
+                                        <div class="btn-group" btnRadioGroup name="bed" (click)="bedclick(bed)"
+                                            [(ngModel)]="bed" style="width: 100%;">
+                                            <label class="btn btn-success" btnRadio="">any</label>
+                                            <label class="btn btn-success" btnRadio=0>1+</label>
+                                            <label class="btn btn-success" btnRadio=1>2+</label>
+                                            <label class="btn btn-success" btnRadio=2>3+</label>
+                                            <label class="btn btn-success" btnRadio=3>4+</label>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <div class="col-lg-12" style="margin-top:10px">
+                                    <p style="color: black;"> <strong>BathRooms</strong></p>
+                                    <div class="form-inline">
+                                        <div class="btn-group" btnRadioGroup name="bath" (click)="bathclick(bath)"
+                                            [(ngModel)]="bath" style="width: 100%;">
+                                            <label class="btn btn-success" btnRadio="">any</label>
+                                            <label class="btn btn-success" btnRadio=0>1+</label>
+                                            <label class="btn btn-success" btnRadio=1>2+</label>
+                                            <label class="btn btn-success" btnRadio=2>3+</label>
+                                            <label class="btn btn-success" btnRadio=3>4+</label>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </popover-content>
+
+                        <button type="button" [popover]="bedbath" class="btn btn-yellow btnfilter" popoverSize="small"
+                            [popoverOnHover]="false"> Bed Bath </button>
+
+                    </div>
                 </div>
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-6">
-                    <a class="btn btn-yellow" (click)="openModal(template)">Filter </a>
+
+
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
+                    <div class="rld-single-select">
+                        <popover-content #price [closeOnClickOutside]="true" [animation]="true">
+                            <div class="row">
+                                <div class="col-lg-12">
+
+                                    <ngx-slider [(value)]="minPriceInput" [(highValue)]="maxPriceInput"
+                                        (mouseup)="pricechange(maxPriceInput)" [options]="options"></ngx-slider>
+                                </div>
+                            </div>
+                        </popover-content>
+
+                        <button type="button" [popover]="price" class="btn btn-yellow btnfilter"
+                            popoverSize="medium-small" [popoverOnHover]="false" popoverPlacement="bottom"> Price
+                        </button>
+
+                    </div>
+
                 </div>
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-6">
-                    <a class="btn btn-yellow" name="isShown"
-                        (click)="toggleShowMap()">{{isShown==false ? "Map" : "List"}}</a>
+
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
+                    <div class="rld-single-select">
+                        <popover-content #more [closeOnClickOutside]="true" [animation]="true">
+                            <div class="row">
+                                <div class="col-lg-12">
+
+
+                                    <div class="row" *ngIf="propertyType == 'Residential'">
+                                        <div class="col-lg-12">
+                                            <p style="color: black;"> <strong>Open house</strong></p>
+
+                                            <ul class="ks-cboxtags">
+                                                <li><input type="checkbox" id="checkboxOne" (click)="openhouseclick()"
+                                                        [(ngModel)]="openHouse"><label for="checkboxOne">Open
+                                                        house</label></li>
+
+                                            </ul>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <div class="row" *ngIf="propertyType == 'Commercial'">
+
+                                        <div class="col-lg-12">
+                                            <p style="color: black;"> <strong>ForClouser</strong></p>
+
+                                            <ul class="ks-cboxtags">
+                                                <li><input id="checkboxTwo" type="checkbox"><label
+                                                        for="checkboxTwo">ForClouser</label></li>
+
+                                            </ul>
+
+
+                                        </div>
+
+                                    </div>
+
+                                    <p style="color: black;"> <strong>Square feet</strong></p>
+                                    <div class="row">
+                                        <div class="col-lg-6">
+
+                                            <div class="rld-single-select">
+                                                <select class="select single-select" (change)="changesqft()"
+                                                    name="minSqrft" [(ngModel)]="minSqft">
+                                                    <option value="">Min sqr ft</option>
+                                                    <option value='500'>500</option>
+                                                    <option value='750'>750</option>
+                                                    <option value='1000'>1000</option>
+                                                    <option value='1250'>1250</option>
+                                                    <option value='1500'>1500</option>
+                                                    <option value='1750'>1750</option>
+                                                    <option value='2000'>2000</option>
+                                                    <option value='2250'>2250</option>
+                                                    <option value='2500'>2500</option>
+                                                    <option value='3000'>3000</option>
+                                                    <option value='4000'>4000</option>
+                                                    <option value='5000'>5000</option>
+                                                    <option value='10000'>10000</option>
+                                                    <option value='20000'>20000</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-lg-6">
+
+                                            <div class="rld-single-select">
+                                                <select class="select single-select" (change)="changesqft()"
+                                                    name="maxSqrft" [(ngModel)]="maxSqft">
+                                                    <option value="">Max sqr ft</option>
+                                                    <option value='500'>500</option>
+                                                    <option value='750'>750</option>
+                                                    <option value='1000'>1000</option>
+                                                    <option value='1250'>1250</option>
+                                                    <option value='1500'>1500</option>
+                                                    <option value='1750'>1750</option>
+                                                    <option value='2000'>2000</option>
+                                                    <option value='2250'>2250</option>
+                                                    <option value='2500'>2500</option>
+                                                    <option value='3000'>3000</option>
+                                                    <option value='4000'>4000</option>
+                                                    <option value='5000'>5000</option>
+                                                    <option value='10000'>10000</option>
+                                                    <option value='20000'>20000</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+
+
+                                    <p style="color: black;"> <strong>Basement</strong></p>
+                                    <div class="row" *ngIf="propertyType == 'Residential'">
+                                        <div class="col-lg-12">
+
+                                            <ul class="ks-cboxtags">
+                                                <li><input id="checkboxTwo" type="checkbox"><label
+                                                        for="checkboxTwo">Basement</label></li>
+
+                                            </ul>
+
+
+                                        </div>
+
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </popover-content>
+
+                        <button type="button" [popover]="more" class="btn btn-yellow btnfilter"
+                            popoverSize="medium-small" [popoverOnHover]="false" popoverPlacement="bottom"> More
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <div class="col-xl-1 col-lg-4 col-md-6 col-sm-12">
+                    <button type="button" class="btn btn-yellow btnfilter" (click)="clearFilter()">Clear </button>
+                </div>
+
+                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-6 btnmob">
+                    <a class="btn btn-yellow " (click)="openModal(template)">Filter </a>
+                </div>
+
+                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-6">
+                    <a class="btn btn-yellow " name="isShown"
+                        (click)="toggleShowMap()">{{isShown==false ? "List" : "Map"}}</a>
                 </div>
 
             </div>
 
-        </form>
-
-    </div>
-</section>
-<!-- STAR HEADER GOOGLE MAP -->
-<section *ngIf="isShown" class="header-map google-maps pull-top map-leaflet-wrapper" style=" height: 750px;">
-    <agm-map [latitude]="lat" [longitude]="lng" [zoom]="zoom" [disableDefaultUI]="true" [zoomControl]="true"
-        (idle)="idle($event)" [fullscreenControl]='true' [mapTypeControl]='true' >
-        <agm-marker-cluster
-            imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
-            <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"
-                [markerDraggable]="m.draggable" [iconUrl]="icon"
-                (mouseOver)="mouseOver(m,i)">
-
-                <agm-snazzy-info-window [isOpen]="false" [closeOnMapClick]="true" [closeWhenOthersOpen]="true" [maxWidth]="500" [maxHeight]="300">
-                    <ng-template >
-                        <!-- {{m | json}} -->
-
-                        <div class="container" >
-                            <div class="card">
-                                <div class="row ">
-
-                                    <div class="col-sm-5">
-                                        <img class="d-block w-100" style="width: 100%; height: auto;" src="{{m.photoLink}}" alt="">
-                                    </div>
-
-                                    <div class="col-sm-7">
-                                        <div class="card-block">
-                                            <!--           <h4 class="card-title">Small card</h4> -->
-                                            <p> <strong>Price : </strong> {{m.price}}</p>
-                                            <p> <strong>Address : </strong> {{m.address}}</p>
-                                            <p> <strong>City : </strong> {{m.city}}</p>
-                                            
-                                            <a  routerLink="/property/ResidentialProperty/{{m.propertyUniqid}}" class="btn btn-primary btn-sm">Visit</a>
-                                        </div>
-                                    </div>
-
-                                    
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </ng-template>
-                </agm-snazzy-info-window>
-
-                <!-- <agm-info-window>
-            <strong>InfoWindow content</strong>
-          </agm-info-window> -->
-
-            </agm-marker>
-        </agm-marker-cluster>
-    </agm-map>
-    <!-- <div class="container" style="margin-right: 250px;">
-      <div class="filter">
-        <div class="filter-toggle hidden-md-up"><i class="fa fa-search"></i>
-          <h6>START SEARCHING</h6>
-        </div>
-        <form method="get">
-          <div class="filter-item">
-            <label>Property Status</label>
-            <select name="property-status">
-              <option value="">Any Status</option>
-              <option value="for-sale">For Sale</option>
-              <option value="for-rent">For Rent</option>
-              <option value="sold">Sold</option>
-            </select>
-          </div>
-          <div class="filter-item">
-            <label>Property Type</label>
-            <select name="property-type">
-              <option value="">Any Type</option>
-              <option value="family-house">Family House</option>
-              <option value="apartment">Apartment</option>
-              <option value="condo">Condo</option>
-            </select>
-          </div>
-          <div class="filter-item">
-            <label>Location</label>
-            <select name="property-type">
-              <option value="">Any Location</option>
-              <option value="family-house">New York</option>
-              <option value="apartment">Los Angeles</option>
-              <option value="condo">Chicago</option>
-              <option value="condo">Philadelphia</option>
-              <option value="condo">San Francisco</option>
-            </select>
-          </div>
-          <div class="filter-item mb-3">
-            <label>Price</label>
-            <input type="text" disabled class="slider_amount m-t-lg-30 m-t-xs-0 m-t-sm-10 mb-3">
-            <div class="slider-range mt-2"></div>
-          </div>
-          <div class="filter-item filter-half mt-3">
-            <label>Beds</label>
-            <select name="beds" id="property-beds">
-              <option value="">Any</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
-          <div class="filter-item filter-half filter-half-last mt-3">
-            <label>Baths</label>
-            <select name="baths" id="property-baths">
-              <option value="">Any</option>
-              <option value="1">1</option>
-              <option value="2">2</option>
-              <option value="3">3</option>
-              <option value="4">4</option>
-              <option value="5">5</option>
-              <option value="6">6</option>
-              <option value="7">7</option>
-              <option value="8">8</option>
-              <option value="9">9</option>
-              <option value="10">10</option>
-            </select>
-          </div>
-          <div class="clear"></div>
-          <div class="filter-item">
-            <label>Area</label>
-            <input type="number" name="areaMin" class="area-filter filter-1 mb-0" placeholder="Min" />
-            <input type="number" name="areaMax" class="area-filter mb-0" placeholder="Max" />
-            <div class="clear"></div>
-          </div>
-          <div class="filter-item">
-            <label class="label-submit p-0 m-0">Submit</label>
-            <br />
-            <input type="submit" class="button alt mb-0" value="SEARCH PROPERTY" />
-          </div>
-        </form>
-      </div>
-    </div> -->
-</section>
-<!-- END HEADER GOOGLE MAP -->
-
-<div class="inner-pages" *ngIf="!isShown">
-    <!-- START SECTION PROPERTIES LISTING -->
-    <section class="properties-right featured portfolio blog" style="padding: 2rem 0;">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12 col-md-12 blog-pots">
-                    <!-- Block heading Start-->
-                    <div class="block-heading">
-                        <div class="row">
-                            <div class="col-lg-6 col-md-5 col-2">
-                                <h4>
-                                    <span class="hidden-sm-down">{{propertyType}} Listing</span>
-                                </h4>
-                            </div>
-                            <div class="col-lg-6 col-md-7 col-10 cod-pad">
-                                <div class="sorting-options">
-                                    <select *ngIf="propertyType == 'Commercial'" class="sorting" name="sortType" [(ngModel)]="sortType"
-                                        (change)="Sort()">
-                                        <option value="">None</option>
-                                        <option value="askingPrice DESC">Price: High to low</option>
-                                        <option value="askingPrice ASC">Price: Low to high</option>
-                                        <option value="listingDate ASC">Listing: Old to New</option>
-                                        <option value="listingDate DESC">Listing: New to Old </option>
-                                    </select>
-
-                                    <select *ngIf="propertyType == 'Residential'" class="sorting" name="sortType" [(ngModel)]="sortType"
-                                        (change)="Sort()">
-                                        <option value="">None</option>
-                                        <option value="Price DESC">Price: High to low</option>
-                                        <option value="Price ASC">Price: Low to high</option>
-                                        <option value="listingContractDate ASC">Listing: Old to New</option>
-                                        <option value="listingContractDate DESC">Listing: New to Old</option>
-                                    </select>
 
 
-                                    <a type="radio" class="change-view-btn "
-                                        [ngClass]="(display==1)?'active-view-btn':'lde'" value="1"
-                                        (click)="changeDisplay(1)"><i class="fa fa-th-large"></i></a>
-                                    <a type="radio" class="change-view-btn"
-                                        [ngClass]="(display==2)?'active-view-btn':'lde'" value="2"
-                                        (click)="changeDisplay(2)"><i class="fa fa-th-list"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Block heading end -->
-                    <div class="row" *ngIf="display === 1">
-                        <div class="item col-lg-4 col-md-4 col-xs-12 landscapes sale"
-                            *ngFor="let property of properties | paginate: config">
-                            <div class="project-single">
-                                <div class="project-inner project-head">
-                                    <div class="project-bottom">
-                                        <h4><a *ngIf="propertyType == 'Commercial'"
-                                                routerLink="/property/CommercialProperty/{{property.propertyUniqid}}">View
-                                                Property</a>
-                                            <a *ngIf="propertyType == 'Residential'"
-                                                routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}">View
-                                                Property</a>
-                                            <span class="category">Real Estate</span></h4>
-                                    </div>
-                                    <div class="homes">
-                                        <!-- homes img -->
-                                        <a *ngIf="propertyType == 'Commercial'"
-                                            routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
-                                            class="homes-img">
-                                            <div class="homes-tag button alt sale">{{property.transactionType | slice:4:16}}</div>
-                                            <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
-                                            <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
-                                                alt="home-1"
-                                                onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
-                                                style="height: 250px;" class="img-responsive">
-                                        </a>
-                                        <a *ngIf="propertyType == 'Residential'"
-                                            routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
-                                            class="homes-img">
-                                            <div class="homes-tag button alt sale">{{property.transactionType}}</div>
-                                            <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
-                                            <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
-                                                alt="home-1"
-                                                onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
-                                                style="height: 250px;" class="img-responsive">
-                                        </a>
-                                    </div>
-                                    <div class="button-effect">
-                                        <a *ngIf="propertyType == 'Commercial'"
-                                            routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
-                                            class="btn"><i class="fa fa-link"></i></a>
-                                        <a *ngIf="propertyType == 'Residential'"
-                                            routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
-                                            class="btn"><i class="fa fa-link"></i></a>
-                                    </div>
-                                </div>
-                                <!-- homes content -->
-                                <div class="homes-content" style="min-height: 100%; max-height: 100%;">
-                                    <!-- homes address -->
-                                    <h3><a>{{property.propertyType}}</a>
-                                    </h3>
-                                    <p class="homes-address mb-3" style="min-height: 54px; ">
-                                        <a>
-                                            <i class="fa fa-map-marker"></i>
-                                            <span>{{property.address}},
-                                                  {{property.city}}
-                                             <span *ngIf="property.state">,{{property.state}}</span>
-                                             ,{{property.postalCode}}
-                                             </span>
-                                        </a>
-                                    </p>
-                                    <!-- homes List -->
-                                    <ul class="homes-list clearfix">
-                                        <li *ngIf="property.bedroomsTotal">
-                                            <i class="fa fa-bed" aria-hidden="true"></i>
-                                            <span>{{property.bedroomsTotal}} Bedrooms</span>
-                                        </li>
-                                        <li *ngIf="property.bathroomTotal">
-                                            <i class="fa fa-bath" aria-hidden="true"></i>
-                                            <span>{{property.bathroomTotal}} Bathrooms</span>
-                                        </li>
-                                        <li>
-                                            <i class="fa fa-object-group" aria-hidden="true"></i>
-                                            <span>{{ property.totalFinishedArea != null ? property.totalFinishedArea : "NA sqft"}}</span>
-                                        </li>
 
-                                    </ul>
-                                    <!-- Price -->
-                                    <div class="price-properties">
-                                        <h3 class="title mt-3">
-                                            <a *ngIf="propertyType == 'Commercial' && property.askingPrice"> $
-                                                {{property.askingPrice ? property.askingPrice : "NA"}}</a>
-
-                                                <a *ngIf="propertyType == 'Commercial' && property.baseRent && property.baseRent != 'N/A' "> $
-                                                    {{property.baseRent ? property.baseRent : "NA"}}</a>  
-
-                                            <a *ngIf="propertyType == 'Residential'">$
-                                                {{property.price ? property.price : "NA"}}</a>
-                                                
-
-                                                
-                                        </h3>
-
-
-                                        <div class="compare">
-                                           
-                                            <a title="Share">
-                                                <i class="fas fa-share-alt"></i>
-                                            </a>
-                                            <a title="Favorites">
-                                                <i class="fa fa-heart-o"></i>
-                                            </a>
-                                        </div>
-                                    </div>
-                                    <div class="footer">
-                                        <a>
-                                            ID: {{property.mlsId}}
-                                        </a>
-                                        <span *ngIf="property.listingDate">
-                                            <i class="fa fa-calendar"></i> {{property.listingDate | timeago }}
-                                        </span>
-                                        <span *ngIf="property.listingContractDate">
-                                            <i class="fa fa-calendar"></i> {{property.listingContractDate | timeago }}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div *ngIf="display === 2">
-                        <div class="row featured portfolio-items" *ngFor="let property of properties"
-                            style="margin-bottom: 20px;">
-
-                            <div class="item col-lg-4 col-md-12 col-xs-12 landscapes sale pr-0 pb-0">
-                                <div class="project-single mb-0 bb-0">
-                                    <div class="project-inner project-head">
-                                        <div class="project-bottom">
-                                            <h4 *ngIf="propertyType == 'Commercial'">
-                                                <a
-                                                    routerLink="/property/CommercialProperty/{{property.propertyUniqid}}">View
-                                                    Property</a>
-                                                <span class="category">Real Estate</span>
-                                            </h4>
-                                            <h4 *ngIf="propertyType == 'Residential'">
-                                                <a
-                                                    routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}">View
-                                                    Property</a>
-                                                <span class="category">Real Estate</span>
-                                            </h4>
-                                        </div>
-                                        <div class="homes">
-                                            <!-- homes img -->
-                                            <a *ngIf="propertyType == 'Commercial'"
-                                                routerLink="/property/CommercialProperties/{{property.propertyUniqid}}"
-                                                class="homes-img">
-                                                <div class="homes-tag button alt sale">{{property.transactionType}}
-                                                </div>
-                                                <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
-                                                <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
-                                                    style="height: 275px;"
-                                                    onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
-                                                    alt="home-1" class="img-responsive">
-                                            </a>
-                                            <a *ngIf="propertyType == 'Residential'"
-                                                routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
-                                                class="homes-img">
-                                                <div class="homes-tag button alt sale">{{property.transactionType}}
-                                                </div>
-                                                <div *ngIf="property.exclusive" class="homes-price">Exclusive</div>
-                                                <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
-                                                    style="height: 275px;"
-                                                    onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
-                                                    alt="home-1" class="img-responsive">
-                                            </a>
-                                        </div>
-                                        <div class="button-effect">
-                                            <a *ngIf="propertyType == 'Commercial'"
-                                                routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
-                                                class="btn"><i class="fa fa-link"></i></a>
-
-                                            <a *ngIf="propertyType == 'Residential'"
-                                                routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
-                                                class="btn"><i class="fa fa-link"></i></a>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- homes content -->
-                            <div class="col-lg-8 col-md-12 homes-content pb-0 mb-44">
-                                <!-- homes address -->
-                                <h3><a>{{property.propertyType}}</a></h3>
-                                <p class="homes-address mb-3">
-                                    <a>
-                                        <i class="fa fa-map-marker"></i>
-                                        <span>
-                                            {{property.city}}
-                                            <span *ngIf="property.state">,{{property.state}}</span>
-                                         </span>
-                                    </a>
-                                </p>
-                                <!-- homes List -->
-                                <ul class="homes-list clearfix">
-                                    <li>
-                                        <i class="fa fa-bed" aria-hidden="true"></i>
-                                        <span *ngIf="property.bedroomsTotal">{{property.bedroomsTotal}} Bedrooms</span>
-                                        <span *ngIf="!property.bedroomsTotal">N/A</span>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-bath" aria-hidden="true"></i>
-                                        <span *ngIf="property.bathroomTotal">{{property.bathroomTotal}} Bathrooms</span>
-                                        <span *ngIf="!property.bathroomTotal">N/A</span>
-                                    </li>
-                                    <li>
-                                        <i class="fa fa-object-group" aria-hidden="true"></i>
-                                        <span *ngIf="property.totalFinishedArea">{{property.totalFinishedArea}} </span>
-                                        <span *ngIf="!property.totalFinishedArea">N/A</span>
-                                    </li>
-                                </ul>
-                                <!-- Price -->
-                                <div class="price-properties">
-
-
-                                    <h3 *ngIf="property.askingPrice" class="title mt-3">
-                                        <a>$
-                                            {{property.askingPrice}}</a>
-                                    </h3>
-                                    <h3 *ngIf="property.price" class="title mt-3">
-                                        <a>$
-                                            {{property.price}}</a>
-                                    </h3>
-                                    <div class="compare">
-                                       
-                                        <a title="Share">
-                                            <i class="fas fa-share-alt"></i>
-                                        </a>
-                                        <a title="Favorites">
-                                            <i class="fa fa-heart-o"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="footer">
-                                    <a>
-                                        ID: {{property.mlsId}}
-                                    </a>
-                                    <span *ngIf="property.listingDate">
-                                        <i class="fa fa-calendar"></i> {{property.listingDate | timeago }}
-                                    </span>
-                                    <span *ngIf="property.listingContractDate">
-                                        <i class="fa fa-calendar"></i> {{property.listingContractDate | timeago }}
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="has-text-centered" style="text-align: center;">
-                <pagination-controls  id="server" [autoHide]="true" (pageChange)="onPageChange($event)"></pagination-controls>
-            </div>
         </div>
     </section>
-    <!-- END SECTION PROPERTIES LISTING -->
-</div>
+    <div class="container-fluid">
+        <div class="row">
+
+            <aside class="col-xl-6 col-lg-6 col-md-12" *ngIf="!isShown" style="padding-right: 0px; padding-left: 0px;">
+                <agm-map (mapReady)="mapReady($event)" [latitude]="lat" [longitude]="lng" [zoom]="zoom"
+                    [disableDefaultUI]="true" [zoomControl]="true" (idle)="idle($event)"
+                    (centerChange)="centerChange($event)" [fullscreenControl]='true' [styles]="styles"
+                    [mapTypeControl]='true'>
+                    <agm-marker-cluster
+                        imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
+                        <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"
+                            [markerDraggable]="m.draggable" [iconUrl]="icon" (mouseOver)="mouseOver(m,i)"
+                            (markerClick)="clickedMarker(infowindow)">
+
+                            <!-- <agm-snazzy-info-window [isOpen]="false" [closeOnMapClick]="true"
+                                [closeWhenOthersOpen]="true" [maxWidth]="300" [maxHeight]="100">
+                                <ng-template>
+                                
+                                    <div class="container">
+                                        <div class="card">
+                                            <div class="row ">
+
+                                                <div class="col-sm-5">
+                                                    <img class="d-block w-100" style="width: 100%; height: auto;"
+                                                        src="{{m.photoLink}}" alt="">
+                                                </div>
+
+                                                <div class="col-sm-7">
+                                                    <div class="card-block">
+                                                        <p> <strong>Price : </strong> {{m.price}}</p>
+                                                        <p> <strong>Address : </strong> {{m.address}}</p>
+                                                        <p> <strong>City : </strong> {{m.city}}</p>
+
+                                                        <a routerLink="/property/ResidentialProperty/{{m.propertyUniqid}}"
+                                                            class="btn btn-primary btn-sm">Visit</a>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                </ng-template>
+                            </agm-snazzy-info-window> -->
+
+                            <agm-info-window [isOpen]="false" #infowindow>
+                                <div id="container">
+                                    <a target="_blank" routerLink="/property/ResidentialProperty/{{m.propertyUniqid}}">
+                                        <img id="image" src="{{m.photoLink}}"
+                                            onerror="this.src='../assets/images/feature-properties/fp-1.jpg';" /></a>
+                                    <p id="text">
+                                        ${{m.price}} |
+                                        {{m.address}}{{m.city}}
+                                    </p>
+                                </div>
+                            </agm-info-window>
+
+                        </agm-marker>
+                    </agm-marker-cluster>
+                </agm-map>
+            </aside>
+
+            <div class=" col-md-12 blog-pots pr-0 " [ngClass]="(!isShown)?'col-lg-6 col-xl-6':'col-lg-12 col-xl-12'"
+                style="padding-left: 0px;">
+                <!-- Block heading Start-->
+                <div class="inner-pages">
+                    <!-- START SECTION PROPERTIES LISTING -->
+                    <section class="properties-right featured portfolio blog">
+                        <div class="container-fluid" style="overflow: auto;
+                        max-height: 86vh;">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12 blog-pots">
+                                    <!-- Block heading Start-->
+                                    <div class="block-heading btnfilter">
+                                        <div class="row">
+                                            <div class="col-lg-5 col-md-5 col-2">
+                                                <h5 style="line-height: 40px;">
+                                                    <span class="hidden-sm-down">{{propertyType}} Listing</span>
+                                                </h5>
+                                            </div>
+                                            <div class="col-lg-7 col-md-7 col-10 cod-pad">
+                                                <div class="sorting-options" style="margin: 1px -11px 0 0;">
+                                                    <select *ngIf="propertyType == 'Commercial'" class="sorting"
+                                                        name="sortType" [(ngModel)]="sortType" (change)="Sort()">
+                                                        <option value="">Sort By</option>
+                                                        <option value="askingPrice DESC">Price: High to low</option>
+                                                        <option value="askingPrice ASC">Price: Low to high</option>
+                                                        <option value="listingDate ASC">Listing: Old to New</option>
+                                                        <option value="listingDate DESC">Listing: New to Old </option>
+                                                    </select>
+
+                                                    <select *ngIf="propertyType == 'Residential'" class="sorting"
+                                                        name="sortType" [(ngModel)]="sortType" (change)="Sort()">
+                                                        <option value="">Sort By</option>
+                                                        <option value="Price DESC">Price: High to low</option>
+                                                        <option value="Price ASC">Price: Low to high</option>
+                                                        <option value="listingContractDate ASC">Listing: Old to New
+                                                        </option>
+                                                        <option value="listingContractDate DESC">Listing: New to Old
+                                                        </option>
+                                                    </select>
+
+
+                                                    <!-- <a type="radio" class="change-view-btn "
+                                                        [ngClass]="(display==1)?'active-view-btn':'lde'" value="1"
+                                                        (click)="changeDisplay(1)"><i class="fa fa-th-large"></i></a> -->
+                                                    <!-- <a type="radio" class="change-view-btn"
+                                                        [ngClass]="(display==2)?'active-view-btn':'lde'" value="2"
+                                                        (click)="changeDisplay(2)"><i class="fa fa-th-list"></i></a> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- Block heading end -->
+                                    <div class="row" *ngIf="display === 1">
+                                        <div class="item col-md-6 col-xs-12 landscapes sale"
+                                            [ngClass]="(!isShown)?'col-lg-6':'col-lg-3'"
+                                            *ngFor="let property of properties | paginate: config"
+                                            style="padding: 0px 4px;">
+                                            <div class="project-single">
+                                                <div class="project-inner project-head">
+                                                    <!-- <div class="project-bottom">
+                                                        <h4><a *ngIf="propertyType == 'Commercial'"
+                                                                routerLink="/property/CommercialProperty/{{property.propertyUniqid}}">View
+                                                                Property</a>
+                                                            <a *ngIf="propertyType == 'Residential'"
+                                                                routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}">View
+                                                                Property</a>
+                                                            <span class="category">Real Estate</span></h4>
+                                                    </div> -->
+                                                    <div class="homes">
+                                                        <!-- homes img -->
+                                                        <a *ngIf="propertyType == 'Commercial'"
+                                                            routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
+                                                            class="homes-img" target="_blank">
+                                                            <!-- <div class="homes-tag button alt sale">
+                                                                {{property.transactionType | slice:4:16}}</div> -->
+                                                            <div *ngIf="property.exclusive" class="homes-price">
+                                                                Exclusive</div>
+
+                                                            <div class="grid">
+                                                                <div *ngIf="property.photoPath" class="img"
+                                                                    style="background-image:
+                                                                    url('{{property.photoPath}}'), url('../../assets/images/feature-properties/fp-1.jpg')">
+                                                                </div>
+
+                                                                <div *ngIf="!property.photoPath" class="img"
+                                                                    style="background-image:
+                                                                        url('../../assets/images/feature-properties/fp-1.jpg')">
+                                                                </div>
+                                                            </div>
+
+                                                            <!-- <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
+                                                                alt="home-1"
+                                                                onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
+                                                                 class="img-responsive"> -->
+                                                        </a>
+                                                        <a *ngIf="propertyType == 'Residential'"
+                                                            routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
+                                                            class="homes-img" target="_blank">
+                                                            <!-- <div class="homes-tag button alt sale">
+                                                                {{property.transactionType}}</div> -->
+                                                            <div *ngIf="property.exclusive" class="homes-price">
+                                                                Exclusive</div>
+
+                                                            <div class="grid">
+                                                                <div *ngIf="property.photoPath" class="img"
+                                                                    style="background-image:
+                                                                    url('{{property.photoPath}}'), url('../../assets/images/feature-properties/fp-1.jpg')">
+                                                                </div>
+
+                                                                <div *ngIf="!property.photoPath" class="img"
+                                                                    style="background-image:
+                                                                     url('../../assets/images/feature-properties/fp-1.jpg')"></div>
+
+                                                            </div>
+
+                                                            <!-- <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
+                                                                alt="home-1"
+                                                                onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
+                                                               class="img-responsive" style="height: 250px;"> -->
+                                                        </a>
+                                                    </div>
+                                                    <!-- <div class="button-effect">
+                                                        <a *ngIf="propertyType == 'Commercial'"
+                                                            routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
+                                                            class="btn"><i class="fa fa-link"></i></a>
+                                                        <a *ngIf="propertyType == 'Residential'"
+                                                            routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
+                                                            class="btn"><i class="fa fa-link"></i></a>
+                                                    </div> -->
+                                                </div>
+                                                <!-- homes content -->
+                                                <div class="homes-content" style="min-height: 100%; max-height: 100%;">
+                                                    <!-- homes address -->
+                                                    <h3><a>{{property.propertyType}}</a>
+                                                        <div class="pull-right" style="font-size: 12px;">
+                                                            {{property.transactionType }}
+                                                        </div>
+                                                    </h3>
+
+
+                                                    <p class="homes-address mb-3" style="text-overflow: ellipsis; white-space: nowrap;
+                                                    overflow: hidden; margin-bottom: 6px!important;">
+                                                        <a>
+                                                            <i class="fa fa-map-marker"></i>
+                                                            <span>{{property.address}},
+                                                                {{property.city}}
+                                                                <span *ngIf="property.state">,{{property.state}}</span>
+                                                                ,{{property.postalCode}}
+                                                            </span>
+                                                        </a>
+                                                    </p>
+                                                    <!-- homes List -->
+                                                    <ul class="homes-list clearfix">
+                                                        <li *ngIf="property.bedroomsTotal">
+                                                            <i class="fa fa-bed" aria-hidden="true"></i>
+                                                            <span>{{property.bedroomsTotal ? property.bedroomsTotal : '0' }}
+                                                                Bed</span>
+                                                        </li>
+                                                        <li *ngIf="property.bathroomTotal">
+                                                            <i class="fa fa-bath" aria-hidden="true"></i>
+                                                            <span>{{property.bathroomTotal ? property.bathroomTotal : '0'}}
+                                                                Bath</span>
+                                                        </li>
+                                                        <!-- <li>
+                                                            <i class="fa fa-object-group" aria-hidden="true"></i>
+                                                            <span>{{ property.totalFinishedArea != null ? property.totalFinishedArea : "NA sqft"}}</span>
+                                                        </li> -->
+
+                                                    </ul>
+                                                    <!-- Price -->
+                                                    <div class="price-properties">
+                                                        <h3 class="title mt-3" style="text-overflow: ellipsis; white-space: nowrap;
+                                                        overflow: hidden;">
+                                                            <a
+                                                                *ngIf="propertyType == 'Commercial' && property.askingPrice">
+                                                                {{(property.askingPrice ? property.askingPrice : "NA") |  currency:'USD':'symbol':'4.0-0'}}
+                                                            </a>
+
+                                                            <a
+                                                                *ngIf="propertyType == 'Commercial' && !property.askingPrice">
+                                                                $ N/A
+                                                            </a>
+
+                                                            <a
+                                                                *ngIf="propertyType == 'Commercial' && property.baseRent && property.baseRent != 'N/A' ">
+                                                                {{(property.baseRent ? property.baseRent : "NA")}}
+                                                            </a>
+
+                                                            <a
+                                                                *ngIf="(propertyType == 'Commercial' && !property.baseRent && property.baseRent == 'N/A') ">
+                                                                $ N/A
+                                                            </a>
+
+                                                            <a *ngIf="propertyType == 'Residential' && property.price">
+                                                                {{(property.price ? property.price : "NA" )|  currency:'USD':'symbol':'4.0-0'}}
+                                                            </a>
+
+                                                            <a *ngIf="propertyType == 'Residential' && !property.price">
+                                                                $ N/A
+                                                            </a>
+                                                        </h3>
+
+
+                                                        <div class="compare">
+                                                            <a title="Share">
+                                                                <i class="fas fa-share-alt"></i>
+                                                            </a>
+                                                            <a title="Favorites">
+                                                                <i class="fa fa-heart-o"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="footer">
+                                                        <a>
+                                                            ID: {{property.mlsId}}
+                                                        </a>
+                                                        <span *ngIf="property.listingDate">
+                                                            <i class="fa fa-calendar"></i>
+                                                            {{property.listingDate | timeago }}
+                                                        </span>
+                                                        <span *ngIf="property.listingContractDate">
+                                                            <i class="fa fa-calendar"></i>
+                                                            {{property.listingContractDate | timeago }}
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div *ngIf="display === 2">
+                                        <div class="row featured portfolio-items" *ngFor="let property of properties"
+                                            style="margin-bottom: 20px;">
+
+                                            <div class="item col-lg-4 col-md-12 col-xs-12 landscapes sale pr-0 pb-0">
+                                                <div class="project-single mb-0 bb-0">
+                                                    <div class="project-inner project-head">
+                                                        <div class="project-bottom">
+                                                            <h4 *ngIf="propertyType == 'Commercial'">
+                                                                <a
+                                                                    routerLink="/property/CommercialProperty/{{property.propertyUniqid}}">View
+                                                                    Property</a>
+                                                                <span class="category">Real Estate</span>
+                                                            </h4>
+                                                            <h4 *ngIf="propertyType == 'Residential'">
+                                                                <a
+                                                                    routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}">View
+                                                                    Property</a>
+                                                                <span class="category">Real Estate</span>
+                                                            </h4>
+                                                        </div>
+                                                        <div class="homes">
+                                                            <!-- homes img -->
+                                                            <a *ngIf="propertyType == 'Commercial'"
+                                                                routerLink="/property/CommercialProperties/{{property.propertyUniqid}}"
+                                                                class="homes-img">
+                                                                <div class="homes-tag button alt sale">
+                                                                    {{property.transactionType}}
+                                                                </div>
+                                                                <div *ngIf="property.exclusive" class="homes-price">
+                                                                    Exclusive</div>
+
+                                                                <div class="grid">
+                                                                    <div *ngIf="property.photoPath" class="img"
+                                                                        style="background-image:
+                                                                        url('{{property.photoPath}}'), url('../../assets/images/feature-properties/fp-1.jpg')">
+                                                                    </div>
+
+                                                                    <div *ngIf="!property.photoPath" class="img"
+                                                                        style="background-image:
+                                                                         url('../../assets/images/feature-properties/fp-1.jpg')"></div>
+
+                                                                </div>
+                                                                <!-- <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
+                                                                    style="height: 275px;"
+                                                                    onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
+                                                                    alt="home-1" class="img-responsive"> -->
+                                                            </a>
+                                                            <a *ngIf="propertyType == 'Residential'"
+                                                                routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
+                                                                class="homes-img">
+                                                                <div class="homes-tag button alt sale">
+                                                                    {{property.transactionType}}
+                                                                </div>
+                                                                <div *ngIf="property.exclusive" class="homes-price">
+                                                                    Exclusive</div>
+
+                                                                <div class="grid">
+                                                                    <div *ngIf="property.photoPath" class="img"
+                                                                        style="background-image:
+                                                                        url('{{property.photoPath}}'), url('../../assets/images/feature-properties/fp-1.jpg')">
+                                                                    </div>
+
+                                                                    <div *ngIf="!property.photoPath" class="img"
+                                                                        style="background-image:
+                                                                         url('../../assets/images/feature-properties/fp-1.jpg')"></div>
+
+                                                                </div>
+                                                                <!-- <img src="{{property.photoPath || '../assets/images/feature-properties/fp-1.jpg'}}"
+                                                                    style="height: 275px;"
+                                                                    onerror="this.src='../assets/images/feature-properties/fp-1.jpg';"
+                                                                    alt="home-1" class="img-responsive"> -->
+                                                            </a>
+                                                        </div>
+                                                        <div class="button-effect">
+                                                            <a *ngIf="propertyType == 'Commercial'"
+                                                                routerLink="/property/CommercialProperty/{{property.propertyUniqid}}"
+                                                                class="btn"><i class="fa fa-link"></i></a>
+
+                                                            <a *ngIf="propertyType == 'Residential'"
+                                                                routerLink="/property/ResidentialProperty/{{property.propertyUniqid}}"
+                                                                class="btn"><i class="fa fa-link"></i></a>
+
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- homes content -->
+                                            <div class="col-lg-8 col-md-12 homes-content pb-0 mb-44">
+                                                <!-- homes address -->
+                                                <h3><a>{{property.propertyType}}</a></h3>
+                                                <p class="homes-address mb-3">
+                                                    <a>
+                                                        <i class="fa fa-map-marker"></i>
+                                                        <span>
+                                                            {{property.city}}
+                                                            <span *ngIf="property.state">,{{property.state}}</span>
+                                                        </span>
+                                                    </a>
+                                                </p>
+                                                <!-- homes List -->
+                                                <ul class="homes-list clearfix">
+                                                    <li>
+                                                        <i class="fa fa-bed" aria-hidden="true"></i>
+                                                        <span *ngIf="property.bedroomsTotal">{{property.bedroomsTotal}}
+                                                            Bedrooms</span>
+                                                        <span *ngIf="!property.bedroomsTotal">N/A</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-bath" aria-hidden="true"></i>
+                                                        <span *ngIf="property.bathroomTotal">{{property.bathroomTotal}}
+                                                            Bathrooms</span>
+                                                        <span *ngIf="!property.bathroomTotal">N/A</span>
+                                                    </li>
+                                                    <li>
+                                                        <i class="fa fa-object-group" aria-hidden="true"></i>
+                                                        <span
+                                                            *ngIf="property.totalFinishedArea">{{property.totalFinishedArea}}
+                                                        </span>
+                                                        <span *ngIf="!property.totalFinishedArea">N/A</span>
+                                                    </li>
+                                                </ul>
+                                                <!-- Price -->
+                                                <div class="price-properties">
+
+
+                                                    <h3 *ngIf="property.askingPrice" class="title mt-3">
+                                                        <a>$
+                                                            {{property.askingPrice}}</a>
+                                                    </h3>
+                                                    <h3 *ngIf="property.price" class="title mt-3">
+                                                        <a>$
+                                                            {{property.price}}</a>
+                                                    </h3>
+                                                    <div class="compare">
+
+                                                        <a title="Share">
+                                                            <i class="fas fa-share-alt"></i>
+                                                        </a>
+                                                        <a title="Favorites">
+                                                            <i class="fa fa-heart-o"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="footer">
+                                                    <a>
+                                                        ID: {{property.mlsId}}
+                                                    </a>
+                                                    <span *ngIf="property.listingDate">
+                                                        <i class="fa fa-calendar"></i>
+                                                        {{property.listingDate | timeago }}
+                                                    </span>
+                                                    <span *ngIf="property.listingContractDate">
+                                                        <i class="fa fa-calendar"></i>
+                                                        {{property.listingContractDate | timeago }}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="has-text-centered" style="text-align: center;">
+                                <pagination-controls id="server" [autoHide]="true" (pageChange)="onPageChange($event)">
+                                </pagination-controls>
+                            </div>
+
+                            <footer class="first-footer">
+                                <div class="top-footer">
+                                    <div class="container">
+                                        <div class="row">
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="netabout">
+                                                    <a href="index.html" class="logo">
+                                                        <img src="../assets/images/logo-footer.svg" alt="netcom">
+                                                    </a>
+                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
+                                                        incidunt architecto soluta laboriosam,
+                                                        perspiciatis, aspernatur officiis esse.</p>
+                                                </div>
+                                                <div class="contactus">
+                                                    <ul>
+                                                        <li>
+                                                            <div class="info">
+                                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
+                                                                <p class="in-p">95 South Park Avenue, USA</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="info">
+                                                                <i class="fa fa-phone" aria-hidden="true"></i>
+                                                                <p class="in-p">+456 875 369 208</p>
+                                                            </div>
+                                                        </li>
+                                                        <li>
+                                                            <div class="info">
+                                                                <i class="fa fa-envelope" aria-hidden="true"></i>
+                                                                <p class="in-p ti">support@findhouses.com</p>
+                                                            </div>
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4 col-md-6">
+                                                <div class="navigation">
+                                                    <h3>Navigation</h3>
+                                                    <div class="nav-footer">
+                                                        <ul>
+                                                            <li><a href="index.html">Home One</a></li>
+                                                            <li><a href="properties-right-sidebar.html">Properties
+                                                                    Right</a></li>
+                                                            <li><a href="properties-full-list.html">Properties List</a>
+                                                            </li>
+                                                            <li><a href="properties-details.html">Property Details</a>
+                                                            </li>
+                                                            <li class="no-mgb"><a href="agents-listing-grid.html">Agents
+                                                                    Listing</a></li>
+                                                        </ul>
+                                                        <ul class="nav-right">
+                                                            <li><a href="agent-details.html">Agents Details</a></li>
+                                                            <li><a href="about.html">About Us</a></li>
+                                                            <li><a href="blog.html">Blog Default</a></li>
+                                                            <li><a href="blog-details.html">Blog Details</a></li>
+                                                            <li class="no-mgb"><a href="contact-us.html">Contact Us</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-lg-3 col-md-6">
+                                                <div class="newsletters">
+                                                    <h3>Newsletters</h3>
+                                                    <p>Sign Up for Our Newsletter to get Latest Updates and Offers.
+                                                        Subscribe to receive news in your inbox.
+                                                    </p>
+                                                </div>
+                                                <form class="bloq-email mailchimp form-inline" method="post">
+                                                    <label for="subscribeEmail" class="error"></label>
+                                                    <div class="email">
+                                                        <input type="email" id="subscribeEmail" name="EMAIL"
+                                                            placeholder="Enter Your Email">
+                                                        <input type="submit" value="Subscribe">
+                                                        <p class="subscription-success"></p>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="second-footer">
+                                    <div class="container">
+                                        <p>2020 © Copyright - All Rights Reserved.</p>
+                                        <p>Made With <i class="fa fa-heart" aria-hidden="true"></i> By Code-Theme</p>
+                                    </div>
+                                </div>
+                            </footer>
+                        </div>
+                    </section>
+                    <!-- END SECTION PROPERTIES LISTING -->
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+</section>
+<!-- END SECTION PROPERTIES LISTING -->
+
 
 <ng-template #template>
     <div class="modal-header">
@@ -520,14 +1256,16 @@
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
                     <div class="rld-single-input left-icon searchhide">
-                        <input name="propertysearchinput" value="" [(ngModel)]="propertysearchinput" type="text" placeholder="Entry Landmark Location">
+                        <input name="propertysearchinput" value="" [(ngModel)]="propertysearchinput" type="text"
+                            placeholder="Entry Landmark Location">
                     </div>
                 </div>
 
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
                     <div class="rld-single-select">
-                        <select class="select single-select" name="propertyTypedropdown" [(ngModel)]="propertyTypeinput">
-                            <option value=""  >Property Type</option>
+                        <select class="select single-select" name="propertyTypedropdown"
+                            [(ngModel)]="propertyTypeinput">
+                            <option value="">Property Type</option>
                             <option *ngIf="propertyType == 'Commercial'" value="Land">Land</option>
                             <option *ngIf="propertyType == 'Commercial'" value="Office">Office</option>
                             <option *ngIf="propertyType == 'Commercial'" value="Retail">Retail</option>
@@ -542,7 +1280,7 @@
 
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
                     <div class="rld-single-select">
-                        <select class="select single-select"  name="minPriceInput" [(ngModel)]="minPriceInput">
+                        <select class="select single-select" name="minPriceInput" [(ngModel)]="minPriceInput">
                             <option value="">Min Price</option>
                             <option value=250000>25,000</option>
                             <option value=500000>50,000</option>
@@ -554,8 +1292,8 @@
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
                     <div class="rld-single-select">
-                        <select class="select single-select"  name="maxPriceInput" [(ngModel)]="maxPriceInput">
-                            <option value="" >Max Price</option>
+                        <select class="select single-select" name="maxPriceInput" [(ngModel)]="maxPriceInput">
+                            <option value="">Max Price</option>
                             <option value=0>0</option>
                             <option value=250000>25,0000</option>
                             <option value=500000>50,0000</option>
@@ -565,62 +1303,12 @@
                         </select>
                     </div>
                 </div>
-                <!-- <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Residential'">
-                    <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Beds</option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
-                            <option value=6>6</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Residential'">
-                    <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Baths</option>
-                            <option value=1>1</option>
-                            <option value=2>2</option>
-                            <option value=3>3</option>
-                            <option value=4>4</option>
-                            <option value=5>5</option>
-                            <option value=6>6</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Commercial'">
-                    <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Building Size</option>
-                            <option value=1>0 - 5,000 sqft</option>
-                            <option value=2>5,001 - 10,000 sqft</option>
-                            <option value=3>10,001 - 15,000 sqft</option>
-                            <option value=4>15,001 - 20,000 sqft</option>
-                            <option value=5>20,001 - 25,000 sqft</option>
-                        </select>
-                    </div>
-                </div>
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Commercial'">
-                    <div class="rld-single-select">
-                        <select class="select single-select">
-                            <option value="" disabled selected>Land Size</option>
-                            <option value=1>1+ acer</option>
-                            <option value=2>2+ acer</option>
-                            <option value=3>3+ acer</option>
-                            <option value=4>4+ acer</option>
-                            <option value=5>5+ acer</option>
-                            <option value=6>6+ acer</option>
-                        </select>
-                    </div>
-                </div> -->
+
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
-                    <a class="btn btn-yellow " (click)="search()"  (click)="modalRef.hide()" >Search</a>
+                    <a class="btn btn-yellow " (click)="search()" (click)="modalRef.hide()">Search</a>
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
-                    <a class="btn btn-yellow " >Reset</a>
+                    <a class="btn btn-yellow ">Reset</a>
                 </div>
 
             </div>

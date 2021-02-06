@@ -8,69 +8,86 @@ import { Observable, BehaviorSubject } from 'rxjs';
 export class PropertiesService {
   baseUrl = 'https://patelestateapi-dev.azurewebsites.net/api/';
 
-  constructor(private http: HttpClient) {
-    
+  constructor(private http: HttpClient) {}
+
+  public data = {};
+
+  setOption(option, value) {
+    this.data[option] = value;
   }
 
-  public data = {};  
-  
-  setOption(option, value) {      
-     this.data[option] = value;  
-   }  
-   
-   getOption() {  
-     return this.data;  
-   }
+  getOption() {
+    return this.data;
+  }
 
-   clearOption(){
+  clearOption() {
     this.data = {};
-   }
+  }
 
-  getCommercialProperties(top?,skip?,sort?,propertysearchinput?,propertyTypeinput?, minPriceInput?,maxPriceInput?,exclusive?): Observable<any> {
+  getCommercialProperties(
+    top?,
+    skip?,
+    sort?,
+    propertysearchinput?,
+    propertyTypeinput?,
+    minPriceInput?,
+    maxPriceInput?,
+    exclusive?,
+    forSale?,
+    minsqft?,
+    maxsqft?
+  ): Observable<any> {
     let params = new HttpParams();
-    if(top)
-    params = params.append('$top', top);
+    if (top) params = params.append('$top', top);
 
-    if(skip)
-    params = params.append('$skip', skip);
-    
-    if(sort)
-    params = params.append('$orderby', sort);
-    
-    var param ="";
+    if (skip) params = params.append('$skip', skip);
 
-    if(propertysearchinput)
-    if(param)
-    param = ' and city eq ' + "'" +propertysearchinput+"'";
-    else
-    param = 'city eq ' + "'" +propertysearchinput+"'";
+    if (sort) params = params.append('$orderby', sort);
 
-    if(propertyTypeinput)
-    if(param)
-    param = param.concat(' and propertyType eq ' + "'" + propertyTypeinput + "'");
-    else
-    param ='propertyType eq ' + "'" + propertyTypeinput + "'";
+    var param = '';
 
-    if(minPriceInput)
-    if(param)
-    param = param.concat(' and askingPrice gt ' + minPriceInput );
-    else
-    param ='askingPrice gt ' + minPriceInput ;
+    if (propertysearchinput) {
+      if (param) 
+      param =  param.concat(' or contains(city' + ",'"  + propertysearchinput + "')" + ' or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(state' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')");
 
-    if(maxPriceInput)
-    if(param)
-    param = param.concat(' and askingPrice lt ' + maxPriceInput );
-    else
-    param ='askingPrice lt ' + maxPriceInput ;
+      else 
+      param = 'contains(city' + ",'" + propertysearchinput + "')" + 'or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(state' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')";
 
-    if(exclusive)
-    if(param)
-    param = param.concat(' and exclusive eq ' + exclusive );
-    else
-    param ='exclusive eq ' + exclusive ;
+    }
 
-    if(param)
-    params = params.append('$filter',param);
+    if (propertyTypeinput)
+      if (param)
+        param = param.concat(
+          ' and propertyType eq ' + "'" + propertyTypeinput + "'"
+        );
+      else param = 'propertyType eq ' + "'" + propertyTypeinput + "'";
+
+    if (minPriceInput)
+      if (param) param = param.concat(' and askingPrice gt ' + minPriceInput);
+      else param = 'askingPrice gt ' + minPriceInput;
+
+    if (maxPriceInput)
+      if (param) param = param.concat(' and askingPrice lt ' + maxPriceInput);
+      else param = 'askingPrice lt ' + maxPriceInput;
+
+    if (exclusive)
+      if (param) param = param.concat(' and exclusive eq ' + exclusive);
+      else param = 'exclusive eq ' + exclusive;
+
+    if (forSale)
+      if (param)
+        param = param.concat(' and transactionType eq ' + "'" + forSale + "'");
+      else param = 'transactionType eq ' + "'" + forSale + "'";
+
+    if (minsqft)
+      if (param) param = param.concat(' and totalFinishedArea gt ' + minsqft);
+      else param = 'totalFinishedArea gt ' + minsqft;
+
+    if (maxsqft)
+      if (param) param = param.concat(' and totalFinishedArea lt ' + maxsqft);
+      else param = 'totalFinishedArea lt ' + maxsqft;
+
+    if (param) params = params.append('$filter', param);
 
     // params = params.append('$inlinecount',"allpages");
 
@@ -86,48 +103,88 @@ export class PropertiesService {
     );
   }
 
-  
-  getResidentialProperties(top?,skip?,sort?,propertysearchinput?,propertyTypeinput?, minPriceInput?,maxPriceInput?): Observable<any> {
+  getResidentialProperties(
+    top?,
+    skip?,
+    sort?,
+    propertysearchinput?,
+    propertyTypeinput?,
+    minPriceInput?,
+    maxPriceInput?,
+    exclusive?,
+    forSale?,
+    openHouse?,
+    bed?,
+    bath?,
+    minsqft?,
+    maxsqft?
+  ): Observable<any> {
     let params = new HttpParams();
 
-    if(top)
-    params = params.append('$top', top);
+    if (top) params = params.append('$top', top);
 
-    if(skip)
-    params = params.append('$skip', skip);
-    
-    if(sort)
-    params = params.append('$orderby', sort);
-    
-    var param ="";
+    if (skip) params = params.append('$skip', skip);
 
-    if(propertysearchinput)
-    if(param)
-    param = ' and city eq ' + "'" +propertysearchinput+"'";
-    else
-    param = 'city eq ' + "'" +propertysearchinput+"'";
+    if (sort) params = params.append('$orderby', sort);
 
-    if(propertyTypeinput)
-    if(param)
-    param = param.concat(' and propertyType eq ' + "'" + propertyTypeinput + "'");
-    else
-    param ='propertyType eq ' + "'" + propertyTypeinput + "'";
+    var param = '';
 
-    if(minPriceInput)
-    if(param)
-    param = param.concat(' and price gt ' + "'" + minPriceInput + "'");
-    else
-    param ='price gt ' + "'" + minPriceInput + "'" ;
+    if (propertysearchinput) {
+      if (param) 
+      param =  param.concat(' or contains(city' + ",'"  + propertysearchinput + "')" + ' or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(province' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')");
 
-    if(maxPriceInput)
-    if(param)
-    param = param.concat(' and price lt ' +  "'" + maxPriceInput + "'" );
-    else
-    param ='price lt ' +  "'" + maxPriceInput + "'";
+      else 
+      param = 'contains(city' + ",'" + propertysearchinput + "')" + 'or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(province' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')";
 
+    }
 
-    if(param)
-    params = params.append('$filter',param);
+    if (propertyTypeinput)
+      if (param)
+        param = param.concat(
+          ' and propertyType eq ' + "'" + propertyTypeinput + "'"
+        );
+      else param = 'propertyType eq ' + "'" + propertyTypeinput + "'";
+
+    if (minPriceInput)
+      if (param)
+        param = param.concat(' and price gt ' + "'" + minPriceInput + "'");
+      else param = 'price gt ' + "'" + minPriceInput + "'";
+
+    if (maxPriceInput)
+      if (param)
+        param = param.concat(' and price lt ' + "'" + maxPriceInput + "'");
+      else param = 'price lt ' + "'" + maxPriceInput + "'";
+
+    if (exclusive)
+      if (param) param = param.concat(' and exclusive eq ' + exclusive);
+      else param = 'exclusive eq ' + exclusive;
+
+    if (forSale)
+      if (param)
+        param = param.concat(' and transactionType eq ' + "'" + forSale + "'");
+      else param = 'transactionType eq ' + "'" + forSale + "'";
+
+    if (openHouse)
+      if (param) param = param.concat(' and openHouse eq ' + openHouse);
+      else param = 'openHouse eq ' + openHouse;
+
+    if (bed)
+      if (param) param = param.concat(' and bedroomsTotal gt ' + bed);
+      else param = 'bedroomsTotal gt ' + bed;
+
+    if (bath)
+      if (param) param = param.concat(' and bathroomTotal gt ' + bath);
+      else param = 'bathroomTotal gt ' + bath;
+
+    if (minsqft)
+      if (param) param = param.concat(' and totalFinishedArea gt ' + "'" + minsqft + "'");
+      else param = 'totalFinishedArea gt ' + "'" + minsqft + "'";
+
+    if (maxsqft)
+      if (param) param = param.concat(' and totalFinishedArea lt ' + "'" + maxsqft + "'");
+      else param = 'totalFinishedArea lt ' + "'" + maxsqft + "'";
+
+    if (param) params = params.append('$filter', param);
 
     return this.http.get<any[]>(this.baseUrl + 'ResidentialProperty', {
       observe: 'response',
@@ -141,54 +198,89 @@ export class PropertiesService {
     );
   }
 
-  getResidentialMap(top?,skip?,sort?,propertysearchinput?,propertyTypeinput?, minPriceInput?,maxPriceInput?): Observable<any> {
+  getResidentialMap(
+    top?,
+    skip?,
+    sort?,
+    propertysearchinput?,
+    propertyTypeinput?,
+    minPriceInput?,
+    maxPriceInput?,
+    exclusive?,
+    forSale?,
+    openHouse?,
+    bed?,
+    bath?,
+    minsqft?,
+    maxsqft?
+  ): Observable<any> {
     let params = new HttpParams();
 
-    if(top)
-    params = params.append('$top', top);
+    if (top) params = params.append('$top', top);
 
-    if(skip)
-    params = params.append('$skip', skip);
-    
+    if (skip) params = params.append('$skip', skip);
 
-    if(sort)
-    params = params.append('$orderby', sort);
-    
-    var param ="";
+    if (sort) params = params.append('$orderby', sort);
 
-    if(propertysearchinput)
-    if(param)
-    param = ' and city eq ' + "'" +propertysearchinput+"'";
-    else
-    param = 'city eq ' + "'" +propertysearchinput+"'";
+    var param = '';
 
-    if(propertyTypeinput)
-    if(param)
-    param = param.concat(' and propertyType eq ' + "'" + propertyTypeinput + "'");
-    else
-    param ='propertyType eq ' + "'" + propertyTypeinput + "'";
+    // if (propertysearchinput) {
+    //   if (param) 
+    //   param =  param.concat(' or contains(city' + ",'"  + propertysearchinput + "')" + ' or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(province' + ",'" + propertysearchinput + "')");
 
-    if(minPriceInput)
-    if(param)
-    param = param.concat(' and askingPrice gt ' + minPriceInput );
-    else
-    param ='askingPrice gt ' + minPriceInput ;
+    //   else 
+    //   param = 'contains(city' + ",'" + propertysearchinput + "')" + 'or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(province' + ",'" + propertysearchinput + "')";
 
-    if(maxPriceInput)
-    if(param)
-    param = param.concat(' and askingPrice lt ' + maxPriceInput );
-    else
-    param ='askingPrice lt ' + maxPriceInput ;
+    // }
 
+    if (propertyTypeinput)
+      if (param)
+        param = param.concat(
+          ' and propertyType eq ' + "'" + propertyTypeinput + "'"
+        );
+      else param = 'propertyType eq ' + "'" + propertyTypeinput + "'";
 
-    if(param)
-    params = params.append('$filter',param);
-  
+    if (minPriceInput)
+      if (param) param = param.concat(' and askingPrice gt ' + minPriceInput);
+      else param = 'askingPrice gt ' + minPriceInput;
+
+    if (maxPriceInput)
+      if (param) param = param.concat(' and askingPrice lt ' + maxPriceInput);
+      else param = 'askingPrice lt ' + maxPriceInput;
+
+    if (exclusive)
+      if (param) param = param.concat(' and exclusive eq ' + exclusive);
+      else param = 'exclusive eq ' + exclusive;
+
+    if (forSale)
+      if (param) param = param.concat(' and transactionType eq ' + forSale);
+      else param = 'transactionType eq ' + forSale;
+
+    if (openHouse)
+      if (param) param = param.concat(' and openHouse eq ' + openHouse);
+      else param = 'openHouse eq ' + openHouse;
+
+    if (bed)
+      if (param) param = param.concat(' and bedroomsTotal eq ' + bed);
+      else param = 'bedroomsTotal eq ' + bed;
+
+    if (bath)
+      if (param) param = param.concat(' and bathroomTotal eq ' + bath);
+      else param = 'bathroomTotal eq ' + bath;
+
+    if (minsqft)
+      if (param) param = param.concat(' and totalFinishedArea gt ' + minsqft);
+      else param = 'totalFinishedArea gt ' + minsqft;
+
+    if (maxsqft)
+      if (param) param = param.concat(' and totalFinishedArea lt ' + maxsqft);
+      else param = 'totalFinishedArea lt ' + maxsqft;
+
+    if (param) params = params.append('$filter', param);
+
     return this.http.get<any[]>(this.baseUrl + 'ResidentialProperty/map', {
       observe: 'response',
       params,
     });
   }
-
-  
 }

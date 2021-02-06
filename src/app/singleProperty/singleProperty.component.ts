@@ -69,19 +69,34 @@ export class SinglePropertyComponent implements OnInit {
           (element.big = element.photoPath);
       });
       this.galleryImages = this.property.commercialImages;
-    } else {
+      this.property.type = 'commercial';
+
+    } else if(this.property.residentialImages) {
       this.property.residentialImages.forEach((element) => {
         (element.small = element.photoPath),
           (element.medium = element.photoPath),
           (element.big = element.photoPath);
       });
       this.galleryImages = this.property.residentialImages;
+      this.property.type = 'residential';
+
+    } else {
+     
+      this.galleryImages =  [{
+        small: '../assets/images/feature-properties/fp-1.jpg',
+        medium: '../assets/images/feature-properties/fp-1.jpg',
+        big: '../assets/images/feature-properties/fp-1.jpg'
+      }]
+
     }
     this.getsimilarproperty(3, 0);
   }
 
   getsimilarproperty(top, skip) {
-    this.propertiesService.getCommercialProperties(top, skip).subscribe(
+
+    if(this.property.type == 'residential')
+    {
+    this.propertiesService.getResidentialProperties(top, skip, '', '', this.property.propertyType).subscribe(
       (properties: any) => {
         this.properties = properties.body;
         console.log(properties);
@@ -90,6 +105,19 @@ export class SinglePropertyComponent implements OnInit {
         console.log(error);
       }
     );
+    }
+    else if(this.property.type == 'commercial')
+    {
+      this.propertiesService.getCommercialProperties(top, skip, '', '', this.property.propertyType).subscribe(
+        (properties: any) => {
+          this.properties = properties.body;
+          console.log(properties);
+        },
+        (error) => {
+          console.log(error);
+        }
+      );
+    }
   }
 
   getSingleProperty() {

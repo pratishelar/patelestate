@@ -26,6 +26,12 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { FormsModule } from '@angular/forms';
 import { NgxPaginationModule } from 'ngx-pagination';
+// import { PopoverModule } from 'ngx-bootstrap/popover';
+import { NgxSliderModule } from '@angular-slider/ngx-slider';
+import {PopoverModule} from "ngx-smart-popover";
+import { ButtonsModule } from 'ngx-bootstrap/buttons';
+import { Ng2ImgMaxModule } from 'ng2-img-max';
+import { LayoutModule } from '@angular/cdk/layout';
 
 @NgModule({
   declarations: [					
@@ -53,8 +59,13 @@ import { NgxPaginationModule } from 'ngx-pagination';
     ModalModule.forRoot(),
     NgxGalleryModule,
     PaginationModule.forRoot(),
+    PopoverModule,
     FormsModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    NgxSliderModule,
+    ButtonsModule.forRoot(),
+    Ng2ImgMaxModule,
+    LayoutModule
   ],
   providers: [
     PropertiesService, 

@@ -26,7 +26,7 @@ export class HomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit() {
-    this.getResidentialProperty();
+    this.getCommercialProperty();
   }
 
   ngOnDestroy() {}
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit, OnDestroy {
     this.display = mode;
   }
 
-  getResidentialProperty() {
+  getCommercialProperty() {
     this.propertiesService.getCommercialProperties("6", "3", "", "", "", "", "", "true").subscribe(
       (properties: any) => {
         this.properties = properties.body;

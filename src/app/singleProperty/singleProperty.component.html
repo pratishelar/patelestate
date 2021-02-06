@@ -39,7 +39,7 @@
                           <div class="listing-title-bar">
                             <h4 *ngIf="property.askingprice">$ {{property.askingprice}}</h4>
                             <h4 *ngIf="property.price">$ {{property.price}}</h4>
-                            <h4 *ngIf="!(property.baseRent && property.baseRent == 'N/A')">$ {{property.baseRent}}</h4>
+                            <h4 *ngIf="property.baseRent && property.baseRent != 'N/A'">$ {{property.baseRent}}</h4>
                             
                             <div class="mt-0">
                               <a class="listing-address">
@@ -360,7 +360,7 @@
           <div class="single widget">
 
             <!-- end author-verified-badge -->
-            <div class="sidebar">
+            <div class="sidebar mt-5" >
               <div class="widget-boxed mt-33 mt-5">
                 <div class="widget-boxed-header">
                   <h4>Contact Information</h4>
