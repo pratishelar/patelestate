@@ -20,7 +20,7 @@ export class SinglePropertyComponent implements OnInit {
   galleryImages: NgxGalleryImage[];
 
   // google maps zoom level
-  zoom: number = 10;
+  zoom: number = 15;
 
   // initial center position for the map
   lat: number = 59.37570263036942;
@@ -89,7 +89,7 @@ export class SinglePropertyComponent implements OnInit {
       }]
 
     }
-    this.getsimilarproperty(3, 0);
+    this.getsimilarproperty(6, 0);
   }
 
   getsimilarproperty(top, skip) {

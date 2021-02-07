@@ -117,7 +117,9 @@ export class PropertiesService {
     bed?,
     bath?,
     minsqft?,
-    maxsqft?
+    maxsqft?,
+    forCloser?,
+    basement?
   ): Observable<any> {
     let params = new HttpParams();
 
@@ -183,6 +185,15 @@ export class PropertiesService {
     if (maxsqft)
       if (param) param = param.concat(' and totalFinishedArea lt ' + "'" + maxsqft + "'");
       else param = 'totalFinishedArea lt ' + "'" + maxsqft + "'";
+
+    if (forCloser)
+      if (param) param = param.concat(' and forCloser eq ' + forCloser);
+      else param = 'forCloser eq ' + forCloser;
+
+    if (basement)
+      if (param) param = param.concat(' and basement eq ' + basement);
+      else param = 'basement eq ' + basement;
+
 
     if (param) params = params.append('$filter', param);
 

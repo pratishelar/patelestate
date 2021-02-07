@@ -45,4 +45,21 @@
 }
   
   
+
+.img {
+  width: 550px;
+  height: 230px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
   
+.portfolio .project-head:before {
+  position: relative !important;
+
+}
+
+.gallery-wrapper {
+  text-align: center;
+  margin-top: 20px;
+}

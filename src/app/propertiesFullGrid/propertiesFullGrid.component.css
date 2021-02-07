@@ -467,7 +467,7 @@ section.google-map-right {
 }
 .radio input:checked + span:before {
   transform: scale(1.04);
-  background: #5D9BFB;
+  background: #fad20b;
 }
 .radio input:checked + span:after {
   transform: scale(0.4);
@@ -493,7 +493,39 @@ section.google-map-right {
 
 
 
+.bedbathselector{
+  background-color: white;
+    color: black;
+    border: 1px solid #e7e7e7;
+}
 
+.bedbathselector:hover{
+  color: black;
+  background-color: #fad20b;
+  border-color: #fad20b;
+}
+
+.bedbathselector:not(:disabled):not(.disabled).active, .btn-success:not(:disabled):not(.disabled):active, .show>.btn-success.dropdown-toggle {
+  color: black;
+  background-color: #fad20b;
+  border-color: #fad20b;
+}
+
+::ng-deep  .ngx-slider .ngx-slider-pointer {
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  top: -14px;
+  background-color: #fad20b !important;
+  z-index: 3;
+  border-radius: 16px;
+}
+
+::ng-deep  .ngx-slider .ngx-slider-selection {
+  z-index: 2;
+  background: #ffd400 !important;
+  border-radius: 2px;
+}
 
 
 ul.ks-cboxtags {

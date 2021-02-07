@@ -4,6 +4,8 @@ import {
   TemplateRef,
   AfterViewInit,
   OnDestroy,
+  ViewChild,
+  ElementRef,
 } from '@angular/core';
 import { PropertiesService } from '../_services/properties.service';
 import { ActivatedRoute } from '@angular/router';
@@ -28,6 +30,7 @@ import {
   styleUrls: ['./propertiesFullGrid.component.css'],
 })
 export class PropertiesFullGridComponent implements OnInit, OnDestroy {
+  @ViewChild('divToScroll') divToScroll: ElementRef;
   properties: any = [];
   modalRef: BsModalRef;
   isShown: boolean;
@@ -50,16 +53,18 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
 
   // search
   propertysearchinput = '';
-  propertyTypeinput:any = '';
+  propertyTypeinput: any = '';
   forSale = '';
   exclusive = '';
   openHouse: any = '';
+  forCloser: any = '';
   bed: number;
   bath: number;
   minPriceInput: any = '';
   maxPriceInput: any = '';
-  minSqft:any = '';
-  maxSqft:any = '';
+  minSqft: any = '';
+  maxSqft: any = '';
+  basement: any = '';
 
   // initial center position for the map
   lat: number = 53.637115;
@@ -74,7 +79,6 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     totalItems: 1000,
     id: 'server',
   };
-
 
   protected map: any;
 
@@ -92,7 +96,6 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
       }
     },
   };
-
 
   styles = [
     // {
@@ -146,15 +149,15 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     //     }
     //   ]
     // },
-    {
-      "featureType": "landscape.natural",
-      "elementType": "geometry",
-      "stylers": [
-        {
-          "color": "#f7f9f9"
-        }
-      ]
-    },
+    // {
+    //   "featureType": "landscape.natural",
+    //   "elementType": "geometry",
+    //   "stylers": [
+    //     {
+    //       "color": "#ebfcfc"
+    //     }
+    //   ]
+    // },
     // {
     //   "featureType": "poi",
     //   "elementType": "geometry",
@@ -309,6 +312,7 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     //   ]
     // }
   ];
+
   previous;
 
   constructor(
@@ -377,22 +381,32 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
 
   clickedMarker(infowindow) {
     if (this.previous) {
-        this.previous.close();
+      this.previous.close();
     }
     this.previous = infowindow;
- }
+  }
+
+  forCloserClick() {
+    this.forCloser = !this.forCloser;
+    this.sortSearchPagination();
+  }
+
+  basementClick() {
+    this.basement = !this.forCloser;
+    this.sortSearchPagination();
+  }
 
   pricechange(event) {
     console.log('Max', this.maxPriceInput);
     this.sortSearchPagination();
   }
 
-  onSearchChange(){
+  onSearchChange() {
     this.sortSearchPagination();
   }
 
   propertyTypeclick() {
-  //  console.log( this.propertyTypeinput);
+    //  console.log( this.propertyTypeinput);
     // this.propertyTypeinput = type;
     this.sortSearchPagination();
   }
@@ -422,24 +436,44 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     this.sortSearchPagination();
   }
 
-  changesqft(){
+  changesqft() {
     this.sortSearchPagination();
   }
 
   clearFilter() {
-    if(this.propertysearchinput || this.propertyTypeinput || this.minPriceInput 
-      || this.maxPriceInput || this.exclusive || this.forSale || this.openHouse)
-      {
-    this.propertysearchinput = '',
-      this.propertyTypeinput = '',
-      this.minPriceInput = '',
-      this.maxPriceInput = '',
-      this.exclusive = '',
-      this.forSale = '',
-      this.openHouse = ''
+    if (
+      this.propertysearchinput ||
+      this.propertyTypeinput ||
+      this.minPriceInput ||
+      this.maxPriceInput ||
+      this.exclusive ||
+      this.forSale ||
+      this.openHouse ||
+      this.minSqft ||
+      this.maxSqft ||
+      this.openHouse ||
+      this.basement ||
+      this.forCloser ||
+      this.bath ||
+      this.bed
+    ) {
+      this.propertysearchinput = '';
+      this.propertyTypeinput = '';
+      this.minPriceInput = '';
+      this.maxPriceInput = '';
+      this.exclusive = '';
+      this.forSale = '';
+      this.openHouse = '';
+      this.minSqft = '';
+      this.maxSqft = '';
+      this.openHouse = '';
+      this.basement = '';
+      this.forCloser = '';
+      this.bath = null;
+      this.bed = null;
 
       this.sortSearchPagination();
-      }
+    }
   }
 
   toggleShowMap() {
@@ -481,9 +515,9 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
   }
   protected mapReady(map) {
     this.map = map;
-  //   if (this.previous) {
-  //     this.previous.close();
-  // }
+    //   if (this.previous) {
+    //     this.previous.close();
+    // }
   }
 
   idle($event: any) {
@@ -514,7 +548,9 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     this.skip = (number - 1) * this.config.itemsPerPage;
     this.config.currentPage = number;
     this.sortSearchPagination();
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
+    this.divToScroll.nativeElement.scrollTo(0, 0);
+  
   }
 
   sortSearchPagination() {
@@ -558,7 +594,9 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
           this.bed,
           this.bath,
           this.minSqft,
-          this.maxSqft
+          this.maxSqft,
+          this.forCloser,
+          this.basement
         )
         .subscribe(
           (properties: any) => {

@@ -15,13 +15,13 @@
 }
 
 .active {
-  border-bottom: 2px solid #fad210;
+  border-bottom: 3px solid black;
 }
 
 nav ul a:hover {
   /* color: white; */
   /* background-color: black; */
-  border-bottom: 2px solid #fad210;
+  border-bottom: 3px solid black;
 
 }
 
@@ -54,4 +54,8 @@ nav ul a:hover {
   ::ng-deep .logoinside {
     display: none;
   }
+}
+
+.bg-light {
+  background-color: #ffffff!important;
 }

@@ -435,9 +435,7 @@
                                             <span>Non Exclusive</span>
                                         </label>
                                     </div>
-
                                 </div>
-
                                 <!-- <div class="col-lg-12">
 
                                         <a class="proptype forsalebtn" (click)="exclusiveclick('')">
@@ -463,8 +461,8 @@
                             </div>
                         </popover-content>
 
-                        <button type="button" [popover]="Exclusive" class="btn btn-yellow btnfilter" popoverSize="small"
-                            [popoverOnHover]="false">
+                        <button type="button" [popover]="Exclusive" [ngClass]="{borderbtn: exclusive}"
+                            class="btn btn-yellow btnfilter" popoverSize="small" [popoverOnHover]="false">
                             <!-- {{exclusive ? "Exclusive" : "Non Exclusive" }}  --> Exclusive
                         </button>
 
@@ -483,13 +481,12 @@
                                     <div class="form-inline">
                                         <div class="btn-group" btnRadioGroup name="bed" (click)="bedclick(bed)"
                                             [(ngModel)]="bed" style="width: 100%;">
-                                            <label class="btn btn-success" btnRadio="">any</label>
-                                            <label class="btn btn-success" btnRadio=0>1+</label>
-                                            <label class="btn btn-success" btnRadio=1>2+</label>
-                                            <label class="btn btn-success" btnRadio=2>3+</label>
-                                            <label class="btn btn-success" btnRadio=3>4+</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio="">any</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio=0>1+</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio=1>2+</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio=2>3+</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio=3>4+</label>
                                         </div>
-
                                     </div>
                                 </div>
                                 <div class="col-lg-12" style="margin-top:10px">
@@ -497,22 +494,20 @@
                                     <div class="form-inline">
                                         <div class="btn-group" btnRadioGroup name="bath" (click)="bathclick(bath)"
                                             [(ngModel)]="bath" style="width: 100%;">
-                                            <label class="btn btn-success" btnRadio="">any</label>
-                                            <label class="btn btn-success" btnRadio=0>1+</label>
-                                            <label class="btn btn-success" btnRadio=1>2+</label>
-                                            <label class="btn btn-success" btnRadio=2>3+</label>
-                                            <label class="btn btn-success" btnRadio=3>4+</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio="">any</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio=0>1+</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio=1>2+</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio=2>3+</label>
+                                            <label class="btn btn-success bedbathselector" btnRadio=3>4+</label>
                                         </div>
-
                                     </div>
-
                                 </div>
                             </div>
                         </popover-content>
 
-                        <button type="button" [popover]="bedbath" class="btn btn-yellow btnfilter" popoverSize="small"
-                            [popoverOnHover]="false"> Bed Bath </button>
-
+                        <button type="button" [popover]="bedbath" [ngClass]="{borderbtn: (bed || bath)}"
+                            class="btn btn-yellow btnfilter" popoverSize="small" [popoverOnHover]="false"> Bed Bath
+                        </button>
                     </div>
                 </div>
 
@@ -529,12 +524,11 @@
                             </div>
                         </popover-content>
 
-                        <button type="button" [popover]="price" class="btn btn-yellow btnfilter"
+                        <button type="button" [popover]="price"
+                            [ngClass]="{borderbtn: (minPriceInput || maxPriceInput)}" class="btn btn-yellow btnfilter"
                             popoverSize="medium-small" [popoverOnHover]="false" popoverPlacement="bottom"> Price
                         </button>
-
                     </div>
-
                 </div>
 
                 <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
@@ -542,7 +536,6 @@
                         <popover-content #more [closeOnClickOutside]="true" [animation]="true">
                             <div class="row">
                                 <div class="col-lg-12">
-
 
                                     <div class="row" *ngIf="propertyType == 'Residential'">
                                         <div class="col-lg-12">
@@ -552,29 +545,22 @@
                                                 <li><input type="checkbox" id="checkboxOne" (click)="openhouseclick()"
                                                         [(ngModel)]="openHouse"><label for="checkboxOne">Open
                                                         house</label></li>
-
                                             </ul>
-
-
                                         </div>
-
                                     </div>
 
 
-                                    <div class="row" *ngIf="propertyType == 'Commercial'">
+                                    <div class="row" *ngIf="propertyType == 'Residential'">
 
                                         <div class="col-lg-12">
                                             <p style="color: black;"> <strong>ForClouser</strong></p>
 
                                             <ul class="ks-cboxtags">
-                                                <li><input id="checkboxTwo" type="checkbox"><label
+                                                <li><input id="checkboxTwo" (click)="forCloserClick()"
+                                                        [(ngModel)]="forCloser" type="checkbox"><label
                                                         for="checkboxTwo">ForClouser</label></li>
-
                                             </ul>
-
-
                                         </div>
-
                                     </div>
 
                                     <p style="color: black;"> <strong>Square feet</strong></p>
@@ -604,7 +590,6 @@
 
                                         </div>
                                         <div class="col-lg-6">
-
                                             <div class="rld-single-select">
                                                 <select class="select single-select" (change)="changesqft()"
                                                     name="maxSqrft" [(ngModel)]="maxSqft">
@@ -625,34 +610,28 @@
                                                     <option value='20000'>20000</option>
                                                 </select>
                                             </div>
-
                                         </div>
-
                                     </div>
 
 
                                     <p style="color: black;"> <strong>Basement</strong></p>
                                     <div class="row" *ngIf="propertyType == 'Residential'">
                                         <div class="col-lg-12">
-
                                             <ul class="ks-cboxtags">
-                                                <li><input id="checkboxTwo" type="checkbox"><label
-                                                        for="checkboxTwo">Basement</label></li>
+                                                <li><input id="checkboxThree" (click)="basementClick()"
+                                                        [(ngModel)]="basement" type="checkbox"><label
+                                                        for="checkboxThree">Basement</label></li>
 
                                             </ul>
-
-
                                         </div>
-
                                     </div>
-
-
                                 </div>
                             </div>
                         </popover-content>
 
                         <button type="button" [popover]="more" class="btn btn-yellow btnfilter"
-                            popoverSize="medium-small" [popoverOnHover]="false" popoverPlacement="bottom"> More
+                            popoverSize="medium-small" [ngClass]="{borderbtn: (maxSqft || minSqft || openHouse || basement || forCloser)}"
+                            [popoverOnHover]="false" popoverPlacement="bottom"> More
                         </button>
 
                     </div>
@@ -743,14 +722,14 @@
                 </agm-map>
             </aside>
 
-            <div class=" col-md-12 blog-pots pr-0 " [ngClass]="(!isShown)?'col-lg-6 col-xl-6':'col-lg-12 col-xl-12'"
+            <div class=" col-md-12 blog-pots pr-0 "  [ngClass]="(!isShown)?'col-lg-6 col-xl-6':'col-lg-12 col-xl-12'"
                 style="padding-left: 0px;">
                 <!-- Block heading Start-->
                 <div class="inner-pages">
                     <!-- START SECTION PROPERTIES LISTING -->
-                    <section class="properties-right featured portfolio blog">
+                    <section class="properties-right featured portfolio blog" >
                         <div class="container-fluid" style="overflow: auto;
-                        max-height: 86vh;">
+                        max-height: 86vh;"  #divToScroll>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 blog-pots">
                                     <!-- Block heading Start-->
@@ -799,7 +778,7 @@
                                         <div class="item col-md-6 col-xs-12 landscapes sale"
                                             [ngClass]="(!isShown)?'col-lg-6':'col-lg-3'"
                                             *ngFor="let property of properties | paginate: config"
-                                            style="padding: 0px 4px;">
+                                            style="padding: 0px 4px;" >
                                             <div class="project-single">
                                                 <div class="project-inner project-head">
                                                     <!-- <div class="project-bottom">
@@ -1135,101 +1114,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="has-text-centered" style="text-align: center;">
+                            <div class="has-text-centered mt-4 mb-4" style="text-align: center;">
                                 <pagination-controls id="server" [autoHide]="true" (pageChange)="onPageChange($event)">
                                 </pagination-controls>
                             </div>
 
-                            <footer class="first-footer">
-                                <div class="top-footer">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="netabout">
-                                                    <a href="index.html" class="logo">
-                                                        <img src="../assets/images/logo-footer.svg" alt="netcom">
-                                                    </a>
-                                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum
-                                                        incidunt architecto soluta laboriosam,
-                                                        perspiciatis, aspernatur officiis esse.</p>
-                                                </div>
-                                                <div class="contactus">
-                                                    <ul>
-                                                        <li>
-                                                            <div class="info">
-                                                                <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                                                <p class="in-p">95 South Park Avenue, USA</p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="info">
-                                                                <i class="fa fa-phone" aria-hidden="true"></i>
-                                                                <p class="in-p">+456 875 369 208</p>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="info">
-                                                                <i class="fa fa-envelope" aria-hidden="true"></i>
-                                                                <p class="in-p ti">support@findhouses.com</p>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4 col-md-6">
-                                                <div class="navigation">
-                                                    <h3>Navigation</h3>
-                                                    <div class="nav-footer">
-                                                        <ul>
-                                                            <li><a href="index.html">Home One</a></li>
-                                                            <li><a href="properties-right-sidebar.html">Properties
-                                                                    Right</a></li>
-                                                            <li><a href="properties-full-list.html">Properties List</a>
-                                                            </li>
-                                                            <li><a href="properties-details.html">Property Details</a>
-                                                            </li>
-                                                            <li class="no-mgb"><a href="agents-listing-grid.html">Agents
-                                                                    Listing</a></li>
-                                                        </ul>
-                                                        <ul class="nav-right">
-                                                            <li><a href="agent-details.html">Agents Details</a></li>
-                                                            <li><a href="about.html">About Us</a></li>
-                                                            <li><a href="blog.html">Blog Default</a></li>
-                                                            <li><a href="blog-details.html">Blog Details</a></li>
-                                                            <li class="no-mgb"><a href="contact-us.html">Contact Us</a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                            </div>
-
-                                            <div class="col-lg-3 col-md-6">
-                                                <div class="newsletters">
-                                                    <h3>Newsletters</h3>
-                                                    <p>Sign Up for Our Newsletter to get Latest Updates and Offers.
-                                                        Subscribe to receive news in your inbox.
-                                                    </p>
-                                                </div>
-                                                <form class="bloq-email mailchimp form-inline" method="post">
-                                                    <label for="subscribeEmail" class="error"></label>
-                                                    <div class="email">
-                                                        <input type="email" id="subscribeEmail" name="EMAIL"
-                                                            placeholder="Enter Your Email">
-                                                        <input type="submit" value="Subscribe">
-                                                        <p class="subscription-success"></p>
-                                                    </div>
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="second-footer">
-                                    <div class="container">
-                                        <p>2020 © Copyright - All Rights Reserved.</p>
-                                        <p>Made With <i class="fa fa-heart" aria-hidden="true"></i> By Code-Theme</p>
-                                    </div>
-                                </div>
-                            </footer>
+                          <app-footer></app-footer>
                         </div>
                     </section>
                     <!-- END SECTION PROPERTIES LISTING -->

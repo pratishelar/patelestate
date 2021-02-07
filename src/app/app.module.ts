@@ -32,15 +32,19 @@ import {PopoverModule} from "ngx-smart-popover";
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { LayoutModule } from '@angular/cdk/layout';
+import { NavbarComponent } from './navbar/navbar.component';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
-  declarations: [					
+  declarations: [							
     AppComponent,
       PropertiesFullGridComponent,
       HomeComponent,
       SinglePropertyComponent,
       LoginComponent,
-      RegisterComponent
+      RegisterComponent,
+      NavbarComponent,
+      FooterComponent
    ],
   imports: [
     BrowserModule,
