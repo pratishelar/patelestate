@@ -3,9 +3,9 @@
     <section class="search-sec" style="border-bottom: 1px solid #e8e8e8;">
         <div class="container rld-main-search" style="max-width: 90% !important;">
 
-            <div class="row align-items-center justify-content-center">
-                <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12">
-                    <div class="input-group" style="margin-top: -2px;">
+            <div class="row align-items-center justify-content-center ">
+                <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 btnmobhide">
+                    <div class="input-group"  style="margin-top: -2px;">
                         <input class="form-control py-2 border-right-0 border searchinput" name="propertysearchinput"
                             value="" [(ngModel)]="propertysearchinput" style="border-radius: 50px 0px 0px 50px;"
                             placeholder="Entry Landmark Location" type="search" id="example-search-input">
@@ -18,13 +18,13 @@
                     </div>
                 </div>
 
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 btnfilter">
                     <div class="rld-single-select">
                         <popover-content #propertytype placement="bottom" [closeOnClickOutside]="true">
                             <div *ngIf="propertyType == 'Commercial'">
                                 <p style="color: black; margin-left:-10px"> <strong>Commercial</strong></p>
                                 <div class="row">
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_01" name="propertyTypeinput" [value]="''"
                                             [(ngModel)]="propertyTypeinput" (ngModelChange)="propertyTypeclick('')">
                                         <label class="lable" for="control_01">
@@ -35,7 +35,7 @@
                                             <p class="proptitle">All</p>
                                         </label>
                                     </div>
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_02" name="propertyTypeinput" [value]="'Land'"
                                             [(ngModel)]="propertyTypeinput" (ngModelChange)="propertyTypeclick('Land')">
                                         <label class="lable" for="control_02">
@@ -46,7 +46,7 @@
                                             <p class="proptitle">Land</p>
                                         </label>
                                     </div>
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_03" name="propertyTypeinput" [value]="'Office'"
                                             [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Office')">
@@ -58,7 +58,7 @@
                                             <p class="proptitle">Office</p>
                                         </label>
                                     </div>
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_04" name="propertyTypeinput"
                                             [value]="'Industrial'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Industrial')">
@@ -76,7 +76,7 @@
 
                                 <p style="color: black; margin-left:-10px"> <strong>Business</strong></p>
                                 <div class="row">
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_05" name="propertyTypeinput"
                                             [value]="'Autobody Workshop'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Autobody Workshop')">
@@ -88,7 +88,7 @@
                                             <p class="proptitle">Autobody</p>
                                         </label>
                                     </div>
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_06" name="propertyTypeinput"
                                             [value]="'Bottle Depot'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Bottle Depot')">
@@ -100,7 +100,7 @@
                                             <p class="proptitle">Bottle Depot</p>
                                         </label>
                                     </div>
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_07" name="propertyTypeinput"
                                             [value]="'Camp Ground'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Camp Ground')">
@@ -112,7 +112,7 @@
                                             <p class="proptitle">Camp Ground</p>
                                         </label>
                                     </div>
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_08" name="propertyTypeinput"
                                             [value]="'Car Wash'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Car Wash')">
@@ -125,7 +125,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_09" name="propertyTypeinput"
                                             [value]="'Convenience Store'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Convenience Store')">
@@ -138,7 +138,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_10" name="propertyTypeinput"
                                             [value]="'Day Care'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Day Care')">
@@ -151,7 +151,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_11" name="propertyTypeinput"
                                             [value]="'Gas Station'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Gas Station')">
@@ -164,7 +164,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_12" name="propertyTypeinput"
                                             [value]="'Liquor Store'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Liquor Store')">
@@ -177,7 +177,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_13" name="propertyTypeinput"
                                             [value]="'Personal Services'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Personal Services')">
@@ -191,7 +191,7 @@
                                     </div>
 
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_14" name="propertyTypeinput" [value]="'Pub/Bar'"
                                             [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Pub/Bar')">
@@ -205,7 +205,7 @@
                                     </div>
 
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_15" name="propertyTypeinput"
                                             [value]="'Recreation'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Recreation')">
@@ -219,7 +219,7 @@
                                     </div>
 
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_16" name="propertyTypeinput"
                                             [value]="'Restaurant'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Restaurant')">
@@ -232,7 +232,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_17" name="propertyTypeinput"
                                             [value]="'Retail and Wholesale'" [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Retail and Wholesale')">
@@ -245,7 +245,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_18" name="propertyTypeinput" [value]="'Rv Park'"
                                             [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Rv Park')">
@@ -258,7 +258,7 @@
                                         </label>
                                     </div>
 
-                                    <div class="col-lg-3" style="padding: 0 7px;">
+                                    <div class="col-lg-3" style="padding: 0 10px;">
                                         <input type="radio" id="control_19" name="propertyTypeinput" [value]="'Other'"
                                             [(ngModel)]="propertyTypeinput"
                                             (ngModelChange)="propertyTypeclick('Other')">
@@ -342,7 +342,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 btnfilter">
                     <div class="rld-single-select">
 
                         <popover-content #Forsale [closeOnClickOutside]="true">
@@ -374,34 +374,7 @@
 
                                 </div>
 
-                                <!-- <div class="col-lg-12">
-                                        <a class="proptype forsalebtn" (click)="forsaleclick('')">
-                                            <span class="box">
-                                                <span class="proptitle forsalelable">All</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <a class="proptype forsalebtn" (click)="forsaleclick('For sale')">
-                                            <span class="box">
-                                                <span class="proptitle forsalelable">For Sale</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <a class="proptype forsalebtn" (click)="forsaleclick('For lease')">
-                                            <span class="box">
-                                                <span class="proptitle forsalelable">For Lease</span>
-                                            </span>
-                                        </a>
-                                    </div>
-                                    <div class="col-lg-12">
-                                        <a class="proptype forsalebtn" (click)="forsaleclick('For Sale & Lease')">
-                                            <span class="box">
-                                                <span class="proptitle forsalelable">For Sale & Lease</span>
-                                            </span>
-                                        </a>
-                                    </div> -->
+                               
                             </div>
                         </popover-content>
 
@@ -412,7 +385,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 btnfilter">
                     <div class="rld-single-select">
                         <popover-content #Exclusive [closeOnClickOutside]="true">
                             <div class="row">
@@ -471,7 +444,7 @@
 
 
 
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12" *ngIf="propertyType == 'Residential'">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 btnfilter" *ngIf="propertyType == 'Residential'">
                     <div class="rld-single-select">
 
                         <popover-content #bedbath placement="bottom" [closeOnClickOutside]="true">
@@ -512,7 +485,7 @@
                 </div>
 
 
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 btnfilter">
                     <div class="rld-single-select">
                         <popover-content #price [closeOnClickOutside]="true" [animation]="true">
                             <div class="row">
@@ -531,7 +504,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 btnfilter">
                     <div class="rld-single-select">
                         <popover-content #more [closeOnClickOutside]="true" [animation]="true">
                             <div class="row">
@@ -614,9 +587,10 @@
                                     </div>
 
 
-                                    <p style="color: black;"> <strong>Basement</strong></p>
+                                   
                                     <div class="row" *ngIf="propertyType == 'Residential'">
                                         <div class="col-lg-12">
+                                            <p style="color: black;"> <strong>Basement</strong></p>
                                             <ul class="ks-cboxtags">
                                                 <li><input id="checkboxThree" (click)="basementClick()"
                                                         [(ngModel)]="basement" type="checkbox"><label
@@ -639,15 +613,15 @@
                 </div>
 
 
-                <div class="col-xl-1 col-lg-4 col-md-6 col-sm-12">
+                <div class="col-xl-1 col-lg-4 col-md-6 col-sm-12 btnfilter">
                     <button type="button" class="btn btn-yellow btnfilter" (click)="clearFilter()">Clear </button>
                 </div>
 
-                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-6 btnmob">
+                <div class="col-xl-1 col-lg-4 col-md-6 col-sm-6 col-6 btnmob ">
                     <a class="btn btn-yellow " (click)="openModal(template)">Filter </a>
                 </div>
 
-                <div class="col-xl-1 col-lg-4 col-md-12 col-sm-6">
+                <div class="col-xl-1 col-lg-4 col-md-6 col-sm-6 col-6">
                     <a class="btn btn-yellow " name="isShown"
                         (click)="toggleShowMap()">{{isShown==false ? "List" : "Map"}}</a>
                 </div>
@@ -708,7 +682,7 @@
                             <agm-info-window [isOpen]="false" #infowindow>
                                 <div id="container">
                                     <a target="_blank" routerLink="/property/ResidentialProperty/{{m.propertyUniqid}}">
-                                        <img id="image" src="{{m.photoLink}}"
+                                        <img id="image" src="{{m.photoPath}}"
                                             onerror="this.src='../assets/images/feature-properties/fp-1.jpg';" /></a>
                                     <p id="text">
                                         ${{m.price}} |
@@ -729,18 +703,18 @@
                     <!-- START SECTION PROPERTIES LISTING -->
                     <section class="properties-right featured portfolio blog" >
                         <div class="container-fluid" style="overflow: auto;
-                        max-height: 86vh;"  #divToScroll>
+                        max-height: 85vh;"  #divToScroll>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 blog-pots">
                                     <!-- Block heading Start-->
-                                    <div class="block-heading btnfilter">
+                                    <div class="block-heading ">
                                         <div class="row">
-                                            <div class="col-lg-5 col-md-5 col-2">
+                                            <div class="col-lg-5 col-md-5 col-5">
                                                 <h5 style="line-height: 40px;">
-                                                    <span class="hidden-sm-down">{{propertyType}} Listing</span>
+                                                    <span class="">{{propertyType}} Listing</span>
                                                 </h5>
                                             </div>
-                                            <div class="col-lg-7 col-md-7 col-10 cod-pad">
+                                            <div class="col-lg-7 col-md-7 col-7 cod-pad">
                                                 <div class="sorting-options" style="margin: 1px -11px 0 0;">
                                                     <select *ngIf="propertyType == 'Commercial'" class="sorting"
                                                         name="sortType" [(ngModel)]="sortType" (change)="Sort()">
@@ -774,11 +748,11 @@
                                         </div>
                                     </div>
                                     <!-- Block heading end -->
-                                    <div class="row" *ngIf="display === 1">
+                                    <div class="row" *ngIf="display === 1" style="padding: 0 4px;">
                                         <div class="item col-md-6 col-xs-12 landscapes sale"
                                             [ngClass]="(!isShown)?'col-lg-6':'col-lg-3'"
                                             *ngFor="let property of properties | paginate: config"
-                                            style="padding: 0px 4px;" >
+                                            style="padding: 0px 6px 0px 6px;" >
                                             <div class="project-single">
                                                 <div class="project-inner project-head">
                                                     <!-- <div class="project-bottom">

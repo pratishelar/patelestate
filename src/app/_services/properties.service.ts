@@ -210,7 +210,6 @@ export class PropertiesService {
   }
 
   getResidentialMap(
-    top?,
     skip?,
     sort?,
     propertysearchinput?,
@@ -227,7 +226,7 @@ export class PropertiesService {
   ): Observable<any> {
     let params = new HttpParams();
 
-    if (top) params = params.append('$top', top);
+    // if (top) params = params.append('$top', top);
 
     if (skip) params = params.append('$skip', skip);
 

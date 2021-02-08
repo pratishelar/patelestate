@@ -236,21 +236,27 @@ section.portfolio {
   /* background: linear-gradient(-47deg, #4528dc 0%, #8731e8 100%); */
 }
 
-@media screen and (max-width: 990px) {
+@media screen and (max-width: 1200px) {
 
   .btnfilter{
     display: none;
   }
 }
-@media screen and (min-width: 990px) {
+@media screen and (min-width: 1200px) {
   .btnmob{
     display: none;
   }
 }
 
 @media screen and (max-width: 990px) {
+  .btnmobhide{
+    display: none;
+  }
+}
+
+@media screen and (max-width:990px) {
   agm-map {
-    height: 800px;
+    height: 100vh;
   }
 }
 
@@ -622,13 +628,13 @@ input[type=radio]:disabled ~ label {
 .lable {
   display: block;
   background: white;
-  border: 2px solid #dedddd;
+  border: 1px solid #eeefef;
   border-radius: 5px;
   padding-top: 5px;
   text-align: center;
-  box-shadow: 0px 3px 10px -2px rgba(161, 170, 166, 0.5);
+  box-shadow: 0px 3px 4px -2px rgb(216 216 216 / 50%);
   position: relative;
-  margin-bottom: 5px;
+  margin-bottom: 6px;
 }
 
 input[type=radio]:hover + label.lable {

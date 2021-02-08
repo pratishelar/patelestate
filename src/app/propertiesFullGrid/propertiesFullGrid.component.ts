@@ -367,7 +367,7 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
             propertyUniqid: element.propertyUniqid,
             address: element.address,
             city: element.city,
-            photoLink: element.photoLink,
+            photoPath: element.photoPath,
             price: element.price,
           };
           this.markers.push(obj);

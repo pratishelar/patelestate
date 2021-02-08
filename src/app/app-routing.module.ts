@@ -10,6 +10,7 @@ import { SinglePropertyResolver } from './_resolvers/singleProperty.resolver';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
+  { path: 'home', component: HomeComponent },
   { path: 'properties/:propertyType', component: PropertiesFullGridComponent, resolve: {properties: PropertiesResolver} },
   { path: 'property/:propertyType/:propertyId', component: SinglePropertyComponent, resolve: {property: SinglePropertyResolver} },
   { path: 'login', component: LoginComponent },
