@@ -1,16 +1,32 @@
+
 <div class="inner-pages mt-5">
   <!-- START SECTION PROPERTIES LISTING -->
   <section class="single-proper blog details">
     <div class="container">
+    
+  
+
       <div class="row">
+        <div class="col-lg-12 col-md-12 blog-pots"> 
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item">{{property.state}}</li>
+            <li class="breadcrumb-item">{{property.city}}</li>
+            <li class="breadcrumb-item active" aria-current="page">{{property.address}}</li>
+          </ol>
+        </nav>
+      </div>
+
         <div class="col-lg-8 col-md-12 blog-pots">
+         
           <div class="row">
             <div class="col-md-12">
-              <section class="headings-2" style="padding: 45px 0 20px 0;">
-                <div class="pro-wrapper">
-                  <div class="row">
-                    <div class="col-md-6">
+            
+              <section class="headings-2" style="padding: 15px 0 20px 0;">
 
+                <div class="pro-wrapper">
+                  <div class="row" style="width: 100%;">
+                    <div class="col-md-9 col-lg-9 col-12">
                       <div class="detail-wrapper-body">
                         <div class="listing-title-bar">
                           <h3>{{property.propertyType}} <span
@@ -34,10 +50,10 @@
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-3 col-lg-3 col-12">
                       <div class="single detail-wrapper">
                         <div class="detail-wrapper-body">
-                          <div class="listing-title-bar">
+                          <div class="listing-title-bar" >
                             <h4 *ngIf="property.askingprice">$ {{property.askingprice}}</h4>
                             <h4 *ngIf="property.price">$ {{property.price}}</h4>
                             <h4 *ngIf="property.baseRent && property.baseRent != 'N/A'">$ {{property.baseRent}}</h4>
@@ -179,6 +195,29 @@
             </table>
 
           </div>
+
+        <div *ngIf="property.type == 'residential'">
+          <div class="property wprt-image-video w50 pro" *ngIf="property.residentialPropertyPrices.length != 0">
+            <h5>Price Updates</h5>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Price</th>
+                  <th>change Date</th>
+                 
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let room of property.residentialPropertyPrices">
+                  <td>{{room.price}}</td>
+                  <td>{{room.changeDate | date}}</td>
+                 
+                </tr>
+              </tbody>
+            </table>
+
+          </div>
+        </div>
 
           <div class="floor-plan property wprt-image-video w50 pro">
             <h5>What's Nearby</h5>
@@ -362,8 +401,8 @@
           <div class="single widget">
 
             <!-- end author-verified-badge -->
-            <div class="sidebar mt-5">
-              <div class="widget-boxed mt-33 mt-5">
+            <div class="sidebar">
+              <div class="widget-boxed mt-33">
                 <div class="widget-boxed-header">
                   <h4>Contact Information</h4>
                 </div>
@@ -433,7 +472,7 @@
         </aside>
       </div>
       <!-- START SIMILAR PROPERTIES -->
-      <section class="similar-property recently portfolio bshd p-0 bg-white-inner">
+      <section class="similar-property recently portfolio bshd p-0 bg-white-inner mt-5">
         <div class="container">
           <h5>Similar Properties</h5>
           <div class="row portfolio-items">
@@ -542,9 +581,9 @@
 
 
                     <div class="compare">
-                      <a title="Share">
+                      <!-- <a title="Share">
                         <i class="fas fa-share-alt"></i>
-                      </a>
+                      </a> -->
                       <a title="Favorites">
                         <i class="fa fa-heart-o"></i>
                       </a>

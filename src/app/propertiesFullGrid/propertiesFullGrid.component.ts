@@ -58,8 +58,8 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
   exclusive = '';
   openHouse: any = '';
   forCloser: any = '';
-  bed: number;
-  bath: number;
+  bed: any = '';
+  bath: any = '';
   minPriceInput: any = '';
   maxPriceInput: any = '';
   minSqft: any = '';

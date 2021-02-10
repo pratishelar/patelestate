@@ -15,6 +15,7 @@ export class SinglePropertyComponent implements OnInit {
   amenities: any = [];
   appliances: any = [];
   properties: any = [];
+  residentialPropertyPrices : any = [];
 
   galleryOptions: NgxGalleryOptions[];
   galleryImages: NgxGalleryImage[];

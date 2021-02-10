@@ -79,7 +79,8 @@
     <!-- Header / End -->
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top " >
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExample08" 
+      (click)="showMyContainer=!showMyContainer"   aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -109,9 +110,9 @@
         </ul>
       </div>
 
-      <!-- <div class="logo logooutside" style="margin: -40px 195px 0 195px; width: 45px;">
+      <div *ngIf="!showMyContainer" class="logo logooutside" style="margin: -40px 195px 0 195px; width: 40px;">
         <a routerLink='/'><img src="../assets/images/logo.png" alt=""></a>
-      </div> -->
+      </div>
 
     </nav>
 

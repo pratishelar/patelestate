@@ -8,6 +8,7 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 })
 export class AppComponent {
   title = 'frontend';
+  showMyContainer;
 
   onActivate(event) {
     window.scroll(0,0);

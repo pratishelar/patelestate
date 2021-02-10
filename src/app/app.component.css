@@ -28,6 +28,11 @@ nav ul a:hover {
 .nav-link {
   margin-left: 10px;
   margin-right: 10px;
+  font-weight: 500;
+}
+
+.navbar-collapse {
+  text-align: center!important;
 }
 
 .header-top {

@@ -1,3 +1,6 @@
+
+
+
 <!-- START SECTION PROPERTIES LISTING -->
 <section class="properties-right featured portfolio blog" style="position:fixed; width: 100%; top: 60px;">
     <section class="search-sec" style="border-bottom: 1px solid #e8e8e8;">
@@ -5,7 +8,7 @@
 
             <div class="row align-items-center justify-content-center ">
                 <div class="col-xl-3 col-lg-4 col-md-12 col-sm-12 btnmobhide">
-                    <div class="input-group"  style="margin-top: -2px;">
+                    <div class="input-group" style="margin-top: -2px;">
                         <input class="form-control py-2 border-right-0 border searchinput" name="propertysearchinput"
                             value="" [(ngModel)]="propertysearchinput" style="border-radius: 50px 0px 0px 50px;"
                             placeholder="Entry Landmark Location" type="search" id="example-search-input">
@@ -374,7 +377,7 @@
 
                                 </div>
 
-                               
+
                             </div>
                         </popover-content>
 
@@ -543,7 +546,7 @@
                                             <div class="rld-single-select">
                                                 <select class="select single-select" (change)="changesqft()"
                                                     name="minSqrft" [(ngModel)]="minSqft">
-                                                    <option value="">Min sqr ft</option>
+                                                    <option value=" ">Min sqr ft</option>
                                                     <option value='500'>500</option>
                                                     <option value='750'>750</option>
                                                     <option value='1000'>1000</option>
@@ -586,9 +589,7 @@
                                         </div>
                                     </div>
 
-
-                                   
-                                    <div class="row" *ngIf="propertyType == 'Residential'">
+                                    <!-- <div class="row" *ngIf="propertyType == 'Residential'">
                                         <div class="col-lg-12">
                                             <p style="color: black;"> <strong>Basement</strong></p>
                                             <ul class="ks-cboxtags">
@@ -598,13 +599,14 @@
 
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                         </popover-content>
 
                         <button type="button" [popover]="more" class="btn btn-yellow btnfilter"
-                            popoverSize="medium-small" [ngClass]="{borderbtn: (maxSqft || minSqft || openHouse || basement || forCloser)}"
+                            popoverSize="medium-small"
+                            [ngClass]="{borderbtn: (maxSqft || minSqft || openHouse || basement || forCloser)}"
                             [popoverOnHover]="false" popoverPlacement="bottom"> More
                         </button>
 
@@ -640,7 +642,7 @@
                 <agm-map (mapReady)="mapReady($event)" [latitude]="lat" [longitude]="lng" [zoom]="zoom"
                     [disableDefaultUI]="true" [zoomControl]="true" (idle)="idle($event)"
                     (centerChange)="centerChange($event)" [fullscreenControl]='true' [styles]="styles"
-                    [mapTypeControl]='true'>
+                    >
                     <agm-marker-cluster
                         imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
                         <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"
@@ -696,14 +698,14 @@
                 </agm-map>
             </aside>
 
-            <div class=" col-md-12 blog-pots pr-0 "  [ngClass]="(!isShown)?'col-lg-6 col-xl-6':'col-lg-12 col-xl-12'"
+            <div class=" col-md-12 blog-pots pr-0 " [ngClass]="(!isShown)?'col-lg-6 col-xl-6':'col-lg-12 col-xl-12'"
                 style="padding-left: 0px;">
                 <!-- Block heading Start-->
                 <div class="inner-pages">
                     <!-- START SECTION PROPERTIES LISTING -->
-                    <section class="properties-right featured portfolio blog" >
+                    <section class="properties-right featured portfolio blog">
                         <div class="container-fluid" style="overflow: auto;
-                        max-height: 85vh;"  #divToScroll>
+                        max-height: 87vh;" #divToScroll>
                             <div class="row">
                                 <div class="col-lg-12 col-md-12 blog-pots">
                                     <!-- Block heading Start-->
@@ -714,8 +716,8 @@
                                                     <span class="">{{propertyType}} Listing</span>
                                                 </h5>
                                             </div>
-                                            <div class="col-lg-7 col-md-7 col-7 cod-pad">
-                                                <div class="sorting-options" style="margin: 1px -11px 0 0;">
+                                            <div class="col-lg-7 col-md-7 col-7 cod-pad" >
+                                                <div class="sorting-options" style="margin: 1px -11px 0 0;" *ngIf="properties.length != 0">
                                                     <select *ngIf="propertyType == 'Commercial'" class="sorting"
                                                         name="sortType" [(ngModel)]="sortType" (change)="Sort()">
                                                         <option value="">Sort By</option>
@@ -752,7 +754,7 @@
                                         <div class="item col-md-6 col-xs-12 landscapes sale"
                                             [ngClass]="(!isShown)?'col-lg-6':'col-lg-3'"
                                             *ngFor="let property of properties | paginate: config"
-                                            style="padding: 0px 6px 0px 6px;" >
+                                            style="padding: 0px 6px 0px 6px;">
                                             <div class="project-single">
                                                 <div class="project-inner project-head">
                                                     <!-- <div class="project-bottom">
@@ -900,9 +902,9 @@
 
 
                                                         <div class="compare">
-                                                            <a title="Share">
+                                                            <!-- <a title="Share">
                                                                 <i class="fas fa-share-alt"></i>
-                                                            </a>
+                                                            </a> -->
                                                             <a title="Favorites">
                                                                 <i class="fa fa-heart-o"></i>
                                                             </a>
@@ -925,6 +927,22 @@
                                             </div>
                                         </div>
                                     </div>
+
+                                    <div class="row" *ngIf="properties.length == 0" style="height: 100%;">
+                                        <div class="container" style="text-align: center;"> 
+                                            <div class="jumbotron" style="background: white;">
+                                                <img src="../assets/images/no_property_found.png" class="mx-auto d-block" style="width:50%"> 
+
+                                             
+                                              <p mt-5>
+                                                Sorry, but nothing matched your search.
+                                                Please try again with some different search.</p>
+                                            </div>
+                                                
+                                          </div>
+                                   
+                                    </div>
+
                                     <div *ngIf="display === 2">
                                         <div class="row featured portfolio-items" *ngFor="let property of properties"
                                             style="margin-bottom: 20px;">
@@ -1088,12 +1106,12 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="has-text-centered mt-4 mb-4" style="text-align: center;">
+                            <div class="has-text-centered mt-4 mb-4" style="text-align: center;" *ngIf="properties.length != 0">
                                 <pagination-controls id="server" [autoHide]="true" (pageChange)="onPageChange($event)">
                                 </pagination-controls>
                             </div>
 
-                          <app-footer></app-footer>
+                            <app-footer></app-footer>
                         </div>
                     </section>
                     <!-- END SECTION PROPERTIES LISTING -->
@@ -1118,14 +1136,14 @@
     <div class="modal-body">
         <form>
             <div class="row">
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
-                    <div class="rld-single-input left-icon searchhide">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
+                    <div class="rld-single-input searchhide">
                         <input name="propertysearchinput" value="" [(ngModel)]="propertysearchinput" type="text"
                             placeholder="Entry Landmark Location">
                     </div>
                 </div>
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
                     <div class="rld-single-select">
                         <select class="select single-select" name="propertyTypedropdown"
                             [(ngModel)]="propertyTypeinput">
@@ -1142,10 +1160,102 @@
                     </div>
                 </div>
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
                     <div class="rld-single-select">
-                        <select class="select single-select" name="minPriceInput" [(ngModel)]="minPriceInput">
-                            <option value="">Min Price</option>
+                        <select class="select single-select" name="forSale" [(ngModel)]="forSale">
+                            <option value="">All For Sale</option>
+                            <option value="For sale">Only Forsale</option>
+                            <option value="For Lease">For Lease</option>
+                            <option value="For Sale & Lease">For Sale & Lease</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
+                    <div class="rld-single-select">
+                        <select class="select single-select" name="exclusive" [(ngModel)]="exclusive">
+                            <option value="">All Exclusive</option>
+                            <option value="true">Only Exclusive</option>
+                            <option value="false">Non - Exclusive</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6mb-3" *ngIf="propertyType == 'Residential'">
+                    <div class="rld-single-select">
+                        <select class="select single-select" name="bed" [(ngModel)]="bed">
+                            <option value="">All bed</option>
+                            <option value=1>1+</option>
+                            <option value=2>2+</option>
+                            <option value=3>3+</option>
+                            <option value=4>4+</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3" *ngIf="propertyType == 'Residential'">
+                    <div class="rld-single-select">
+                        <select class="select single-select" name="bath"  [(ngModel)]="bath">
+                            <option value="">All bath</option>
+                            <option value=1>1+</option>
+                            <option value=2>2+</option>
+                            <option value=3>3+</option>
+                            <option value=4>4+</option>
+                        </select>
+                    </div>
+                </div>
+
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
+                    <div class="rld-single-select">
+                        <select class="select single-select"  name="minSqft"
+                            [(ngModel)]="minSqft">
+                            <option value="">Min sqft</option>
+                            <option value='500'>500</option>
+                            <option value='750'>750</option>
+                            <option value='1000'>1000</option>
+                            <option value='1250'>1250</option>
+                            <option value='1500'>1500</option>
+                            <option value='1750'>1750</option>
+                            <option value='2000'>2000</option>
+                            <option value='2250'>2250</option>
+                            <option value='2500'>2500</option>
+                            <option value='3000'>3000</option>
+                            <option value='4000'>4000</option>
+                            <option value='5000'>5000</option>
+                            <option value='10000'>10000</option>
+                            <option value='20000'>20000</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
+                    <div class="rld-single-select">
+                        <select class="select single-select" name="maxSqft" 
+                            [(ngModel)]="maxSqft">
+                            <option value="">Max sqr ft</option>
+                            <option value='500'>500</option>
+                            <option value='750'>750</option>
+                            <option value='1000'>1000</option>
+                            <option value='1250'>1250</option>
+                            <option value='1500'>1500</option>
+                            <option value='1750'>1750</option>
+                            <option value='2000'>2000</option>
+                            <option value='2250'>2250</option>
+                            <option value='2500'>2500</option>
+                            <option value='3000'>3000</option>
+                            <option value='4000'>4000</option>
+                            <option value='5000'>5000</option>
+                            <option value='10000'>10000</option>
+                            <option value='20000'>20000</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
+                    <div class="rld-single-select">
+                        <select class="select single-select" name="minPriceInput"  [(ngModel)]="minPriceInput">
+                            <option value=0>Min Price</option>
                             <option value=250000>25,000</option>
                             <option value=500000>50,000</option>
                             <option value=750000>75,000</option>
@@ -1154,11 +1264,10 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
                     <div class="rld-single-select">
                         <select class="select single-select" name="maxPriceInput" [(ngModel)]="maxPriceInput">
-                            <option value="">Max Price</option>
-                            <option value=0>0</option>
+                            <option value=0>Max Price</option>
                             <option value=250000>25,0000</option>
                             <option value=500000>50,0000</option>
                             <option value=750000>75,0000</option>
@@ -1168,13 +1277,33 @@
                     </div>
                 </div>
 
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
-                    <a class="btn btn-yellow " (click)="search()" (click)="modalRef.hide()">Search</a>
-                </div>
-                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12 mb-3">
-                    <a class="btn btn-yellow ">Reset</a>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3" *ngIf="propertyType == 'Residential'">
+                    <ul class="ks-cboxtags">
+                        <li><input type="checkbox" id="checkboxOne" (click)="openhouseclick()"
+                                [(ngModel)]="openHouse"><label style="width:100%" for="checkboxOne">Open
+                                house</label></li>
+                    </ul>
                 </div>
 
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3" *ngIf="propertyType == 'Residential'">
+                    <ul class="ks-cboxtags">
+                        <li><input id="checkboxTwo" (click)="forCloserClick()" [(ngModel)]="forCloser"
+                                type="checkbox"><label style="width:100%" for="checkboxTwo">ForClouser</label></li>
+                    </ul>
+                </div>
+
+
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
+                    <a class="btn btn-yellow " (click)="search()" (click)="modalRef.hide()">Search</a>
+                </div>
+                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-6 mb-3">
+                    <a class="btn btn-yellow " (click)="clearFilter()">Reset</a>
+                </div>
             </div>
 
 

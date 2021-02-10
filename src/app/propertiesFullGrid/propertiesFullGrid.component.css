@@ -98,7 +98,7 @@ section.portfolio {
 
 .rld-single-input input {
   height: 35px;
-  line-height: 40px;
+  line-height: 30px;
   width: 100%;
   padding: 0 5px;
   /* border: 1px solid #D4D4D4; */
@@ -109,6 +109,7 @@ section.portfolio {
   /* box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); */
   border: 2px solid #c3c3c3;
     color: rgb(111 109 109);
+    -webkit-appearance: none;
 }
 
 .searchinput{
@@ -133,7 +134,7 @@ section.portfolio {
 
 .rld-single-select .single-select {
   height: 35px;
-  line-height: 40px;
+  line-height: 30px;
   width: 100%;
   padding: 0 0px 0 5px;
   -webkit-transition: all 0.4s ease;
@@ -144,6 +145,7 @@ section.portfolio {
   /* box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15); */
   border: 2px solid #c3c3c3;
     color: rgb(111 109 109);
+    -webkit-appearance: none;
 }
 
 .rld-single-input.left-icon input {
@@ -172,6 +174,9 @@ section.portfolio {
   border-radius: 50px;
   margin-top: 4px;
   height: 30px;
+  -webkit-appearance: none;
+
+
 }
 
 #container {
@@ -609,7 +614,11 @@ border: 2px solid #fad20b;
 }
 
 
-
+::ng-deep .ngx-pagination {
+  margin-left: 0;
+  margin-bottom: 1rem;
+  padding: 0 !important;
+}
 
 
 input[type=radio] {

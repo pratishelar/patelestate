@@ -41,10 +41,15 @@
 }
 
 .single.detail-wrapper {
-  margin-left: 11rem;
+  margin-left: 0rem;
 }
   
   
+.breadcrumb {
+  background-color: white;
+  border-radius: .25rem;
+  margin-top: 30px;
+}
 
 .img {
   width: 550px;
