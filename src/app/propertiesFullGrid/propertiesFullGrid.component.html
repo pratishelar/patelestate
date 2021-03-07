@@ -362,16 +362,23 @@
                                                 [(ngModel)]="forSale" (ngModelChange)="forsaleclick('For sale')">
                                             <span>For Sale</span>
                                         </label>
-                                        <label class="radio">
+                                        <label *ngIf="propertyType == 'Commercial'" class="radio">
                                             <input type="radio" name="forSale" [value]="'For lease'"
                                                 [(ngModel)]="forSale" (ngModelChange)="forsaleclick('For lease')">
                                             <span>For Lease</span>
                                         </label>
-                                        <label class="radio">
+                                        <label *ngIf="propertyType == 'Commercial'" class="radio">
                                             <input type="radio" name="forSale" [value]="'For Sale & Lease'"
                                                 [(ngModel)]="forSale"
                                                 (ngModelChange)="forsaleclick('For Sale & Lease')">
                                             <span>For Sale & Lease</span>
+                                        </label>
+
+                                        <label *ngIf="propertyType == 'Residential'" class="radio">
+                                            <input type="radio" name="ForRent" [value]="'For Rent'"
+                                                [(ngModel)]="forSale"
+                                                (ngModelChange)="forsaleclick('For Rent')">
+                                            <span>For Rent</span>
                                         </label>
                                     </div>
 
@@ -388,7 +395,7 @@
                     </div>
                 </div>
 
-                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 btnfilter">
+                <div class="col-xl-1 col-lg-4 col-md-4 col-sm-12 btnfilter" *ngIf="propertyType == 'Commercial'">
                     <div class="rld-single-select">
                         <popover-content #Exclusive [closeOnClickOutside]="true">
                             <div class="row">
@@ -437,8 +444,8 @@
                             </div>
                         </popover-content>
 
-                        <button type="button" [popover]="Exclusive" [ngClass]="{borderbtn: exclusive}"
-                            class="btn btn-yellow btnfilter" popoverSize="small" [popoverOnHover]="false">
+                        <button type="button"   [popover]="Exclusive" [ngClass]="{borderbtn: exclusive}"
+                            class="btn btn-yellow btnfilter" popoverSize="small" [popoverOnHover]="false" >
                             <!-- {{exclusive ? "Exclusive" : "Non Exclusive" }}  --> Exclusive
                         </button>
 
@@ -546,7 +553,7 @@
                                             <div class="rld-single-select">
                                                 <select class="select single-select" (change)="changesqft()"
                                                     name="minSqrft" [(ngModel)]="minSqft">
-                                                    <option value=" ">Min sqr ft</option>
+                                                    <option value="">Min sqr ft</option>
                                                     <option value='500'>500</option>
                                                     <option value='750'>750</option>
                                                     <option value='1000'>1000</option>
@@ -730,8 +737,8 @@
                                                     <select *ngIf="propertyType == 'Residential'" class="sorting"
                                                         name="sortType" [(ngModel)]="sortType" (change)="Sort()">
                                                         <option value="">Sort By</option>
-                                                        <option value="Price DESC">Price: High to low</option>
-                                                        <option value="Price ASC">Price: Low to high</option>
+                                                        <option value="price DESC">Price: High to low</option>
+                                                        <option value="price ASC">Price: Low to high</option>
                                                         <option value="listingContractDate ASC">Listing: Old to New
                                                         </option>
                                                         <option value="listingContractDate DESC">Listing: New to Old
@@ -861,10 +868,10 @@
                                                             <span>{{property.bathroomTotal ? property.bathroomTotal : '0'}}
                                                                 Bath</span>
                                                         </li>
-                                                        <!-- <li>
+                                                        <li>
                                                             <i class="fa fa-object-group" aria-hidden="true"></i>
                                                             <span>{{ property.totalFinishedArea != null ? property.totalFinishedArea : "NA sqft"}}</span>
-                                                        </li> -->
+                                                        </li>
 
                                                     </ul>
                                                     <!-- Price -->

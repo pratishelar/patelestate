@@ -48,10 +48,10 @@ export class PropertiesService {
 
     if (propertysearchinput) {
       if (param) 
-      param =  param.concat(' or contains(city' + ",'"  + propertysearchinput + "')" + ' or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(state' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')" + ' or contains(communityName' + ",'" + propertysearchinput + "')");
+      param =  param.concat(' or contains(city' + ",'"  + propertysearchinput + "')" + ' or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(state' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')" );
 
       else 
-      param = 'contains(city' + ",'" + propertysearchinput + "')" + 'or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(state' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')" + ' or contains(communityName' + ",'" + propertysearchinput + "')";
+      param = '(contains(city' + ",'" + propertysearchinput + "')" + ' or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(state' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "'))" ;
 
     }
 
@@ -136,7 +136,7 @@ export class PropertiesService {
       param =  param.concat(' or contains(city' + ",'"  + propertysearchinput + "')" + ' or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(province' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')" + ' or contains(communityName' + ",'" + propertysearchinput + "')");
 
       else 
-      param = 'contains(city' + ",'" + propertysearchinput + "')" + 'or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(province' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')" + ' or contains(communityName' + ",'" + propertysearchinput + "')";
+      param = '(contains(city' + ",'" + propertysearchinput + "')" + ' or contains(address' + ",'" + propertysearchinput + "')" + ' or contains(postalCode' + ",'" + propertysearchinput + "')" + ' or contains(province' + ",'" + propertysearchinput + "')" + ' or contains(mlsId' + ",'" + propertysearchinput + "')" + ' or contains(communityName' + ",'" + propertysearchinput + "'))";
 
     }
 

@@ -1,27 +1,27 @@
-
 <div class="inner-pages mt-5">
   <!-- START SECTION PROPERTIES LISTING -->
   <section class="single-proper blog details">
     <div class="container">
-    
-  
+
+
 
       <div class="row">
-        <div class="col-lg-12 col-md-12 blog-pots"> 
-        <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item">{{property.state}}</li>
-            <li class="breadcrumb-item">{{property.city}}</li>
-            <li class="breadcrumb-item active" aria-current="page">{{property.address}}</li>
-          </ol>
-        </nav>
-      </div>
+        <div class="col-lg-12 col-md-12 blog-pots">
+          <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item" *ngIf="property.state">{{property.state}}</li>
+              <li class="breadcrumb-item" *ngIf="property.city">{{property.city}}</li>
+              <li class="breadcrumb-item active" *ngIf="property.address" aria-current="page">{{property.address}}</li>
+              <li class="breadcrumb-item active" *ngIf="property.addressLine1" aria-current="page">{{property.addressLine1}}</li>
+            </ol>
+          </nav>
+        </div>
 
         <div class="col-lg-8 col-md-12 blog-pots">
-         
+
           <div class="row">
             <div class="col-md-12">
-            
+
               <section class="headings-2" style="padding: 15px 0 20px 0;">
 
                 <div class="pro-wrapper">
@@ -53,9 +53,9 @@
                     <div class="col-md-3 col-lg-3 col-12">
                       <div class="single detail-wrapper">
                         <div class="detail-wrapper-body">
-                          <div class="listing-title-bar" >
-                            <h4 *ngIf="property.askingprice">$ {{property.askingprice}}</h4>
-                            <h4 *ngIf="property.price">$ {{property.price}}</h4>
+                          <div class="listing-title-bar">
+                            <h4 *ngIf="property.askingprice"> {{property.askingprice |  currency:'USD':'symbol':'4.0-0'}}</h4>
+                            <h4 *ngIf="property.price"> {{property.price |  currency:'USD':'symbol':'4.0-0'}}</h4>
                             <h4 *ngIf="property.baseRent && property.baseRent != 'N/A'">$ {{property.baseRent}}</h4>
 
                             <div class="mt-0">
@@ -109,11 +109,11 @@
               </li>
               <li *ngIf="property.askingprice">
                 <span class="font-weight-bold mr-1">Property Price:</span>
-                <span class="det">{{property.askingprice}}</span>
+                <span class="det">{{property.askingprice |  currency:'USD':'symbol':'4.0-0'}}</span>
               </li>
               <li *ngIf="property.price">
                 <span class="font-weight-bold mr-1">Property Price:</span>
-                <span class="det">{{property.price}}</span>
+                <span class="det">{{property.price |  currency:'USD':'symbol':'4.0-0'}}</span>
               </li>
               <li *ngIf="property.bedroomsTotal">
                 <span class="font-weight-bold mr-1">Bed Rooms:</span>
@@ -147,10 +147,10 @@
                 <span class="font-weight-bold mr-1">Listing Date:</span>
                 <span class="det">{{property.listingContractDate | date}}</span>
               </li>
-              <li *ngIf="property.expirydate">
+              <!-- <li *ngIf="property.expirydate">
                 <span class="font-weight-bold mr-1">Expiry Date:</span>
                 <span class="det">{{property.expirydate | date}}</span>
-              </li>
+              </li> -->
 
 
             </ul>
@@ -196,28 +196,28 @@
 
           </div>
 
-        <div *ngIf="property.type == 'residential'">
-          <div class="property wprt-image-video w50 pro" *ngIf="property.residentialPropertyPrices.length != 0">
-            <h5>Price Updates</h5>
-            <table class="table table-hover">
-              <thead>
-                <tr>
-                  <th>Price</th>
-                  <th>change Date</th>
-                 
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let room of property.residentialPropertyPrices">
-                  <td>{{room.price}}</td>
-                  <td>{{room.changeDate | date}}</td>
-                 
-                </tr>
-              </tbody>
-            </table>
+          <div *ngIf="property.type == 'residential'">
+            <div class="property wprt-image-video w50 pro" *ngIf="property.residentialPropertyPrices.length != 0">
+              <h5>Price Updates</h5>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Price</th>
+                    <th>change Date</th>
 
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let room of property.residentialPropertyPrices">
+                    <td>{{room.price}}</td>
+                    <td>{{room.changeDate | date}}</td>
+
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
           </div>
-        </div>
 
           <div class="floor-plan property wprt-image-video w50 pro">
             <h5>What's Nearby</h5>
@@ -369,8 +369,8 @@
             <h5>Location</h5>
             <div class="divider-fade"></div>
             <div class="contact-map">
-              <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="null" [zoom]="zoom" [zoomControl]="true"  [disableDefaultUI]="false"
-                [zoomControl]="false">
+              <agm-map [latitude]="lat" [longitude]="lng" [scrollwheel]="null" [zoom]="zoom" [zoomControl]="true"
+                [disableDefaultUI]="false" [zoomControl]="false">
                 <agm-marker-cluster
                   imagePath="https://raw.githubusercontent.com/googlearchive/js-marker-clusterer/gh-pages/images/m">
                   <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"
@@ -442,7 +442,10 @@
                       <input type="number" id="pnumber" name="phone_number" placeholder="Phone Number" required />
                       <input type="email" id="emailid" name="email_address" placeholder="Email Address" required />
                       <textarea placeholder="Message" name="message" required></textarea>
+                      <small>For faster process sign  NDA from, click below link.</small>
+                      <button type="button" class="btn btn-link btn-sm" (click)="openModal(template)"> NDA Form Signed <i *ngIf="!NDFForm" style="color: red;" class="fa fa-times" aria-hidden="true"></i> <i *ngIf="NDFForm" style="color: green;" class="fa fa-check" aria-hidden="true"></i></button>
                       <input type="submit" name="sendmessage" class="multiple-send-message" value="Submit Request" />
+
                     </form>
                   </div>
 
@@ -615,4 +618,93 @@
   <!-- END SECTION PROPERTIES LISTING -->
 </div>
 
+
 <app-footer></app-footer>
+
+
+<ng-template #template >
+  <div >
+
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">NDA Form</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+  <div class="modal-body" style="font-size: 12px;" id="contentToConvert">
+
+    <ol style="list-style-type: decimal;">
+      <p>RE: BUSINESS/PROPERTIES: <input type="input" class="form__field" size="90" name="name" id='name'  /></p>
+      <p>ADDRESS: <input type="input" class="form__field"  name="address"size="100" id='address'  /></p>
+      <p>In consideration of the Seller(s)/Seller’s Brokerage providing me with information on a business and/or
+        properties,
+        as captioned above (herein called the “Entities”). I understand, agree, and warranty as follows:</p>
+
+      <li>That the information provided on the Entities is sensitive and confidential, and that their disclosure to
+        others
+        would be damaging to the described Entities and to the Brokerage’s fiduciary relationship with the owners.</li>
+      <li>Not to disclose any such information regarding these Entities to any other person who has not also signed a
+        separate confidentiality agreement. Information shall include all data and materials related to the Entities,and
+        also the fact that they are for sale.</li>
+      <li>Not to contact directly or indirectly the owners, their employees, the landlord, franchiser, suppliers,
+        customers, business associates, and competitors.</li>
+      <li>Not to divulge to other Associates or Brokers this confidential information without obtaining permission by
+        written consent from the Seller(s).</li>
+      <li>That all information is provided by the Seller(s) and it is not verified in any way by the Brokerage. The
+        Brokerage is relying on the Seller(s) for the accuracy and completeness of the said information, and no
+        warrantees are made either expressed or implied.</li>
+      <li>That the Brokerage is an Agent for the Seller(s).</li>
+      <li>No copies of any of the Seller(s) documentation, plans, drawings, maps, appraisals, financial statements,
+        equipment lists, inventory lists, or other material, shall be made without permission of the Brokerage. All
+        documentation noted above shall be returned at the request of the Brokerage, and not retained in any
+        manner.</li>
+
+      <p>This Agreement shall be binding upon the undersigned, its affiliates and employees, and assumes full
+        responsibility
+        and liability for the actions of these parties to whom disclosure of the confidential information is made.</p>
+
+      <p>This Agreement shall be governed by the laws of the Province of Alberta.</p>
+
+      <p>I acknowledge having read this Agreement and received a copy.</p>
+
+      <p>Signed at <input type="input" class="form__field" name="address" size="20" />, Alberta, this <input type="input" class="form__field" size="20" />day of <input type="input" class="form__field" size="20" />, 20  <input type="input" class="form__field" size="2" /></p>
+      <button *ngIf="!signatureImage" class="btn btn-link" (click)="openModal2(templateNested)"> click to add Signature </button> 
+      <p *ngIf="signatureImage">Signature <small class="btn btn-link" (click)="openModal2(templateNested)">(change)</small></p> 
+    </ol>
+    
+    <img [src]="signatureImage" *ngIf="signatureImage" />
+    
+  </div>
+  <div class="modal-footer">
+    <div class="container">
+      <div class="row">
+        <div class="col-12 col-md-12">
+          <button style="width: 100%;" class="btn btn-success" (click)="makePdf()" (click)="modalRef.hide()" [disabled]="!signatureImage" >Save & Download</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+</ng-template>
+
+
+<ng-template #templateNested>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Add Signature</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef2.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <ng-signature-pad (clear)="deleteImage()" [responsive]=true [showClearButton]=true format="base64"  (done)="showImage($event)"></ng-signature-pad>
+
+   
+  </div>
+
+  <div class="modal-footer">
+  <button type="button" class="btn btn-danger" (click)="closeModal(2)">Close</button>
+</div>
+
+</ng-template>

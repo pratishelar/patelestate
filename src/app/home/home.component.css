@@ -69,7 +69,12 @@
     -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     -webkit-appearance: none;
     border: 2px solid #ffd208;
-    color: rgb(111 109 109);
+    color: black;
+  }
+  
+  ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: black;
+    opacity: 1; /* Firefox */
   }
   
   .rld-single-select .single-select {
@@ -87,7 +92,12 @@
     -moz-box-shadow: 0px 8px 20px 0px rgba(0, 0, 0, 0.15);
     -webkit-appearance: none;
     border: 2px solid #ffd208;
-    color: rgb(111 109 109);
+    color: black;
+  }
+
+  .single-select:hover{
+    background-color: #ffd208;
+
   }
   
   .rld-single-input.left-icon input {

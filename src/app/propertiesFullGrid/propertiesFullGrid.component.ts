@@ -8,7 +8,7 @@ import {
   ElementRef,
 } from '@angular/core';
 import { PropertiesService } from '../_services/properties.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TimeagoIntl } from 'ngx-timeago';
 import { MouseEvent } from '@agm/core';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -23,13 +23,14 @@ import {
   Breakpoints,
   BreakpointState,
 } from '@angular/cdk/layout';
+declare let google: any;
 
 @Component({
   selector: 'app-propertiesFullGrid',
   templateUrl: './propertiesFullGrid.component.html',
   styleUrls: ['./propertiesFullGrid.component.css'],
 })
-export class PropertiesFullGridComponent implements OnInit, OnDestroy {
+export class PropertiesFullGridComponent implements OnInit {
   @ViewChild('divToScroll') divToScroll: ElementRef;
   properties: any = [];
   modalRef: BsModalRef;
@@ -67,8 +68,10 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
   basement: any = '';
 
   // initial center position for the map
-  lat: number = 53.637115;
-  lng: number = -113.50774;
+  // lat: number = 53.637115;
+  // lng: number = -113.50774;
+  lat;
+  lng;
 
   message: any;
   subscription: Subscription;
@@ -96,6 +99,8 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
       }
     },
   };
+  address;
+  previous;
 
   styles = [
     // {
@@ -313,14 +318,13 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     // }
   ];
 
-  previous;
-
   constructor(
     private propertiesService: PropertiesService,
     private route: ActivatedRoute,
     private modalService: BsModalService,
     private ng2ImgMaxService: Ng2ImgMaxService,
-    public breakpointObserver: BreakpointObserver
+    public breakpointObserver: BreakpointObserver,
+    private router: Router
   ) {
     this.breakpointObserver
       .observe(['(min-width: 900px)'])
@@ -333,14 +337,14 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
           this.isShown = true;
         }
       });
+  
   }
 
   ngOnInit() {
     this.getpropertiesFromroute();
+   
 
     this.message = this.propertiesService.getOption();
-    console.log(this.message);
-
     if (Object.keys(this.message).length != 0) {
       this.propertysearchinput = this.message.propertysearchinput;
       this.propertyTypeinput = this.message.propertyTypeinput;
@@ -351,8 +355,53 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     }
   }
 
-  ngOnDestroy() {}
+  /*****  find current location from browser  *******/
+  setCurrentLocation() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.lat = position.coords.latitude;
+        this.lng = position.coords.longitude;
 
+        // this.lat = 51.0447;
+        // this.lng = -114.0719;
+
+        this.getAddress(this.lat, this.lng);
+      });
+    }
+  }
+
+  /*****  Get current city using current location lat and lng *******/
+  getAddress(lat: number, lng: number) {
+    if (navigator.geolocation) {
+      let geocoder = new google.maps.Geocoder();
+      let latlng = new google.maps.LatLng(lat, lng);
+      let request = { latLng: latlng };
+      geocoder.geocode(request, (results, status) => {
+        if (status === google.maps.GeocoderStatus.OK) {
+          let result = results[0].formatted_address;
+          //let rsltAdrComponent = result.address_components;
+          //let resultLength = rsltAdrComponent.length;
+          if (result != null) {
+            var value = result.split(',');
+            var count = value.length;
+            var country = value[count - 1];
+            var state = value[count - 2];
+            var city = value[count - 3];
+            this.propertysearchinput = city;
+            if (city) this.sortSearchPagination();
+
+            console.log('city name is: ' + city);
+            this.address = result;
+            // console.log(this.address);
+          } else {
+            alert('No address available!');
+          }
+        }
+      });
+    }
+  }
+
+  /*****  Get map pins *******/
   getMapPins() {
     this.propertiesService.getResidentialMap().subscribe(
       (property: any) => {
@@ -379,6 +428,140 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     );
   }
 
+  /***** search sort and pagination api call *******/
+  sortSearchPagination() {
+    if (this.router.url == '/properties/CommercialProperties') {
+      this.propertiesService
+        .getCommercialProperties(
+          this.config.itemsPerPage,
+          this.skip,
+          this.sortType,
+          this.propertysearchinput,
+          this.propertyTypeinput,
+          this.minPriceInput,
+          this.maxPriceInput,
+          this.exclusive,
+          this.forSale,
+          this.minSqft,
+          this.maxSqft
+        )
+        .subscribe(
+          (properties: any) => {
+            this.properties = properties.body;
+            // map marker start
+            this.markers = [];
+            properties.body.forEach((element, index) => {
+              const obj = {
+                lat: element.latitude,
+                lng: element.longitude,
+                label: index,
+                draggable: false,
+                propertyUniqid: element.propertyUniqid,
+                address: element.address,
+                city: element.city,
+                photoPath: element.photoPath,
+                price: element.price,
+              };
+              this.markers.push(obj);
+            });
+            // map marker end
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    } else if (this.router.url == '/properties/ResidentialProperties') {
+      this.propertiesService
+        .getResidentialProperties(
+          this.config.itemsPerPage,
+          this.skip,
+          this.sortType,
+          this.propertysearchinput,
+          this.propertyTypeinput,
+          this.minPriceInput,
+          this.maxPriceInput,
+          this.exclusive,
+          this.forSale,
+          this.openHouse,
+          this.bed,
+          this.bath,
+          this.minSqft,
+          this.maxSqft,
+          this.forCloser,
+          this.basement
+        )
+        .subscribe(
+          (properties: any) => {
+            this.properties = properties.body;
+            // map marker start
+            if (properties.body) {
+              this.markers = [];
+              properties.body.forEach((element, index) => {
+                const obj = {
+                  lat: element.latitude,
+                  lng: element.longitude,
+                  label: index,
+                  draggable: false,
+                  propertyUniqid: element.propertyUniqid,
+                  address: element.address,
+                  city: element.city,
+                  photoPath: element.photoPath,
+                  price: element.price,
+                };
+                this.markers.push(obj);
+              });
+            }
+            // map marker end
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+    }
+  }
+
+  getpropertiesFromroute() {
+    this.route.data.subscribe((data) => {
+      this.propertysearchinput = '';
+      this.propertyTypeinput = '';
+      this.minPriceInput = '';
+      this.maxPriceInput = '';
+      this.exclusive = '';
+      this.forSale = '';
+      this.openHouse = '';
+      this.minSqft = '';
+      this.maxSqft = '';
+      this.openHouse = '';
+      this.basement = '';
+      this.forCloser = '';
+      this.bath = null;
+      this.bed = null;
+      // this.properties = [];
+      this.properties = data['properties'].body;
+      
+      // this.markers = [];
+      console.log(this.properties);
+      if (this.router.url == '/properties/CommercialProperties') {
+        this.isShown = false;
+        this.propertyType = 'Commercial';
+        this.setCurrentLocation();
+      } else if (this.router.url == '/properties/ResidentialProperties') {
+        // this.getMapPins();
+        this.isShown = false;
+        this.propertyType = 'Residential';
+        this.setCurrentLocation();
+      }
+    });
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {
+      class: 'modal-lg modal-dialog-centered',
+      ignoreBackdropClick: true,
+      keyboard: false,
+    });
+  }
+
   clickedMarker(infowindow) {
     if (this.previous) {
       this.previous.close();
@@ -387,56 +570,67 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
   }
 
   forCloserClick() {
+    this.skip = 0;
     this.forCloser = !this.forCloser;
     this.sortSearchPagination();
   }
 
   basementClick() {
+    this.skip = 0;
     this.basement = !this.forCloser;
     this.sortSearchPagination();
   }
 
   pricechange(event) {
+    this.skip = 0;
     console.log('Max', this.maxPriceInput);
     this.sortSearchPagination();
   }
 
   onSearchChange() {
+    this.skip = 0;
     this.sortSearchPagination();
   }
 
   propertyTypeclick() {
+    this.skip = 0;
     //  console.log( this.propertyTypeinput);
     // this.propertyTypeinput = type;
     this.sortSearchPagination();
   }
 
   forsaleclick(event) {
+    this.skip = 0;
     this.forSale = event;
     this.sortSearchPagination();
   }
 
   exclusiveclick(event) {
+    this.skip = 0;
     this.exclusive = event;
     this.sortSearchPagination();
   }
 
   openhouseclick(event) {
+    this.skip = 0;
     this.openHouse = !this.openHouse;
     this.sortSearchPagination();
   }
 
   bedclick(event) {
+    this.skip = 0;
     this.bed = event;
     this.sortSearchPagination();
   }
 
   bathclick(event) {
+    this.skip = 0;
     this.bath = event;
     this.sortSearchPagination();
   }
 
   changesqft() {
+    this.skip = 0;
     this.sortSearchPagination();
   }
 
@@ -484,31 +678,6 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     this.display = mode;
   }
 
-  getpropertiesFromroute() {
-    this.route.data.subscribe((data) => {
-      // this.properties = [];
-      this.properties = data['properties'].body;
-      // this.markers = [];
-      console.log(this.properties);
-      if (this.properties[0].latitude == 0) {
-        this.isShown = false;
-        this.propertyType = 'Commercial';
-      } else if (this.properties[0].latitude != 0) {
-        this.getMapPins();
-        this.isShown = false;
-        this.propertyType = 'Residential';
-      }
-    });
-  }
-
-  openModal(template: TemplateRef<any>) {
-    this.modalRef = this.modalService.show(template, {
-      class: 'modal-lg modal-dialog-centered',
-      ignoreBackdropClick: true,
-      keyboard: false,
-    });
-  }
-
   mouseOver(i: number) {
     // m.icon = '../assets/images/pin3.png';
     // this.markers[i].display = true;
@@ -524,7 +693,8 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     // console.log(this.lat);
     // console.log(this.lng);
     var center = this.map.getCenter();
-    console.log(center.lat(), center.lng());
+    //console.log(center.lat(), center.lng());
+    // this.getAddress(center.lat(), center.lng());
   }
 
   centerChange($event: any) {
@@ -550,64 +720,6 @@ export class PropertiesFullGridComponent implements OnInit, OnDestroy {
     this.sortSearchPagination();
     // window.scrollTo(0, 0);
     this.divToScroll.nativeElement.scrollTo(0, 0);
-  
-  }
-
-  sortSearchPagination() {
-    if (this.propertyType == 'Commercial') {
-      this.propertiesService
-        .getCommercialProperties(
-          this.config.itemsPerPage,
-          this.skip,
-          this.sortType,
-          this.propertysearchinput,
-          this.propertyTypeinput,
-          this.minPriceInput,
-          this.maxPriceInput,
-          this.exclusive,
-          this.forSale,
-          this.minSqft,
-          this.maxSqft
-        )
-        .subscribe(
-          (properties: any) => {
-            this.properties = properties.body;
-            console.log(properties);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-    } else if (this.propertyType == 'Residential') {
-      this.propertiesService
-        .getResidentialProperties(
-          this.config.itemsPerPage,
-          this.skip,
-          this.sortType,
-          this.propertysearchinput,
-          this.propertyTypeinput,
-          this.minPriceInput,
-          this.maxPriceInput,
-          this.exclusive,
-          this.forSale,
-          this.openHouse,
-          this.bed,
-          this.bath,
-          this.minSqft,
-          this.maxSqft,
-          this.forCloser,
-          this.basement
-        )
-        .subscribe(
-          (properties: any) => {
-            this.properties = properties.body;
-            console.log(properties);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-    }
   }
 }
 

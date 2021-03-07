@@ -115,11 +115,16 @@ section.portfolio {
 .searchinput{
   height: 30px;
   border-radius: 50px 0px 0px 50px;
-    color: #868181;
+    color: black;
     font-size: 11px;
     background-color: #ffffff;
     border: 1px solid #e7e7e7!important;
     border-right: none!important;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: black;
+  opacity: 1; /* Firefox */
 }
 
 .searchbtn{
@@ -211,7 +216,7 @@ section.portfolio {
   padding: 0px 0px;
   width: 100%;
   margin-bottom: 0px;
-  color: #868181;
+  color: black;
   font-weight: 300;
   border-radius: 50px;
   font-size: 11px;
@@ -221,7 +226,6 @@ section.portfolio {
 
 .btn.btn-yellow:hover {
   background-color: #ffd208;
-
 }
 
 .rld-main-search .rld-single-input, .rld-main-search .rld-single-select .single-select {

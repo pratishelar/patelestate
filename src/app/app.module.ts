@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -34,8 +34,14 @@ import { Ng2ImgMaxModule } from 'ng2-img-max';
 import { LayoutModule } from '@angular/cdk/layout';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
+import { SignaturePadModule } from '@ng-plus/signature-pad';
+import { LoadingBarHttpClientModule } from '@ngx-loading-bar/http-client';
+import { LoadingBarModule } from '@ngx-loading-bar/core';
+import { LOADING_BAR_CONFIG } from '@ngx-loading-bar/core';
+import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 
 @NgModule({
+  schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   declarations: [							
     AppComponent,
       PropertiesFullGridComponent,
@@ -69,14 +75,19 @@ import { FooterComponent } from './footer/footer.component';
     NgxSliderModule,
     ButtonsModule.forRoot(),
     Ng2ImgMaxModule,
-    LayoutModule
-  ],
+    LayoutModule,
+    SignaturePadModule,
+    LoadingBarHttpClientModule,
+    LoadingBarModule,
+    LoadingBarRouterModule
+    ],
   providers: [
     PropertiesService, 
     PropertiesResolver,
     BusyService,
     SinglePropertyResolver,
     { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
+    { provide: LOADING_BAR_CONFIG, useValue: { latencyThreshold: 100 } },
   ],
   bootstrap: [AppComponent]
 })

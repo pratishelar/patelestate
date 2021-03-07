@@ -52,11 +52,15 @@
                         <div class="rld-single-select">
                           <select class="select single-select" name="minPriceInput" [(ngModel)]="minPriceInput">
                             <option value="">Min Price</option>
-                            <option value=250000>25,000</option>
-                            <option value=500000>50,000</option>
-                            <option value=750000>75,000</option>
-                            <option value=1000000>100,000</option>
-                            <option value=1250000>125,000</option>
+                            <option value=100000>100,000</option>
+                            <option value=200000>200,000</option>
+                            <option value=300000>300,000</option>
+                            <option value=400000>400,000</option>
+                            <option value=500000>500,000</option>
+                            <option value=600000>600,000</option>
+                            <option value=700000>700,000</option>
+                            <option value=700000>800,000</option>
+                            <option value=700000>900,000</option>
                           </select>
                         </div>
                       </div>
@@ -65,11 +69,15 @@
                           <select class="select single-select" name="maxPriceInput" [(ngModel)]="maxPriceInput">
                             <option value="">Max Price</option>
                             <option value=0>0</option>
-                            <option value=250000>25,0000</option>
-                            <option value=500000>50,0000</option>
-                            <option value=750000>75,0000</option>
-                            <option value=1000000>100,0000</option>
-                            <option value=1250000>125,0000</option>
+                            <option value=100000>100,000</option>
+                            <option value=200000>200,000</option>
+                            <option value=300000>300,000</option>
+                            <option value=400000>400,000</option>
+                            <option value=500000>500,000</option>
+                            <option value=600000>600,000</option>
+                            <option value=700000>700,000</option>
+                            <option value=700000>800,000</option>
+                            <option value=700000>900,000</option>
                           </select>
                         </div>
                       </div>
@@ -104,11 +112,15 @@
                         <div class="rld-single-select">
                           <select class="select single-select" name="minPriceInput" [(ngModel)]="minPriceInput">
                             <option value="">Min Price</option>
-                            <option value=250000>25,000</option>
-                            <option value=500000>50,000</option>
-                            <option value=750000>75,000</option>
-                            <option value=1000000>100,000</option>
-                            <option value=1250000>125,000</option>
+                            <option value=100000>100,000</option>
+                            <option value=200000>200,000</option>
+                            <option value=300000>300,000</option>
+                            <option value=400000>400,000</option>
+                            <option value=500000>500,000</option>
+                            <option value=600000>600,000</option>
+                            <option value=700000>700,000</option>
+                            <option value=700000>800,000</option>
+                            <option value=700000>900,000</option>
                           </select>
                         </div>
                       </div>
@@ -117,11 +129,15 @@
                           <select class="select single-select" name="maxPriceInput" [(ngModel)]="maxPriceInput">
                             <option value="">Max Price</option>
                             <option value=0>0</option>
-                            <option value=250000>25,0000</option>
-                            <option value=500000>50,0000</option>
-                            <option value=750000>75,0000</option>
-                            <option value=1000000>100,0000</option>
-                            <option value=1250000>125,0000</option>
+                            <option value=100000>100,000</option>
+                            <option value=200000>200,000</option>
+                            <option value=300000>300,000</option>
+                            <option value=400000>400,000</option>
+                            <option value=500000>500,000</option>
+                            <option value=600000>600,000</option>
+                            <option value=700000>700,000</option>
+                            <option value=700000>800,000</option>
+                            <option value=700000>900,000</option>
                           </select>
                         </div>
                       </div>
@@ -177,18 +193,11 @@
             </ul>
 
             <ul class="popular-searchs" *ngIf="display == 'commercial'">
-              <li>
-                <a (click)="commercial('Land')">
-                  <span class="box">
-                    <img src="../assets/images/icons/icon-7.svg" width="45" height="45" alt="">
-                    <span>Land</span>
-                  </span>
-                </a>
-              </li>
+            
               <li>
                 <a (click)="commercial('Retail')">
                   <span class="box">
-                    <img src="../assets/images/icons/icon-8.svg" width="45" height="45" alt="">
+                    <img src="../assets/images/icons/icon-11.svg" width="45" height="45" alt="">
                     <span>Retail</span>
                   </span>
                 </a>
@@ -203,10 +212,19 @@
               </li>
 
               <li>
-                <a (click)="commercial('Industrial')">
+                <a (click)="commercial('Land')">
                   <span class="box">
-                    <img src="../assets/images/icons/icon-11.svg" width="45" height="45" alt="">
-                    <span>Industrial</span>
+                    <img src="../assets/images/icons/icon-7.svg" width="45" height="45" alt="">
+                    <span>Restaurant</span>
+                  </span>
+                </a>
+              </li>
+
+              <li>
+                <a (click)="commercial('hotel/motel')">
+                  <span class="box">
+                    <img src="../assets/images/icons/icon-8.svg" width="45" height="45" alt="">
+                    <span>Hotel/Motel</span>
                   </span>
                 </a>
               </li>
@@ -214,7 +232,7 @@
                 <a (click)="commercial('Other')">
                   <span class="box">
                     <img src="../assets/images/icons/icon-10.svg" width="45" height="45" alt="">
-                    <span>other</span>
+                    <span>Gas Station</span>
                   </span>
                 </a>
               </li>
